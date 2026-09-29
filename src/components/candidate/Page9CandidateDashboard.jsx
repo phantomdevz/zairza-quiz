@@ -339,7 +339,7 @@ export const Page9CandidateDashboard = () => {
                 Quiz Window Closing Time
               </div>
               <div style={{ fontSize: "0.82rem", color: "var(--text-secondary)", marginTop: "2px" }}>
-                The 24-hr Quiz window closes promptly at 8:00 PM on 30th September. Ensure you complete your attempt before the cutoff.
+                The 24-hr Quiz window closes promptly at 10:00 PM on 30th September. Ensure you complete your attempt before the cutoff.
               </div>
             </div>
 

@@ -1,5 +1,5 @@
 // Zairza Induction Platform — Initial Data & Assessment Configuration
-// Window: 29th Sept 8:00 PM to 30th Sept 8:00 PM
+// Window: 29th Sept 10:00 PM to 30th Sept 10:00 PM
 // Registration Closes: 30th Sept 12:00 PM (Noon)
 // Duration: 30 minutes (1800 seconds)
 
@@ -7,8 +7,8 @@ export const QUIZ_CONFIG = {
   title: "Zairza Induction Assessment 2026",
   societyName: "Zairza — OUTR Bhubaneswar",
   tagline: "Wonder • Think • Create",
-  oaStartEpoch: "2026-09-29T20:00:00+05:30",
-  oaEndEpoch: "2026-09-30T20:00:00+05:30",
+  oaStartEpoch: "2026-09-29T22:00:00+05:30",
+  oaEndEpoch: "2026-09-30T22:00:00+05:30",
   registrationCutoffEpoch: "2026-09-30T12:00:00+05:30",
   durationMinutes: 30,
   totalQuestions: 30,

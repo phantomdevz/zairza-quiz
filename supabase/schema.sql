@@ -27,8 +27,8 @@ CREATE TABLE IF NOT EXISTS public.candidates (
 CREATE TABLE IF NOT EXISTS public.quiz_config (
     id TEXT PRIMARY KEY DEFAULT 'induction_2026',
     title TEXT NOT NULL DEFAULT 'Zairza Induction Assessment 2026',
-    oa_start_epoch TIMESTAMPTZ NOT NULL DEFAULT '2026-09-29 20:00:00+05:30',
-    oa_end_epoch TIMESTAMPTZ NOT NULL DEFAULT '2026-09-30 20:00:00+05:30',
+    oa_start_epoch TIMESTAMPTZ NOT NULL DEFAULT '2026-09-29 22:00:00+05:30',
+    oa_end_epoch TIMESTAMPTZ NOT NULL DEFAULT '2026-09-30 22:00:00+05:30',
     registration_cutoff TIMESTAMPTZ NOT NULL DEFAULT '2026-09-30 12:00:00+05:30',
     duration_minutes INT NOT NULL DEFAULT 30,
     total_questions INT NOT NULL DEFAULT 30,
@@ -137,8 +137,8 @@ INSERT INTO public.quiz_config (
 ) VALUES (
     'induction_2026',
     'Zairza Induction Assessment 2026',
-    '2026-09-29T20:00:00+05:30',
-    '2026-09-30T20:00:00+05:30',
+    '2026-09-29T22:00:00+05:30',
+    '2026-09-30T22:00:00+05:30',
     '2026-09-30T12:00:00+05:30',
     30,
     30,

@@ -73,7 +73,7 @@ export const Page17QuizConfig = () => {
                 value={form.oaStartEpoch}
                 onChange={(e) => setForm({ ...form, oaStartEpoch: e.target.value })}
               />
-              <div style={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>Default: 29th Sept, 8:00 PM</div>
+              <div style={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>Default: 29th Sept, 10:00 PM</div>
             </div>
 
             <div className="form-group">
@@ -84,7 +84,7 @@ export const Page17QuizConfig = () => {
                 value={form.oaEndEpoch}
                 onChange={(e) => setForm({ ...form, oaEndEpoch: e.target.value })}
               />
-              <div style={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>Default: 30th Sept, 8:00 PM</div>
+              <div style={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>Default: 30th Sept, 10:00 PM</div>
             </div>
 
             <div className="form-group">

@@ -6,7 +6,7 @@ export const Page3Countdown = () => {
   const { activeCandidate, setCurrentView, startQuiz } = useQuiz();
 
   // Simulated Quiz status
-  // 24-hr Quiz Window: 29th Sept 8 PM to 30th Sept 8 PM
+  // 24-hr Quiz Window: 29th Sept 10 PM to 30th Sept 10 PM
   const [timeLeft, setTimeLeft] = useState({ hours: 2, minutes: 14, seconds: 37 });
   const [isLive, setIsLive] = useState(true); // Can toggle or test live mode immediately
 
@@ -128,7 +128,7 @@ export const Page3Countdown = () => {
         </div>
 
         <div style={{ color: "var(--text-secondary)", fontSize: "0.95rem", marginBottom: "25px" }}>
-          <strong>Window:</strong> 29th Sept 8:00 PM – 30th Sept 8:00 PM • <strong>Total Duration:</strong> 30 Minutes
+          <strong>Window:</strong> 29th Sept 10:00 PM – 30th Sept 10:00 PM • <strong>Total Duration:</strong> 30 Minutes
         </div>
 
         {/* Action Button */}

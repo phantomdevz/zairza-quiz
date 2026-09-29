@@ -20,7 +20,7 @@ export const Page1Landing = () => {
     },
     {
       q: "How does the 24-hour Quiz window work?",
-      a: "The quiz window opens at 8:00 PM on 29th September and closes at 8:00 PM on 30th September. Once you initiate your quiz, you receive 30 minutes to solve 30 questions across Logical Reasoning, Tech Knowledge, and HR. Submitting the quiz unlocks the Problem Statements (PS) for the Ideathon."
+      a: "The quiz window opens at 10:00 PM on 29th September and closes at 10:00 PM on 30th September. Once you initiate your quiz, you receive 30 minutes to solve 30 questions across Logical Reasoning, Tech Knowledge, and HR. Submitting the quiz unlocks the Problem Statements (PS) for the Ideathon."
     },
     {
       q: "Can I take the quiz on a phone or laptop?",
@@ -181,7 +181,7 @@ export const Page1Landing = () => {
           </li>
           <li>
             <b>2. Attend the Induction Quiz</b>
-            <span>A 30-minute proctored quiz across 3 parts: Logical Reasoning, Tech Knowledge, and HR. Window open from 29th Sept 8 PM to 30th Sept 8 PM.</span>
+            <span>A 30-minute proctored quiz across 3 parts: Logical Reasoning, Tech Knowledge, and HR. Window open from 29th Sept 10 PM to 30th Sept 10 PM.</span>
           </li>
           <li>
             <b>3. Access Ideathon Problem Statements (PS)</b>
@@ -207,7 +207,7 @@ export const Page1Landing = () => {
         <div className="specs">
           <div className="spec">
             <small>QUIZ WINDOW</small>
-            <strong>29th Sept 8 PM – 30th Sept 8 PM</strong>
+            <strong>29th Sept 10 PM – 30th Sept 10 PM</strong>
           </div>
           <div className="spec">
             <small>REGISTRATION CLOSE</small>
