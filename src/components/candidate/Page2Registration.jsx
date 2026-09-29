@@ -11,7 +11,7 @@ export const Page2Registration = () => {
     email: "",
     mobile: "",
     year: "1st Year",
-    branch: "Computer Science & Engineering",
+    branch: "Computer Science and Engineering",
     gender: "Male",
     residentialType: "Hosteller",
     preferredWing: "Software",
@@ -24,15 +24,29 @@ export const Page2Registration = () => {
   const [submissionError, setSubmissionError] = useState("");
 
   const branches = [
-    "Computer Science & Engineering",
+    "Computer Science and Engineering",
+    "Computer Science and Engineering (Artificial Intelligence and Machine Learning)",
+    "Computer Engineering",
     "Information Technology",
-    "Computer Science & Applications (CSA)",
-    "Electrical Engineering",
-    "Electronics & Instrumentation (E&IE)",
+    "Electronics and Communication Engineering (ECE)",
+    "Electronics & Instrumentation Engineering",
     "Mechanical Engineering",
+    "Mechanical Engineering (Robotics and Artificial Intelligence)",
     "Civil Engineering",
     "Biotechnology",
-    "Textile Engineering"
+    "Textile Engineering",
+    "Fashion & Apparel Technology",
+    "Metallurgical and Materials Engineering",
+    "Aerospace Engineering",
+    "Bachelor of Architecture (B.Arch)",
+    "Bachelor of Planning (B.Plan)",
+    "Integrated M.Sc. in Mathematics and Computing",
+    "Integrated M.Sc. in Applied Chemistry",
+    "Integrated M.Sc. in Applied Physics",
+    "Master of Computer Applications (MCA)",
+    "Master of Business Administration (MBA)",
+    "Master of Planning (M.Plan)",
+    "Master of Technology (M.Tech)"
   ];
 
   const availableInterests = [
@@ -70,9 +84,9 @@ export const Page2Registration = () => {
     const errs = {};
     if (!formData.fullName.trim()) errs.fullName = "Full name is required.";
 
-    // Registration Number validation (e.g. 2401106042 or 2301106xxx)
+    // OUTR Roll Number validation (e.g. 2401106042 or 2301106xxx)
     if (!formData.rollNumber.trim()) {
-      errs.rollNumber = "Registration Number is required.";
+      errs.rollNumber = "OUTR Roll Number is required.";
     } else if (formData.rollNumber.trim().length < 8) {
       errs.rollNumber = "Please enter a valid university roll number.";
     }
@@ -105,7 +119,11 @@ export const Page2Registration = () => {
     e.preventDefault();
     setSubmissionError("");
 
-    if (!validate()) return;
+    const isValid = validate();
+    if (!isValid) {
+      setSubmissionError("Please fill in all required fields marked with * and accept the terms before submitting.");
+      return;
+    }
 
     const res = registerCandidate(formData);
     if (!res.success) {
@@ -243,7 +261,7 @@ export const Page2Registration = () => {
             </div>
 
             <div className="form-group">
-              <label className="form-label">Branch of Engineering</label>
+              <label className="form-label">Branch / Academic Program *</label>
               <select
                 className="form-select"
                 value={formData.branch}
@@ -376,6 +394,24 @@ export const Page2Registration = () => {
             </span>
           </label>
           {errors.acceptedTerms && <div className="form-error" style={{ marginBottom: "16px" }}>{errors.acceptedTerms}</div>}
+
+          {submissionError && (
+            <div style={{
+              background: "rgba(244, 63, 94, 0.12)",
+              border: "1px solid var(--accent-rose)",
+              borderRadius: "var(--radius-md)",
+              padding: "12px 16px",
+              marginBottom: "16px",
+              display: "flex",
+              alignItems: "center",
+              gap: "10px",
+              color: "var(--accent-rose)",
+              fontSize: "0.9rem"
+            }}>
+              <AlertCircle size={18} />
+              <span>{submissionError}</span>
+            </div>
+          )}
 
           <button
             type="submit"
