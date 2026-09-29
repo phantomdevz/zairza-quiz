@@ -7337,7 +7337,7 @@ export const QUIZ_ANSWER_KEYS = {
 
 export const INITIAL_CANDIDATES = [
   {
-    "rollNumber": "2401106042",
+    "rollNumber": "24011042",
     "fullName": "Aarav Mohapatra",
     "email": "aarav.mohapatra@outr.ac.in",
     "mobile": "+91 98765 43210",
@@ -7356,7 +7356,7 @@ export const INITIAL_CANDIDATES = [
     "registeredAt": "2026-09-29 18:30"
   },
   {
-    "rollNumber": "2401106118",
+    "rollNumber": "24011118",
     "fullName": "Priyanka Dash",
     "email": "priyanka.dash@outr.ac.in",
     "mobile": "+91 98765 43211",
@@ -7375,7 +7375,7 @@ export const INITIAL_CANDIDATES = [
     "registeredAt": "2026-09-29 19:15"
   },
   {
-    "rollNumber": "2401106205",
+    "rollNumber": "24011205",
     "fullName": "Rohan Behera",
     "email": "rohan.behera@outr.ac.in",
     "mobile": "+91 98765 43212",

@@ -7,7 +7,7 @@ const QuizContext = createContext(null);
 export const QuizProvider = ({ children }) => {
   // Navigation / Active View
   const [currentView, setCurrentView] = useState("page1_landing");
-  const [selectedCandidateForDetails, setSelectedCandidateForDetails] = useState("2401106042");
+  const [selectedCandidateForDetails, setSelectedCandidateForDetails] = useState("24011042");
 
   // Configuration (Hydrated from localStorage with .env as initial fallback)
   const [quizConfig, setQuizConfig] = useState(() => {

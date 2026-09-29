@@ -73,13 +73,14 @@ export const Page9CandidateDashboard = () => {
 
           <form onSubmit={handleRollLogin}>
             <div className="form-group" style={{ textAlign: "left" }}>
-              <label className="form-label">Registration Number</label>
+              <label className="form-label">Registration Number (8 Digits)</label>
               <input
                 type="text"
                 className="form-input mono"
-                placeholder="e.g. 2401106042"
+                placeholder="e.g. 24011042"
+                maxLength={8}
                 value={inputRoll}
-                onChange={(e) => setInputRoll(e.target.value.toUpperCase())}
+                onChange={(e) => setInputRoll(e.target.value.replace(/\D/g, "").slice(0, 8))}
               />
             </div>
 

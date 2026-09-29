@@ -15,7 +15,7 @@ export const WatermarkOverlay = () => {
 
   if (!isQuizActive || isQuizSubmitted) return null;
 
-  const roll = activeCandidate?.rollNumber || "2401106042";
+  const roll = activeCandidate?.rollNumber || "24011042";
   const name = activeCandidate?.fullName || "OUTR Candidate";
 
   return (

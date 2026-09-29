@@ -125,7 +125,7 @@ const PlatformRouter = () => {
 
       <Navbar />
       {isAdminView ? (
-        <div style={{ display: "flex", flex: 1, minHeight: "calc(100vh - 72px)" }}>
+        <div className="admin-layout-wrapper">
           <AdminSidebar />
           <main style={{ flex: 1, overflowX: "hidden", minWidth: 0 }}>
             {renderActiveView()}

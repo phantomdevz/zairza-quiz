@@ -62,11 +62,12 @@ export const Page2Registration = () => {
     const errs = {};
     if (!formData.fullName.trim()) errs.fullName = "Full name is required.";
 
-    // OUTR Registration Number validation (e.g. 2401106042 or 2301106xxx)
+    // OUTR Registration Number validation (strictly 8-digit number, e.g. 24011042)
+    const rollRegex = /^\d{8}$/;
     if (!formData.rollNumber.trim()) {
       errs.rollNumber = "OUTR Registration Number is required.";
-    } else if (formData.rollNumber.trim().length < 8) {
-      errs.rollNumber = "Please enter a valid university Registration Number.";
+    } else if (!rollRegex.test(formData.rollNumber.trim())) {
+      errs.rollNumber = "Registration Number must be an 8-digit number (e.g. 24011042).";
     }
 
     // Email validation
@@ -112,14 +113,14 @@ export const Page2Registration = () => {
   };
 
   return (
-    <div className="container" style={{ padding: "50px 20px 80px", maxWidth: "840px" }}>
-      <div style={{ textAlign: "center", marginBottom: "35px" }}>
+    <div className="container" style={{ padding: "30px 16px 80px", maxWidth: "840px" }}>
+      <div style={{ textAlign: "center", marginBottom: "30px" }}>
         <span className="badge badge-cyan" style={{ marginBottom: "8px" }}>STEP 1 OF 3</span>
-        <h1 style={{ fontSize: "clamp(2rem, 3.5vw, 2.6rem)", marginBottom: "8px" }}>
+        <h1 style={{ fontSize: "clamp(1.8rem, 4vw, 2.6rem)", marginBottom: "8px" }}>
           Candidate Registration
         </h1>
-        <p style={{ color: "var(--text-secondary)", fontSize: "0.95rem" }}>
-          Fill in your OUTR credentials. Your Registration Number serves as your primary quiz identifier.
+        <p style={{ color: "var(--text-secondary)", fontSize: "0.92rem" }}>
+          Fill in your OUTR credentials. Your 8-digit Registration Number serves as your primary quiz identifier.
         </p>
       </div>
 
@@ -140,7 +141,7 @@ export const Page2Registration = () => {
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="glass-panel" style={{ padding: "35px" }}>
+      <form onSubmit={handleSubmit} className="glass-panel" style={{ padding: "clamp(18px, 4vw, 35px)" }}>
         {/* Section 1: Personal Details */}
         <div style={{ marginBottom: "30px" }}>
           <h3 style={{ fontSize: "1.2rem", color: "var(--accent-cyan)", marginBottom: "16px", display: "flex", alignItems: "center", gap: "8px" }}>
@@ -148,7 +149,7 @@ export const Page2Registration = () => {
             <span>Personal Details</span>
           </h3>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "16px" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "16px" }}>
             <div className="form-group">
               <label className="form-label">Full Name *</label>
               <input
@@ -162,13 +163,14 @@ export const Page2Registration = () => {
             </div>
 
             <div className="form-group">
-              <label className="form-label">Registration Number *</label>
+              <label className="form-label">Registration Number (8 Digits) *</label>
               <input
                 type="text"
                 className="form-input mono"
-                placeholder="e.g. 2401106042"
+                placeholder="e.g. 24011042"
+                maxLength={8}
                 value={formData.rollNumber}
-                onChange={(e) => setFormData({ ...formData, rollNumber: e.target.value.toUpperCase() })}
+                onChange={(e) => setFormData({ ...formData, rollNumber: e.target.value.replace(/\D/g, "").slice(0, 8) })}
               />
               {errors.rollNumber && <div className="form-error">{errors.rollNumber}</div>}
             </div>

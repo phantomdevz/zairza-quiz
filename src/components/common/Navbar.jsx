@@ -82,30 +82,30 @@ export const Navbar = () => {
           </div>
 
           {/* Right Actions: Roll & Submit */}
-          <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
             {activeCandidate && (
-              <div className="badge badge-cyan mono" style={{ fontSize: "0.8rem", padding: "6px 10px" }}>
+              <div className="badge badge-cyan mono" style={{ fontSize: "0.75rem", padding: "4px 8px" }}>
                 ROLL: {activeCandidate.rollNumber}
               </div>
             )}
 
             <button
               onClick={() => setShowSubmitModal(true)}
-              className="btn btn-primary pulse-glow"
+              className="btn btn-primary pulse-glow desktop-sidebar"
               style={{
-                padding: "8px 20px",
-                fontSize: "0.88rem",
-                minHeight: "38px",
+                padding: "6px 16px",
+                fontSize: "0.85rem",
+                minHeight: "36px",
                 background: "var(--accent-emerald)",
                 borderColor: "var(--accent-emerald)",
                 fontWeight: "700",
                 display: "inline-flex",
                 alignItems: "center",
-                gap: "8px"
+                gap: "6px"
               }}
             >
-              <Send size={15} />
-              <span>Submit Quiz</span>
+              <Send size={14} />
+              <span>Submit</span>
             </button>
           </div>
         </div>

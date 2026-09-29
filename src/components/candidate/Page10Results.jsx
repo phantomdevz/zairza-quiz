@@ -6,7 +6,7 @@ export const Page10Results = () => {
   const { activeCandidate, setCurrentView, quizConfig, isEvaluationUnlocked, getUnlockRemainingSeconds } = useQuiz();
 
   const candidate = activeCandidate || {
-    rollNumber: "2401106042",
+    rollNumber: "24011042",
     fullName: "Aarav Mohapatra",
     score: 26,
     timeTakenSeconds: 1420,

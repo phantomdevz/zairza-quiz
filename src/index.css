@@ -704,6 +704,45 @@ ol.steps span {
 }
 
 /* Responsive */
+.admin-layout-wrapper {
+  display: flex;
+  flex: 1;
+  min-height: calc(100vh - 72px);
+  width: 100%;
+}
+
+.admin-sidebar-desktop {
+  width: 260px;
+  min-width: 260px;
+  background: rgba(13, 16, 23, 0.95);
+  border-right: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 24px 16px;
+  position: sticky;
+  top: 72px;
+  height: calc(100vh - 72px);
+  overflow-y: auto;
+  z-index: 50;
+}
+
+.admin-mobile-nav {
+  display: none;
+}
+
+/* Global Responsive Table Container */
+.table-responsive,
+.glass-panel table,
+table {
+  width: 100%;
+}
+
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 @media (max-width: 900px) {
   .quiz-layout-grid {
     grid-template-columns: 1fr !important;
@@ -717,6 +756,29 @@ ol.steps span {
   .quiz-main-content {
     padding-bottom: 90px;
   }
+
+  /* Admin Mobile Switch */
+  .admin-layout-wrapper {
+    flex-direction: column !important;
+  }
+  .admin-sidebar-desktop {
+    display: none !important;
+  }
+  .admin-mobile-nav {
+    display: block !important;
+    position: sticky;
+    top: 72px;
+    z-index: 100;
+  }
+
+  /* Auto-scroll any admin table on phone */
+  .glass-panel:has(table) {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+  .glass-panel table {
+    min-width: 580px;
+  }
 }
 
 @media (max-width: 780px) {
@@ -725,5 +787,51 @@ ol.steps span {
   }
   .win {
     transform: none;
+    margin-right: 0 !important;
+  }
+  .win .bar {
+    padding: 10px 14px;
+    font-size: 0.75rem;
+  }
+  .win .body {
+    padding: 20px 16px;
+  }
+
+  /* Compact glass panels on mobile */
+  .card, .glass-panel {
+    padding: clamp(14px, 4vw, 20px);
+  }
+
+  /* Mobile Modals */
+  .modal-overlay {
+    padding: 12px !important;
+  }
+  .modal-content {
+    padding: 20px 16px !important;
+    max-width: 100% !important;
+    box-shadow: 4px 4px 0 var(--blue) !important;
+  }
+
+  /* Prevent auto-zoom on mobile inputs */
+  .form-input, .form-select {
+    font-size: 16px !important;
+  }
+
+  /* Container mobile padding */
+  .container {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
   }
 }
+
+@media (max-width: 480px) {
+  /* Ultra-small phones */
+  .btn {
+    font-size: 0.82rem;
+    padding: 10px 14px;
+  }
+  .modal-content {
+    padding: 16px 12px !important;
+  }
+}
+

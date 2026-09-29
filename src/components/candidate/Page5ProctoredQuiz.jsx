@@ -37,7 +37,7 @@ export const Page5ProctoredQuiz = () => {
 
   const questions = activeQuestions || poolQuestions;
   const currentQ = questions[currentQuestionIndex] || questions[0];
-  const roll = activeCandidate?.rollNumber || "2401106042";
+  const roll = activeCandidate?.rollNumber || "24011042";
 
   // Format timer MM:SS
   const formatTime = (secs) => {

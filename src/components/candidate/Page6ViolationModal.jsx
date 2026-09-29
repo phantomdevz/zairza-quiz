@@ -16,7 +16,7 @@ export const Page6ViolationModal = () => {
 
   const maxAllowed = quizConfig.maxViolationsAllowed;
   const isTerminated = violationCount >= maxAllowed;
-  const roll = activeCandidate?.rollNumber || "2401106042";
+  const roll = activeCandidate?.rollNumber || "24011042";
 
   return (
     <div className="modal-overlay">
