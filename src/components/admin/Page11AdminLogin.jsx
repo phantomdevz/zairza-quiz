@@ -1,20 +1,25 @@
 import React, { useState } from "react";
 import { useQuiz } from "../../context/QuizContext";
-import { Lock, Mail, Key, ShieldCheck, ArrowRight, AlertCircle, Terminal } from "lucide-react";
+import { Lock, Mail, Key, ShieldCheck, ArrowRight, AlertCircle } from "lucide-react";
 
 export const Page11AdminLogin = () => {
   const { loginAdmin, setCurrentView, isAdminLoggedIn } = useQuiz();
 
-  const [email, setEmail] = useState("admin@zairza.in");
-  const [password, setPassword] = useState("zairza2026");
-  const [twoFactorCode, setTwoFactorCode] = useState("202609");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [twoFactorCode, setTwoFactorCode] = useState("");
   const [step, setStep] = useState(1); // 1: Password, 2: 2FA TOTP
   const [error, setError] = useState("");
 
   const handlePasswordSubmit = (e) => {
     e.preventDefault();
     setError("");
-    if (email === "admin@zairza.in" && password === "zairza2026") {
+    if (!email.trim() || !password.trim()) {
+      setError("Please enter your administrator email and password.");
+      return;
+    }
+
+    if (email.trim().toLowerCase() === "admin@zairza.in" && password === "zairza2026") {
       setStep(2); // Proceed to 2FA challenge
     } else {
       setError("Invalid admin credentials. Please verify your email and password.");
@@ -24,13 +29,18 @@ export const Page11AdminLogin = () => {
   const handle2FASubmit = (e) => {
     e.preventDefault();
     setError("");
+    if (!twoFactorCode.trim()) {
+      setError("Please enter the 6-digit 2FA security code.");
+      return;
+    }
+
     if (twoFactorCode.trim() === "202609" || twoFactorCode.trim().length === 6) {
       const ok = loginAdmin(email, password);
       if (ok) {
         setCurrentView("page12_admin_dashboard");
       }
     } else {
-      setError("Invalid 2FA Authenticator token. Enter 6-digit code.");
+      setError("Invalid 2FA Authenticator token. Enter valid 6-digit code.");
     }
   };
 
@@ -90,8 +100,11 @@ export const Page11AdminLogin = () => {
                   type="email"
                   className="form-input"
                   style={{ paddingLeft: "40px" }}
+                  placeholder="Enter admin email..."
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  autoFocus
+                  required
                 />
                 <Mail size={16} style={{ position: "absolute", left: "14px", top: "16px", color: "var(--text-muted)" }} />
               </div>
@@ -104,8 +117,10 @@ export const Page11AdminLogin = () => {
                   type="password"
                   className="form-input"
                   style={{ paddingLeft: "40px" }}
+                  placeholder="Enter password..."
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  required
                 />
                 <Lock size={16} style={{ position: "absolute", left: "14px", top: "16px", color: "var(--text-muted)" }} />
               </div>
@@ -115,10 +130,6 @@ export const Page11AdminLogin = () => {
               <span>Verify Password</span>
               <ArrowRight size={16} />
             </button>
-
-            <div style={{ marginTop: "16px", fontSize: "0.8rem", color: "var(--text-muted)", textAlign: "center" }}>
-              Pre-filled test credentials: <code>admin@zairza.in</code> / <code>zairza2026</code>
-            </div>
           </form>
         ) : (
           <form onSubmit={handle2FASubmit}>
@@ -135,15 +146,17 @@ export const Page11AdminLogin = () => {
                 type="text"
                 className="form-input mono"
                 style={{ textAlign: "center", fontSize: "1.4rem", letterSpacing: "0.3em", padding: "12px" }}
+                placeholder="• • • • • •"
                 maxLength={6}
                 value={twoFactorCode}
                 onChange={(e) => setTwoFactorCode(e.target.value)}
                 autoFocus
+                required
               />
             </div>
 
             <button type="submit" className="btn btn-primary" style={{ width: "100%", padding: "12px" }}>
-              <span>Authenticate & Enter Admin Suite</span>
+              <span>Authenticate &amp; Enter Admin Suite</span>
               <ArrowRight size={16} />
             </button>
 
