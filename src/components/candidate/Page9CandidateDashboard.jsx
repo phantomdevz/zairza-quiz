@@ -316,11 +316,22 @@ export const Page9CandidateDashboard = () => {
               <span className="badge badge-cyan">{preferredWing}</span>
             </div>
             <div>
-              <div style={{ color: "var(--text-muted)", marginBottom: "6px" }}>Technical Interests:</div>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
-                {technicalInterests && technicalInterests.map((t) => (
-                  <span key={t} className="badge badge-purple">{t}</span>
-                ))}
+              <div style={{ color: "var(--text-muted)", marginBottom: "6px" }}>Interests:</div>
+              <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+                {technicalInterests && (
+                  Array.isArray(technicalInterests) ? (
+                    technicalInterests.map((t, idx) => (
+                      <div key={idx} style={{ fontSize: "0.85rem", color: "var(--text-secondary)", display: "flex", alignItems: "baseline", gap: "6px" }}>
+                        <span style={{ color: "var(--accent-cyan)", fontSize: "0.75rem" }}>▸</span>
+                        <span>{t}</span>
+                      </div>
+                    ))
+                  ) : (
+                    <div style={{ fontSize: "0.85rem", color: "var(--text-secondary)", whiteSpace: "pre-line" }}>
+                      {technicalInterests}
+                    </div>
+                  )
+                )}
               </div>
             </div>
           </div>

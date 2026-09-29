@@ -49,34 +49,23 @@ export const Page2Registration = () => {
     "Master of Technology (M.Tech)"
   ];
 
-  const availableInterests = [
-    "Web Development",
-    "Mobile Apps",
-    "AI / Deep Learning",
-    "Embedded C & Arduino",
-    "Drones & Aerial Robotics",
-    "UI / UX Design",
-    "3D Modelling (Blender)",
-    "Cybersecurity",
-    "Game Dev",
-    "Cloud & DevOps"
-  ];
+  const handleInterestsChange = (e) => {
+    const val = e.target.value;
+    const lines = val.split("\n");
+    if (lines.length > 3) return;
+    setFormData({
+      ...formData,
+      interestsText: val,
+      technicalInterests: lines.map((l) => l.trim()).filter(Boolean)
+    });
+  };
 
-  const handleInterestToggle = (tag) => {
-    if (formData.technicalInterests.includes(tag)) {
-      setFormData({
-        ...formData,
-        technicalInterests: formData.technicalInterests.filter((t) => t !== tag)
-      });
-    } else {
-      if (formData.technicalInterests.length >= 3) {
-        alert("You can select a maximum of 3 technical interests.");
-        return;
+  const handleInterestsKeyDown = (e) => {
+    if (e.key === "Enter") {
+      const lines = (formData.interestsText || "").split("\n");
+      if (lines.length >= 3) {
+        e.preventDefault();
       }
-      setFormData({
-        ...formData,
-        technicalInterests: [...formData.technicalInterests, tag]
-      });
     }
   };
 
@@ -337,35 +326,27 @@ export const Page2Registration = () => {
           </div>
 
           <div className="form-group" style={{ marginTop: "16px" }}>
-            <label className="form-label">
-              <span>Technical Interests (Select up to 3)</span>
+            <label className="form-label" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <span>Write your interests in 3 lines</span>
               <span className="mono" style={{ fontSize: "0.8rem", color: "var(--accent-cyan)" }}>
-                {formData.technicalInterests.length}/3 selected
+                {((formData.interestsText || "").split("\n").filter(Boolean)).length}/3 lines
               </span>
             </label>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", marginTop: "6px" }}>
-              {availableInterests.map((tag) => {
-                const isSelected = formData.technicalInterests.includes(tag);
-                return (
-                  <div
-                    key={tag}
-                    onClick={() => handleInterestToggle(tag)}
-                    style={{
-                      padding: "6px 14px",
-                      borderRadius: "20px",
-                      fontSize: "0.85rem",
-                      cursor: "pointer",
-                      border: isSelected ? "1px solid var(--accent-cyan)" : "1px solid var(--border-subtle)",
-                      background: isSelected ? "rgba(6, 182, 212, 0.2)" : "rgba(255,255,255,0.02)",
-                      color: isSelected ? "var(--accent-cyan)" : "var(--text-secondary)",
-                      transition: "all 0.15s ease"
-                    }}
-                  >
-                    {tag}
-                  </div>
-                );
-              })}
-            </div>
+            <textarea
+              className="form-input"
+              rows={3}
+              value={formData.interestsText || ""}
+              onChange={handleInterestsChange}
+              onKeyDown={handleInterestsKeyDown}
+              placeholder={"1. Web Development, React, Node.js & APIs\n2. Robotics, Arduino & Sensor Integration\n3. UI/UX Design, Figma & 3D Prototyping"}
+              style={{
+                resize: "none",
+                lineHeight: "1.6",
+                padding: "12px 14px",
+                fontSize: "0.9rem",
+                fontFamily: "var(--font-sans)"
+              }}
+            />
           </div>
 
           <div className="form-group" style={{ marginTop: "16px" }}>
