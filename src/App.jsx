@@ -30,7 +30,13 @@ import { Page19AuditLogs } from "./components/admin/Page19AuditLogs";
 import { Page20UserManagement } from "./components/admin/Page20UserManagement";
 
 const PlatformRouter = () => {
-  const { currentView, isQuizActive } = useQuiz();
+  const { currentView, setCurrentView, isQuizActive } = useQuiz();
+
+  React.useEffect(() => {
+    if (window.location.hash === "#admin" || window.location.search.includes("admin")) {
+      setCurrentView("page11_login");
+    }
+  }, [setCurrentView]);
 
   const renderActiveView = () => {
     switch (currentView) {

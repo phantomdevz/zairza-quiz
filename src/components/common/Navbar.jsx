@@ -240,8 +240,8 @@ export const Navbar = () => {
             </button>
           )}
 
-          {/* Admin Switcher */}
-          {isAdminLoggedIn ? (
+          {/* Admin Logout (Visible only when logged in as admin) */}
+          {isAdminLoggedIn && (
             <button
               onClick={() => {
                 logoutAdmin();
@@ -252,15 +252,6 @@ export const Navbar = () => {
               title="Logout Admin"
             >
               <LogOut size={14} />
-            </button>
-          ) : (
-            <button
-              onClick={() => setCurrentView("page11_login")}
-              className="btn btn-secondary"
-              style={{ padding: "8px 10px", minHeight: "38px" }}
-              title="Admin Portal"
-            >
-              <Terminal size={14} />
             </button>
           )}
         </div>
