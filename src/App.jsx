@@ -33,9 +33,27 @@ const PlatformRouter = () => {
   const { currentView, setCurrentView, isQuizActive } = useQuiz();
 
   React.useEffect(() => {
-    if (window.location.hash === "#admin" || window.location.search.includes("admin")) {
-      setCurrentView("page11_login");
-    }
+    const handleHashAndShortcut = () => {
+      if (window.location.hash === "#admin" || window.location.search.includes("admin")) {
+        setCurrentView("page11_login");
+      }
+    };
+
+    const handleKeyDown = (e) => {
+      // Ctrl + Shift + A shortcut for admin access
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === "A" || e.key === "a")) {
+        e.preventDefault();
+        setCurrentView("page11_login");
+      }
+    };
+
+    handleHashAndShortcut();
+    window.addEventListener("hashchange", handleHashAndShortcut);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("hashchange", handleHashAndShortcut);
+      window.removeEventListener("keydown", handleKeyDown);
+    };
   }, [setCurrentView]);
 
   const renderActiveView = () => {
