@@ -22,6 +22,32 @@ export const QuizProvider = ({ children }) => {
   const [candidates, setCandidates] = useState(INITIAL_CANDIDATES);
   const [auditLogs, setAuditLogs] = useState(INITIAL_AUDIT_LOGS);
 
+  // Isolated Answer Keys State (Segregated from candidate questions)
+  const [answerKeys, setAnswerKeys] = useState(() => {
+    const saved = localStorage.getItem("zairza_quiz_answer_keys");
+    return saved ? JSON.parse(saved) : QUIZ_ANSWER_KEYS;
+  });
+
+  useEffect(() => {
+    localStorage.setItem("zairza_quiz_answer_keys", JSON.stringify(answerKeys));
+  }, [answerKeys]);
+
+  const updateAnswerKey = (questionId, correctOptionId, explanation = null) => {
+    setAnswerKeys((prev) => {
+      const existing = prev[questionId] || prev[String(questionId)] || {};
+      const updated = {
+        ...existing,
+        correctOptionId,
+        ...(explanation !== null ? { explanation } : {})
+      };
+      return {
+        ...prev,
+        [questionId]: updated,
+        [String(questionId)]: updated
+      };
+    });
+  };
+
   // Active Candidate Session (Identified by Registration Number)
   const [activeCandidate, setActiveCandidate] = useState(() => {
     const saved = localStorage.getItem("zairza_candidate_session");
@@ -312,7 +338,7 @@ export const QuizProvider = ({ children }) => {
 
     questions.forEach((q) => {
       const selected = answers[q.id];
-      const solution = QUIZ_ANSWER_KEYS[q.id];
+      const solution = answerKeys[q.id] || answerKeys[String(q.id)] || QUIZ_ANSWER_KEYS[q.id];
       if (!selected) {
         unansweredCount++;
       } else if (solution && selected === solution.correctOptionId) {
@@ -442,7 +468,10 @@ export const QuizProvider = ({ children }) => {
         selectedCandidateForDetails,
         setSelectedCandidateForDetails,
         isEvaluationUnlocked,
-        getUnlockRemainingSeconds
+        getUnlockRemainingSeconds,
+        answerKeys,
+        setAnswerKeys,
+        updateAnswerKey
       }}
     >
       {children}

@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import { useQuiz } from "../../context/QuizContext";
-import { Plus, Edit2, Trash2, CheckCircle, Search, Filter, BookOpen } from "lucide-react";
+import { Plus, Trash2, CheckCircle, Search, ShieldCheck, Check, Sparkles, HelpCircle, Save } from "lucide-react";
 
 export const Page16QuestionBank = () => {
-  const { questions, setQuestions, quizConfig } = useQuiz();
+  const { questions, setQuestions, answerKeys, updateAnswerKey } = useQuiz();
 
   const [selectedSection, setSelectedSection] = useState("ALL");
   const [searchQuery, setSearchQuery] = useState("");
   const [showAddModal, setShowAddModal] = useState(false);
+  const [editingExplanationId, setEditingExplanationId] = useState(null);
+  const [tempExplanation, setTempExplanation] = useState("");
 
   // New question form state
   const [newQ, setNewQ] = useState({
@@ -32,24 +34,45 @@ export const Page16QuestionBank = () => {
     if (!newQ.prompt.trim()) return;
 
     const nextId = questions.length + 1;
-    const created = {
+    const createdQuestion = {
       id: nextId,
       section: newQ.section,
-      sectionTitle: newQ.section === "logical" ? "Part 1: Logical Reasoning" : newQ.section === "tech" ? "Part 2: Tech Knowledge" : "Part 3: HR & Cultural Alignment",
+      sectionTitle:
+        newQ.section === "logical"
+          ? "Part 1: Logical Reasoning"
+          : newQ.section === "tech"
+          ? "Part 2: Tech Knowledge"
+          : "Part 3: HR & Cultural Alignment",
       prompt: newQ.prompt,
       options: [
         { id: "opt_1", text: newQ.optA || "Option A" },
         { id: "opt_2", text: newQ.optB || "Option B" },
         { id: "opt_3", text: newQ.optC || "Option C" },
         { id: "opt_4", text: newQ.optD || "Option D" }
-      ],
-      correctOptionId: newQ.correctOpt,
-      explanation: newQ.explanation || "Standard society evaluation criteria."
+      ]
     };
 
-    setQuestions([...questions, created]);
+    // Save sanitized question to questions list
+    setQuestions([...questions, createdQuestion]);
+
+    // Save isolated answer key and explanation into answerKeys table
+    updateAnswerKey(
+      nextId,
+      newQ.correctOpt,
+      newQ.explanation || "Standard society evaluation criteria."
+    );
+
     setShowAddModal(false);
-    setNewQ({ section: "tech", prompt: "", optA: "", optB: "", optC: "", optD: "", correctOpt: "opt_1", explanation: "" });
+    setNewQ({
+      section: "tech",
+      prompt: "",
+      optA: "",
+      optB: "",
+      optC: "",
+      optD: "",
+      correctOpt: "opt_1",
+      explanation: ""
+    });
   };
 
   const handleDelete = (id) => {
@@ -58,15 +81,36 @@ export const Page16QuestionBank = () => {
     }
   };
 
+  const handleOptionClick = (questionId, optionId) => {
+    updateAnswerKey(questionId, optionId);
+  };
+
+  const startEditExplanation = (qId, currentExp) => {
+    setEditingExplanationId(qId);
+    setTempExplanation(currentExp || "");
+  };
+
+  const saveExplanation = (qId) => {
+    const currentKey = answerKeys[qId]?.correctOptionId || answerKeys[String(qId)]?.correctOptionId || "opt_1";
+    updateAnswerKey(qId, currentKey, tempExplanation);
+    setEditingExplanationId(null);
+  };
+
+  // Count how many questions have answers configured
+  const configuredKeysCount = questions.filter(
+    (q) => Boolean(answerKeys[q.id]?.correctOptionId || answerKeys[String(q.id)]?.correctOptionId)
+  ).length;
+
   return (
     <div className="container" style={{ padding: "40px 20px 80px", maxWidth: "1240px" }}>
       {/* Top Header */}
-      <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "center", gap: "16px", marginBottom: "26px" }}>
+      <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "center", gap: "16px", marginBottom: "20px" }}>
         <div>
           <span className="badge badge-cyan" style={{ marginBottom: "6px" }}>CURRICULUM REPOSITORY</span>
           <h1 style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.4rem)" }}>Question Bank Studio</h1>
           <p style={{ color: "var(--text-secondary)", fontSize: "0.92rem", marginTop: "4px" }}>
-            Total pool: <strong>{questions.length} Questions</strong> categorized across Logical, Tech, and HR sections.
+            Total pool: <strong>{questions.length} Questions</strong> • Solution Keys Configured:{" "}
+            <strong className="mono" style={{ color: "var(--accent-emerald)" }}>{configuredKeysCount} / {questions.length}</strong>
           </p>
         </div>
 
@@ -78,6 +122,31 @@ export const Page16QuestionBank = () => {
           <Plus size={16} />
           <span>Add New Question</span>
         </button>
+      </div>
+
+      {/* Security Architecture Information Card */}
+      <div style={{
+        background: "rgba(16, 185, 129, 0.06)",
+        border: "1px solid rgba(16, 185, 129, 0.25)",
+        borderRadius: "12px",
+        padding: "16px 20px",
+        marginBottom: "24px",
+        display: "flex",
+        alignItems: "flex-start",
+        gap: "14px"
+      }}>
+        <div style={{ color: "var(--accent-emerald)", marginTop: "2px" }}>
+          <ShieldCheck size={22} />
+        </div>
+        <div style={{ fontSize: "0.88rem", lineHeight: "1.6" }}>
+          <div style={{ fontWeight: "700", color: "var(--accent-emerald)", marginBottom: "2px" }}>
+            Isolated Solution Keys Architecture Active
+          </div>
+          <div style={{ color: "var(--text-secondary)" }}>
+            Correct answers and explanations are stored separately in the secure <code className="mono">quiz_answer_keys</code> table and never bundled with questions sent to student browsers.
+            <strong> Click any option card below to directly mark or reassign it as the official answer key.</strong>
+          </div>
+        </div>
       </div>
 
       {/* Filter and Search Bar */}
@@ -102,72 +171,185 @@ export const Page16QuestionBank = () => {
               <option value="ALL">All Sections (Logical, Tech, HR)</option>
               <option value="logical">Part 1: Logical Reasoning ({questions.filter((q) => q.section === "logical").length})</option>
               <option value="tech">Part 2: Tech Knowledge ({questions.filter((q) => q.section === "tech").length})</option>
-              <option value="hr">Part 3: HR & Culture ({questions.filter((q) => q.section === "hr").length})</option>
+              <option value="hr">Part 3: HR &amp; Culture ({questions.filter((q) => q.section === "hr").length})</option>
             </select>
           </div>
         </div>
       </div>
 
       {/* Questions List */}
-      <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-        {filteredQuestions.map((q) => (
-          <div key={q.id} className="glass-panel" style={{ padding: "24px" }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "12px" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                <span className="badge badge-cyan mono">Q{q.id}</span>
-                <span className="badge badge-purple">{q.section.toUpperCase()}</span>
-                <span style={{ fontSize: "0.85rem", color: "var(--text-muted)" }}>{q.sectionTitle}</span>
-              </div>
+      <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+        {filteredQuestions.map((q) => {
+          const keyData = answerKeys[q.id] || answerKeys[String(q.id)] || {};
+          const currentCorrectId = keyData.correctOptionId;
+          const explanation = keyData.explanation;
 
-              <div style={{ display: "flex", gap: "8px" }}>
-                <button
-                  onClick={() => handleDelete(q.id)}
-                  className="btn btn-secondary"
-                  style={{ padding: "6px 10px", fontSize: "0.8rem", color: "var(--accent-rose)", minHeight: "32px" }}
-                >
-                  <Trash2 size={14} />
-                </button>
-              </div>
-            </div>
+          return (
+            <div key={q.id} className="glass-panel" style={{ padding: "26px", border: "1px solid var(--border-subtle)" }}>
+              {/* Question Card Top Header */}
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "14px" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                  <span className="badge badge-cyan mono">Q{q.id}</span>
+                  <span className="badge badge-purple">{q.section.toUpperCase()}</span>
+                  <span style={{ fontSize: "0.85rem", color: "var(--text-muted)" }}>{q.sectionTitle}</span>
+                </div>
 
-            <h4 style={{ fontSize: "1.05rem", fontWeight: "600", lineHeight: "1.6", marginBottom: "16px" }}>
-              {q.prompt}
-            </h4>
-
-            {/* Options Grid */}
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "10px", marginBottom: "16px" }}>
-              {q.options.map((opt, i) => {
-                const isCorrect = opt.id === q.correctOptionId;
-                return (
-                  <div
-                    key={opt.id}
-                    style={{
-                      padding: "10px 14px",
-                      borderRadius: "8px",
-                      background: isCorrect ? "rgba(16, 185, 129, 0.1)" : "rgba(255, 255, 255, 0.02)",
-                      border: isCorrect ? "1px solid var(--accent-emerald)" : "1px solid var(--border-subtle)",
-                      fontSize: "0.88rem",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "space-between"
-                    }}
+                <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                  <span style={{ fontSize: "0.78rem", color: "var(--text-muted)" }}>
+                    Click option to mark answer
+                  </span>
+                  <button
+                    onClick={() => handleDelete(q.id)}
+                    className="btn btn-secondary"
+                    style={{ padding: "6px 10px", fontSize: "0.8rem", color: "var(--accent-rose)", minHeight: "32px" }}
+                    title="Delete Question"
                   >
-                    <span>{String.fromCharCode(65 + i)}. {opt.text}</span>
-                    {isCorrect && (
-                      <span className="badge badge-emerald" style={{ fontSize: "0.68rem" }}>KEY</span>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-
-            {q.explanation && (
-              <div style={{ fontSize: "0.82rem", color: "var(--text-muted)", borderTop: "1px solid var(--border-subtle)", paddingTop: "10px" }}>
-                <strong>Explanation:</strong> {q.explanation}
+                    <Trash2 size={14} />
+                  </button>
+                </div>
               </div>
-            )}
-          </div>
-        ))}
+
+              {/* Question Prompt */}
+              <h4 style={{ fontSize: "1.08rem", fontWeight: "600", lineHeight: "1.6", marginBottom: "18px", color: "var(--text-main)" }}>
+                {q.prompt}
+              </h4>
+
+              {/* Options Grid (Click to Mark as Correct) */}
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "12px", marginBottom: "18px" }}>
+                {q.options.map((opt, i) => {
+                  const isCorrect = opt.id === currentCorrectId;
+
+                  return (
+                    <button
+                      key={opt.id}
+                      type="button"
+                      onClick={() => handleOptionClick(q.id, opt.id)}
+                      style={{
+                        padding: "12px 16px",
+                        borderRadius: "10px",
+                        background: isCorrect ? "rgba(16, 185, 129, 0.12)" : "rgba(255, 255, 255, 0.02)",
+                        border: isCorrect ? "2px solid var(--accent-emerald)" : "1px solid var(--border-subtle)",
+                        fontSize: "0.9rem",
+                        color: isCorrect ? "#ecfdf5" : "var(--text-secondary)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        cursor: "pointer",
+                        textAlign: "left",
+                        width: "100%",
+                        transition: "all 0.15s ease",
+                        position: "relative"
+                      }}
+                      onMouseEnter={(e) => {
+                        if (!isCorrect) {
+                          e.currentTarget.style.borderColor = "rgba(6, 182, 212, 0.5)";
+                          e.currentTarget.style.background = "rgba(6, 182, 212, 0.05)";
+                        }
+                      }}
+                      onMouseLeave={(e) => {
+                        if (!isCorrect) {
+                          e.currentTarget.style.borderColor = "var(--border-subtle)";
+                          e.currentTarget.style.background = "rgba(255, 255, 255, 0.02)";
+                        }
+                      }}
+                      title={isCorrect ? "Official Answer Key" : "Click to set as Correct Answer"}
+                    >
+                      <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                        <span className="mono" style={{
+                          fontWeight: "700",
+                          color: isCorrect ? "var(--accent-emerald)" : "var(--text-muted)",
+                          fontSize: "0.95rem"
+                        }}>
+                          {String.fromCharCode(65 + i)}.
+                        </span>
+                        <span>{opt.text}</span>
+                      </div>
+
+                      {isCorrect ? (
+                        <span className="badge badge-emerald" style={{ fontSize: "0.72rem", display: "inline-flex", alignItems: "center", gap: "4px" }}>
+                          <Check size={12} />
+                          <span>KEY ✓</span>
+                        </span>
+                      ) : (
+                        <span style={{ fontSize: "0.72rem", color: "var(--text-muted)", opacity: 0.5 }}>
+                          Set Key
+                        </span>
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Explanation Section */}
+              <div style={{
+                background: "rgba(0, 0, 0, 0.3)",
+                border: "1px solid rgba(255, 255, 255, 0.06)",
+                borderRadius: "8px",
+                padding: "12px 16px"
+              }}>
+                {editingExplanationId === q.id ? (
+                  <div>
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "8px" }}>
+                      <span style={{ fontSize: "0.82rem", fontWeight: "700", color: "var(--accent-cyan)" }}>
+                        Edit Explanation (Saved to quiz_answer_keys)
+                      </span>
+                    </div>
+                    <textarea
+                      className="form-textarea"
+                      rows={2}
+                      value={tempExplanation}
+                      onChange={(e) => setTempExplanation(e.target.value)}
+                      placeholder="Enter explanation for candidate review after 15m..."
+                      style={{ fontSize: "0.85rem", marginBottom: "10px" }}
+                    />
+                    <div style={{ display: "flex", justifyContent: "flex-end", gap: "8px" }}>
+                      <button
+                        type="button"
+                        onClick={() => setEditingExplanationId(null)}
+                        className="btn btn-secondary"
+                        style={{ padding: "4px 12px", fontSize: "0.8rem", minHeight: "28px" }}
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => saveExplanation(q.id)}
+                        className="btn btn-primary"
+                        style={{ padding: "4px 12px", fontSize: "0.8rem", minHeight: "28px" }}
+                      >
+                        <Save size={12} />
+                        <span>Save Explanation</span>
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "10px" }}>
+                    <div style={{ fontSize: "0.85rem", color: "var(--text-secondary)", lineHeight: "1.5" }}>
+                      <strong style={{ color: "var(--text-main)" }}>Explanation: </strong>
+                      {explanation ? explanation : <em style={{ color: "var(--text-muted)" }}>No explanation recorded yet.</em>}
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => startEditExplanation(q.id, explanation)}
+                      style={{
+                        background: "transparent",
+                        border: "1px solid var(--border-subtle)",
+                        borderRadius: "6px",
+                        color: "var(--accent-cyan)",
+                        padding: "3px 8px",
+                        fontSize: "0.75rem",
+                        cursor: "pointer",
+                        whiteSpace: "nowrap"
+                      }}
+                    >
+                      Edit
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
+          );
+        })}
       </div>
 
       {/* Add Question Modal */}
@@ -185,7 +367,7 @@ export const Page16QuestionBank = () => {
                 >
                   <option value="logical">Part 1: Logical Reasoning</option>
                   <option value="tech">Part 2: Tech Knowledge</option>
-                  <option value="hr">Part 3: HR & Cultural Alignment</option>
+                  <option value="hr">Part 3: HR &amp; Cultural Alignment</option>
                 </select>
               </div>
 
@@ -237,21 +419,24 @@ export const Page16QuestionBank = () => {
               </div>
 
               <div className="form-group">
-                <label className="form-label">Correct Option</label>
+                <label className="form-label" style={{ color: "var(--accent-emerald)", fontWeight: "700" }}>
+                  Correct Answer Key (Saved in quiz_answer_keys)
+                </label>
                 <select
                   className="form-select"
                   value={newQ.correctOpt}
                   onChange={(e) => setNewQ({ ...newQ, correctOpt: e.target.value })}
+                  style={{ borderColor: "var(--accent-emerald)" }}
                 >
-                  <option value="opt_1">Option A</option>
-                  <option value="opt_2">Option B</option>
-                  <option value="opt_3">Option C</option>
-                  <option value="opt_4">Option D</option>
+                  <option value="opt_1">Option A ({newQ.optA || "A"})</option>
+                  <option value="opt_2">Option B ({newQ.optB || "B"})</option>
+                  <option value="opt_3">Option C ({newQ.optC || "C"})</option>
+                  <option value="opt_4">Option D ({newQ.optD || "D"})</option>
                 </select>
               </div>
 
               <div className="form-group">
-                <label className="form-label">Explanation (Server-Only)</label>
+                <label className="form-label">Explanation (Server-Only Rationale)</label>
                 <input
                   type="text"
                   className="form-input"
