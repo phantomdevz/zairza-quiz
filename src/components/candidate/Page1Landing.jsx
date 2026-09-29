@@ -20,7 +20,7 @@ export const Page1Landing = () => {
     },
     {
       q: "How does the 24-hour OA window work?",
-      a: "The test opens at 8:00 PM on 29th September and closes at 8:00 PM on 30th September. Once you initiate your test, you receive 30 minutes to solve 30 questions across Logical Reasoning, Tech Knowledge, and HR."
+      a: "The test opens at 10:00 PM on 29th September and closes at 10:00 PM on 30th September. Once you initiate your test, you receive 30 minutes to solve 30 questions across Logical Reasoning, Tech Knowledge, and HR."
     },
     {
       q: "Can I take the quiz on a phone or laptop?",
@@ -111,7 +111,7 @@ export const Page1Landing = () => {
             &nbsp; File "semester1.py", line 1<br />
             &nbsp; &nbsp; plan = figure_it_out()<br />
             RuntimeError: too many options<br /><br />
-            &gt; fix available: join Zairza
+            &gt; fix available: <span style={{ color: "#7da0ff", fontWeight: 700, textDecoration: "underline", textUnderlineOffset: "3px" }}>join Zairza</span>
           </div>
         </div>
       </section>
