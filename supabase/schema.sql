@@ -55,6 +55,10 @@ CREATE TABLE IF NOT EXISTS public.quiz_questions (
     is_active BOOLEAN NOT NULL DEFAULT true
 );
 
+-- Security Migration: Ensure sensitive columns are purged from public questions table
+ALTER TABLE public.quiz_questions DROP COLUMN IF EXISTS correct_option_id CASCADE;
+ALTER TABLE public.quiz_questions DROP COLUMN IF EXISTS explanation CASCADE;
+
 -- 5. Isolated Solution Keys Table (Strict Security Layer)
 -- Accessible only for server-side evaluation and post-15-minute review window
 -- Availability permanently revoked once results are declared.
@@ -119,9 +123,18 @@ CREATE TABLE IF NOT EXISTS public.audit_logs (
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- Enable Supabase Realtime on Telemetry Tables
-ALTER PUBLICATION supabase_realtime ADD TABLE public.proctoring_violations;
-ALTER PUBLICATION supabase_realtime ADD TABLE public.quiz_attempts;
+-- Enable Supabase Realtime on Telemetry Tables (Idempotent)
+DO $$
+BEGIN
+    BEGIN
+        ALTER PUBLICATION supabase_realtime ADD TABLE public.proctoring_violations;
+    EXCEPTION WHEN duplicate_object THEN
+    END;
+    BEGIN
+        ALTER PUBLICATION supabase_realtime ADD TABLE public.quiz_attempts;
+    EXCEPTION WHEN duplicate_object THEN
+    END;
+END $$;
 
 -- Row Level Security (RLS)
 ALTER TABLE public.candidates ENABLE ROW LEVEL SECURITY;
@@ -131,18 +144,32 @@ ALTER TABLE public.proctoring_violations ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.quiz_questions ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.quiz_answer_keys ENABLE ROW LEVEL SECURITY;
 
--- Candidates & Public Policies (Hardened RLS)
+-- Candidates & Public Policies (Hardened RLS, Idempotent)
+DROP POLICY IF EXISTS "Allow public registration" ON public.candidates;
 CREATE POLICY "Allow public registration" ON public.candidates FOR INSERT WITH CHECK (true);
+
+DROP POLICY IF EXISTS "Allow candidates to view own record" ON public.candidates;
+DROP POLICY IF EXISTS "Allow candidates to view own record by roll" ON public.candidates;
 CREATE POLICY "Allow candidates to view own record by roll" ON public.candidates FOR SELECT USING (true);
+
+DROP POLICY IF EXISTS "Allow public read sanitized questions" ON public.quiz_questions;
 CREATE POLICY "Allow public read sanitized questions" ON public.quiz_questions FOR SELECT USING (is_active = true);
 
 -- Attempts: Append-only for active attempts; updates restricted to secure stored procedures
+DROP POLICY IF EXISTS "Allow insert attempts" ON public.quiz_attempts;
 CREATE POLICY "Allow insert attempts" ON public.quiz_attempts FOR INSERT WITH CHECK (true);
+
+DROP POLICY IF EXISTS "Allow select attempts" ON public.quiz_attempts;
 CREATE POLICY "Allow select attempts" ON public.quiz_attempts FOR SELECT USING (true);
+
+DROP POLICY IF EXISTS "Allow upsert answers" ON public.candidate_answers;
 CREATE POLICY "Allow upsert answers" ON public.candidate_answers FOR ALL USING (true);
 
 -- Proctoring: Append-only telemetry log (no client deletion or mutation)
+DROP POLICY IF EXISTS "Allow record violations" ON public.proctoring_violations;
 CREATE POLICY "Allow record violations" ON public.proctoring_violations FOR INSERT WITH CHECK (true);
+
+DROP POLICY IF EXISTS "Allow select violations" ON public.proctoring_violations;
 CREATE POLICY "Allow select violations" ON public.proctoring_violations FOR SELECT USING (true);
 
 -- CRITICAL SECURITY POLICY: Block direct client SELECT on quiz_answer_keys
@@ -5261,9 +5288,6 @@ VALUES (
     200,
     'opt_1',
     'By Newton''s Third Law, motor rotation generates opposite angular torque on the frame. Having 2 CW and 2 CCW motors balances total net torque to zero for stable flight.'
-) ON CONFLICT (question_id) DO UPDATE SET
-    correct_option_id = EXCLUDED.correct_option_id,
-    explanation = EXCLUDED.explanation; Inverse Kinematics calculates the required joint angles to place a tool at a target point.'
 ) ON CONFLICT (question_id) DO UPDATE SET
     correct_option_id = EXCLUDED.correct_option_id,
     explanation = EXCLUDED.explanation;
