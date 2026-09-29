@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Zairza Induction 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#1a1d24;--ink:#0b0c10;--fg:#eceef3;--mut:#8a90a0;--red:#e8352b;--coral:#f0726a;--blue:#2f5bff;--line:#2c313c;
+--sans:'Inter Tight','Helvetica Neue',Arial,sans-serif;--mono:'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans);line-height:1.55;
+background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:64px 64px;background-position:-1px -1px}
+body::before{content:"";position:fixed;inset:0;background:radial-gradient(ellipse at 50% 0,transparent,var(--bg) 85%);pointer-events:none;z-index:-1}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+.mono{font-family:var(--mono)}
+.mut{color:var(--mut)}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+
+/* top bar */
+header{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:22px 0;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:14px;text-decoration:none}
+.logo{width:52px;height:52px;border-radius:50%;background:#fff;border:3px solid var(--red);display:grid;place-items:center}
+.brand b{font-size:1.25rem;letter-spacing:.02em}
+.brand span{display:block;font:400 .72rem var(--mono);color:var(--mut)}
+.hud{font:400 .72rem/1.6 var(--mono);background:var(--ink);border:1px solid var(--line);border-radius:6px;padding:10px 14px;display:grid;grid-template-columns:auto auto;gap:0 18px}
+.hud i{font-style:normal;color:var(--red)}
+
+/* hero */
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin:8px 0 34px}
+.chip{background:var(--ink);border:1px solid var(--line);border-radius:6px;padding:7px 12px;font-size:.85rem;color:var(--mut)}
+.chip.r{border-color:var(--red);color:var(--fg)}
+.chip.b{border-color:var(--blue)}
+.win{position:relative;background:var(--ink);border:2px solid #f4f4f6;border-radius:4px;box-shadow:12px 12px 0 var(--red);transform:rotate(-1deg);margin:0 12px 12px 0}
+.win .bar{display:flex;justify-content:space-between;padding:12px 18px;font:600 .8rem var(--mono);border-bottom:1px solid var(--line)}
+.win .body{padding:clamp(20px,4vw,48px)}
+h1{margin:0;font-weight:800;font-size:clamp(3.4rem,15vw,9.5rem);line-height:.88;letter-spacing:-.045em;text-shadow:-3px 0 var(--blue)}
+.sub{margin:.35em 0 0;font-weight:800;font-size:clamp(1.8rem,7vw,4.4rem);letter-spacing:-.03em;line-height:1}
+.sub em{font-style:normal;color:var(--coral)}
+.tag{margin:22px 0 0;font:400 .95rem var(--mono);color:var(--mut)}
+.tagline{margin:26px 0 0;font:600 1rem var(--mono);letter-spacing:.08em;color:var(--coral)}
+.cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:38px}
+.btn{font:600 .95rem var(--mono);padding:14px 22px;border:2px solid #f4f4f6;background:#f4f4f6;color:var(--ink);text-decoration:none;border-radius:2px;cursor:pointer;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--red)}
+.btn.ghost{background:transparent;color:var(--mut);border-color:var(--line)}
+
+/* sections */
+section{padding:76px 0 0}
+h2{font-size:clamp(1.9rem,5vw,3rem);line-height:1;letter-spacing:-.03em;margin:0 0 10px;font-weight:800}
+.path{font:400 .8rem var(--mono);color:var(--red);margin-bottom:10px}
+.lead{max-width:62ch;color:#c5c9d4;margin:0 0 30px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.card{background:var(--ink);border:1px solid var(--line);border-radius:6px;padding:24px}
+.card h3{margin:0 0 8px;font-size:1.3rem;letter-spacing:-.01em}
+.card p{margin:0;color:#c5c9d4;font-size:.95rem}
+.wings{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.wing{border-top:4px solid var(--blue)}
+.wing:nth-child(2){border-top-color:var(--red)}
+.wing:nth-child(3){border-top-color:var(--coral)}
+.wing .mono{font-size:.75rem;color:var(--mut);margin-top:14px;display:block}
+ul.patch{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:12px 32px}
+ul.patch li{font-size:1.2rem;font-weight:700}
+ul.patch li::before{content:"+ ";color:var(--blue);font-family:var(--mono)}
+.crash{font:400 .82rem/1.6 var(--mono);background:#0a0a0c;border:1px solid var(--red);color:var(--coral);padding:18px;border-radius:4px;transform:rotate(1deg)}
+
+/* process */
+ol.steps{list-style:none;margin:0;padding:0;border-left:2px solid var(--line);margin-left:8px}
+ol.steps li{position:relative;padding:0 0 28px 30px}
+ol.steps li::before{content:"";position:absolute;left:-8px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--bg);border:3px solid var(--red)}
+ol.steps li:last-child::before{background:var(--red)}
+ol.steps b{display:block;font-size:1.1rem}
+ol.steps span{color:var(--mut);font-size:.92rem}
+
+/* quiz */
+.specs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px}
+.spec{background:var(--ink);border:1px solid var(--blue);border-radius:6px;padding:18px}
+.spec small{display:block;font:400 .72rem var(--mono);color:var(--mut);margin-bottom:6px}
+.spec strong{font-size:1.35rem;letter-spacing:-.01em}
+.rules{margin:0;padding-left:1.2em;color:#c5c9d4}
+.rules li{margin-bottom:8px}
+
+/* faq */
+details{background:var(--ink);border:1px solid var(--line);border-radius:6px;margin-bottom:10px}
+summary{cursor:pointer;padding:16px 20px;font-weight:700;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-family:var(--mono);color:var(--red)}
+details[open] summary::after{content:"–"}
+details[open]{border-color:var(--red)}
+details p{margin:0;padding:0 20px 18px;color:#c5c9d4}
+
+/* footer */
+.final{margin-top:76px;background:var(--ink);border:2px solid #f4f4f6;box-shadow:12px 12px 0 var(--blue);padding:clamp(24px,5vw,56px);border-radius:4px;margin-right:12px}
+.final h2{font-size:clamp(2rem,6vw,4rem)}
+.links{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+.links a{font:400 .85rem var(--mono);border:1px solid var(--line);padding:9px 14px;border-radius:4px;text-decoration:none;color:var(--mut)}
+.links a:hover{border-color:var(--coral);color:var(--fg)}
+footer{padding:40px 0 60px;font:400 .78rem var(--mono);color:var(--mut);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+
+@media(max-width:780px){.two,.wings,.specs,ul.patch{grid-template-columns:1fr}.hud{display:none}.win{transform:none}}
+@media(prefers-reduced-motion:no-preference){.win .bar span:last-child{animation:blink 1.2s steps(2) infinite}}
+@keyframes blink{50%{opacity:.2}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <a class="brand" href="#top" aria-label="Zairza home">
+    <div class="logo"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><circle cx="9" cy="15" r="7" fill="#2f5bff"/><path d="M14 4l12 7-4 4 5 6-9 4-4-7z" fill="#f08a1c"/></svg></div>
+    <div><b>Zairza</b><span>Wonder • Think • Create</span></div>
+  </a>
+  <div class="hud" aria-hidden="true"><i>LOC</i><span>20.2644°N 85.7761°E</span><i>STATE</i><span>READY TO LAUNCH</span><i>SYS_ID</i><span>ZRZ-IND-26</span></div>
+</header>
+
+<main id="top">
+<div class="chips" aria-hidden="true">
+  <span class="chip">how to start DSA from zero</span><span class="chip b">best clubs to join 1st year</span>
+  <span class="chip r">Attendance: 68% ▲ Warning</span><span class="chip">bro which club r u joining</span><span class="chip">resume??</span>
+</div>
+
+<div class="win">
+  <div class="bar"><span>fresher.exe · initializing...</span><span>▁ ▢ ✕</span></div>
+  <div class="body">
+    <h1>ZAIRZA</h1>
+    <p class="sub">CLUB <em>INDUCTIONS 2026</em></p>
+    <p class="tag">Found 1 recommended fix for high entropy &amp; chaos.</p>
+    <p class="tagline">WONDER • THINK • CREATE</p>
+    <div class="cta"><a class="btn" href="#register">[ Register for Induction → ]</a><a class="btn ghost" href="#process">[ See how it works ]</a></div>
+  </div>
+</div>
+
+<section id="about">
+  <div class="path">~/about</div>
+  <h2>A system update for 1st &amp; 2nd years.</h2>
+  <p class="lead">Zairza is the tech and design club of our campus, where students learn by building real things. If you feel behind, unsure what to pick, or just curious, this is where you start.</p>
+  <div class="two">
+    <div class="card"><h3>What we do</h3><p>We run workshops, build projects in teams, hold skill sprints, and pair newcomers with seniors. You learn by shipping, not by watching tutorials alone.</p></div>
+    <div class="crash">Traceback (most recent call last):<br>&nbsp; File "semester1.py", line 1<br>&nbsp; &nbsp; plan = figure_it_out()<br>RuntimeError: too many options<br><br>&gt; fix available: join Zairza</div>
+  </div>
+</section>
+
+<section id="wings">
+  <div class="path">~/wings</div>
+  <h2>Three wings. Pick your lane.</h2>
+  <p class="lead">You don't need to know your path yet. Each wing welcomes complete beginners.</p>
+  <div class="wings">
+    <div class="card wing"><h3>Software</h3><p>Web, apps, DSA, and ML. Write code that people use.</p><span class="mono">DSA / DEV / ML</span></div>
+    <div class="card wing"><h3>Robotics &amp; IoT</h3><p>Microcontrollers, sensors, and robots you can hold in your hand.</p><span class="mono">MCU / SENSORS / ARMS</span></div>
+    <div class="card wing"><h3>Design</h3><p>UI, UX, and visual identity. Make things that look and feel right.</p><span class="mono">UI / UX / BRAND</span></div>
+  </div>
+</section>
+
+<section id="why">
+  <div class="path">~/why-join</div>
+  <h2>Patch notes: v1.0 → you, stable.</h2>
+  <p class="lead">Here is what you get when you install the update.</p>
+  <ul class="patch">
+    <li>Tech workshops</li><li>Mentorship from seniors</li><li>Fun events</li><li>Skill sprints</li>
+  </ul>
+  <div class="two" style="margin-top:34px">
+    <div class="card"><h3>What you can learn</h3><p>Python and DSA basics, web development, machine learning, circuits and embedded programming, and design tools like Figma.</p></div>
+    <div class="card"><h3>What you can build</h3><p>Websites and apps, smart IoT gadgets, line-following bots, ML mini-projects, and polished product designs for your portfolio.</p></div>
+  </div>
+</section>
+
+<section id="process">
+  <div class="path">~/process</div>
+  <h2>How induction works</h2>
+  <p class="lead">Four steps from curious to inducted.</p>
+  <ol class="steps">
+    <li><b>Register</b><span>Fill in the induction form with your details and preferred wing.</span></li>
+    <li><b>Attend the quiz</b><span>A short, beginner-friendly quiz on logic and general tech curiosity.</span></li>
+    <li><b>Get shortlisted</b><span>Results are shared with everyone who took part.</span></li>
+    <li><b>Get inducted</b><span>Join your wing, meet your mentors, and start your first sprint.</span></li>
+  </ol>
+</section>
+
+<section id="quiz">
+  <div class="path">~/quiz</div>
+  <h2>Quiz details</h2>
+  <div class="specs">
+    <div class="spec"><small>DATE</small><strong>To be announced</strong></div>
+    <div class="spec"><small>TIME</small><strong>To be announced</strong></div>
+    <div class="spec"><small>DURATION</small><strong>To be announced</strong></div>
+  </div>
+  <div class="card"><h3>Basic rules</h3>
+    <ul class="rules">
+      <li>Register before the quiz. Walk-ins may not be accepted.</li>
+      <li>Attempt the quiz on your own. No collaboration or outside help.</li>
+      <li>Keep your phone away unless the quiz is run on it.</li>
+      <li>Follow instructions from the volunteers at all times.</li>
+      <li>Coding experience is not required.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="path">~/faq</div>
+  <h2>Questions</h2>
+  <details><summary>Do I need to know coding already?</summary><p>No. The induction is designed for beginners. Curiosity matters more than experience.</p></details>
+  <details><summary>Who can register?</summary><p>1st and 2nd year students from any branch.</p></details>
+  <details><summary>Can I join more than one wing?</summary><p>You choose a primary wing at registration. Many members explore others later through events and sprints.</p></details>
+  <details><summary>Is there a fee?</summary><p>Registration details will be shared on the form. Check it before you submit.</p></details>
+  <details><summary>Will the quiz affect my academics?</summary><p>No. It is only for club induction.</p></details>
+</section>
+
+<div class="final" id="register">
+  <div class="path">~/register</div>
+  <h2>Install the update.</h2>
+  <p class="lead">Stop panicking. Register for Zairza Induction 2026 and get your first fix for chaos.</p>
+  <a class="btn" href="#register">[ Register for Induction → ]</a>
+  <div class="links" aria-label="Contact and social links">
+    <a href="mailto:hello@zairza.example">Email</a><a href="#">Instagram</a><a href="#">LinkedIn</a><a href="#">GitHub</a><a href="#">Discord</a>
+  </div>
+</div>
+</main>
+
+<footer><span>ZAIRZA CLUB · WONDER • THINK • CREATE</span><span>LAT 20.2644° N · LON 85.7761° E</span></footer>
+</div>
+</body>
+</html>

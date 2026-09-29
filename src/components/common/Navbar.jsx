@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { useQuiz } from "../../context/QuizContext";
-import { Shield, User, Terminal, LogOut, ExternalLink, ChevronDown, CheckCircle } from "lucide-react";
+import { Shield, User, Terminal, LogOut, ChevronDown, CheckCircle } from "lucide-react";
 
 export const Navbar = () => {
   const {
     currentView,
     setCurrentView,
     activeCandidate,
-    setActiveCandidate,
     isAdminLoggedIn,
     logoutAdmin,
     isQuizActive
@@ -15,43 +14,45 @@ export const Navbar = () => {
 
   const [navDropdownOpen, setNavDropdownOpen] = useState(false);
 
-  // During active quiz, hide navigation to prevent accidental exits
+  // During active quiz, show minimal HUD to prevent distractions
   if (isQuizActive) {
     return (
       <header style={{
-        height: "var(--nav-height)",
-        borderBottom: "1px solid var(--border-subtle)",
-        background: "rgba(7, 9, 14, 0.95)",
-        backdropFilter: "blur(12px)",
+        padding: "16px 0",
+        borderBottom: "1px solid var(--line)",
+        background: "rgba(11, 12, 16, 0.95)",
+        backdropFilter: "blur(6px)",
         position: "sticky",
         top: 0,
         zIndex: 1000
       }}>
-        <div className="container" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: "100%" }}>
+        <div className="container" style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
             <div style={{
-              width: "36px",
-              height: "36px",
-              borderRadius: "8px",
-              background: "var(--grad-cyan-blue)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontWeight: "900",
-              color: "#000",
-              fontFamily: "var(--font-heading)"
+              width: "42px",
+              height: "42px",
+              borderRadius: "50%",
+              background: "#fff",
+              border: "3px solid var(--red)",
+              display: "grid",
+              placeItems: "center"
             }}>
-              Z
+              <svg width="24" height="24" viewBox="0 0 30 30" aria-hidden="true">
+                <circle cx="9" cy="15" r="7" fill="#2f5bff"/>
+                <path d="M14 4l12 7-4 4 5 6-9 4-4-7z" fill="#f08a1c"/>
+              </svg>
             </div>
             <div>
-              <div style={{ fontWeight: "700", fontSize: "1.05rem", letterSpacing: "0.02em" }}>ZAIRZA INDUCTION 2026</div>
-              <div style={{ fontSize: "0.75rem", color: "var(--text-muted)", letterSpacing: "0.05em" }}>Wonder • Think • Create</div>
+              <b style={{ fontSize: "1.1rem" }}>Zairza</b>
+              <span style={{ display: "block", font: "400 .72rem var(--mono)", color: "var(--mut)" }}>
+                Wonder • Think • Create
+              </span>
             </div>
           </div>
 
-          <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
-            <div className="badge badge-emerald">
-              <Shield size={14} /> PROCTORED ACTIVE
+          <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+            <div className="badge badge-rose">
+              <Shield size={13} /> PROCTORING LOCKED
             </div>
             {activeCandidate && (
               <div className="badge badge-cyan mono">
@@ -66,62 +67,64 @@ export const Navbar = () => {
 
   return (
     <header style={{
-      height: "var(--nav-height)",
-      borderBottom: "1px solid var(--border-subtle)",
-      background: "rgba(7, 9, 14, 0.9)",
-      backdropFilter: "blur(12px)",
+      padding: "20px 0",
+      borderBottom: "1px solid var(--line)",
+      background: "rgba(26, 29, 36, 0.9)",
+      backdropFilter: "blur(8px)",
       position: "sticky",
       top: 0,
       zIndex: 1000
     }}>
-      <div className="container" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: "100%" }}>
+      <div className="container" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "14px" }}>
         {/* Brand */}
         <div
           onClick={() => setCurrentView("page1_landing")}
-          style={{ display: "flex", alignItems: "center", gap: "12px", cursor: "pointer" }}
+          style={{ display: "flex", alignItems: "center", gap: "14px", cursor: "pointer" }}
         >
           <div style={{
-            width: "38px",
-            height: "38px",
-            borderRadius: "10px",
-            background: "var(--grad-cyan-blue)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            fontWeight: "900",
-            fontSize: "1.2rem",
-            color: "#000",
-            fontFamily: "var(--font-heading)",
-            boxShadow: "0 0 15px rgba(6, 182, 212, 0.4)"
+            width: "50px",
+            height: "50px",
+            borderRadius: "50%",
+            background: "#fff",
+            border: "3px solid var(--red)",
+            display: "grid",
+            placeItems: "center"
           }}>
-            Z
+            <svg width="28" height="28" viewBox="0 0 30 30" aria-hidden="true">
+              <circle cx="9" cy="15" r="7" fill="#2f5bff"/>
+              <path d="M14 4l12 7-4 4 5 6-9 4-4-7z" fill="#f08a1c"/>
+            </svg>
           </div>
           <div>
-            <div style={{ fontWeight: "800", fontSize: "1.1rem", letterSpacing: "0.02em", display: "flex", alignItems: "center", gap: "8px" }}>
-              ZAIRZA <span className="badge badge-cyan" style={{ fontSize: "0.68rem" }}>INDUCTION '26</span>
-            </div>
-            <div style={{ fontSize: "0.75rem", color: "var(--text-muted)", letterSpacing: "0.05em" }}>
+            <b style={{ fontSize: "1.25rem", letterSpacing: ".02em" }}>Zairza</b>
+            <span style={{ display: "block", font: "400 .72rem var(--mono)", color: "var(--mut)" }}>
               Wonder • Think • Create
-            </div>
+            </span>
           </div>
+        </div>
+
+        {/* Realtime Geo HUD (Exact signature from Zairza Induction template) */}
+        <div className="hud" style={{ display: "none", md: "grid", font: "400 .72rem/1.6 var(--mono)", background: "var(--ink)", border: "1px solid var(--line)", borderRadius: "4px", padding: "8px 14px" }}>
+          <span style={{ color: "var(--red)" }}>LOC: 20.2644°N 85.7761°E</span>
+          <span style={{ color: "var(--mut)", marginLeft: "14px" }}>STATE: READY TO LAUNCH</span>
         </div>
 
         {/* Right Menu & Page Switcher */}
         <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-          {/* Quick Page Navigator Dropdown (Allows testing all 20 pages seamlessly) */}
+          {/* Quick Page Explorer (20 Pages) */}
           <div style={{ position: "relative" }}>
             <button
               onClick={() => setNavDropdownOpen(!navDropdownOpen)}
               className="btn btn-secondary"
-              style={{ padding: "8px 14px", fontSize: "0.85rem", minHeight: "38px" }}
+              style={{ padding: "8px 14px", fontSize: "0.82rem", minHeight: "38px" }}
             >
               <span>Explore Platform (20 Pages)</span>
-              <ChevronDown size={15} />
+              <ChevronDown size={14} />
             </button>
 
             {navDropdownOpen && (
               <div
-                className="glass-panel"
+                className="card"
                 style={{
                   position: "absolute",
                   right: 0,
@@ -131,18 +134,18 @@ export const Navbar = () => {
                   overflowY: "auto",
                   padding: "12px",
                   zIndex: 2000,
-                  border: "1px solid var(--border-glow)",
-                  boxShadow: "0 15px 35px rgba(0,0,0,0.8)"
+                  border: "2px solid #f4f4f6",
+                  boxShadow: "6px 6px 0 var(--red)"
                 }}
               >
-                <div style={{ fontSize: "0.75rem", fontWeight: "700", color: "var(--accent-cyan)", marginBottom: "8px", textTransform: "uppercase" }}>
-                  Candidate Experience (Pages 1–10)
+                <div style={{ fontSize: "0.72rem", fontWeight: "700", color: "var(--coral)", marginBottom: "8px", fontFamily: "var(--mono)" }}>
+                  CANDIDATE PORTAL (PAGES 1–10)
                 </div>
                 {[
                   { id: "page1_landing", label: "Page 1: Landing / Home" },
-                  { id: "page2_register", label: "Page 2: Registration Form" },
-                  { id: "page3_countdown", label: "Page 3: Registration Success & Countdown" },
-                  { id: "page4_precheck", label: "Page 4: Pre-Quiz System Diagnostics" },
+                  { id: "page2_register", label: "Page 2: Candidate Registration" },
+                  { id: "page3_countdown", label: "Page 3: Success & Countdown" },
+                  { id: "page4_precheck", label: "Page 4: Pre-Quiz Diagnostics" },
                   { id: "page5_quiz", label: "Page 5: Proctored Quiz Engine" },
                   { id: "page8_success", label: "Page 8: Submission Successful" },
                   { id: "page9_dashboard", label: "Page 9: Candidate Dashboard" },
@@ -156,30 +159,31 @@ export const Navbar = () => {
                     }}
                     style={{
                       padding: "8px 10px",
-                      borderRadius: "6px",
+                      borderRadius: "2px",
                       fontSize: "0.82rem",
                       cursor: "pointer",
-                      background: currentView === item.id ? "rgba(6, 182, 212, 0.15)" : "transparent",
-                      color: currentView === item.id ? "var(--accent-cyan)" : "var(--text-secondary)",
+                      background: currentView === item.id ? "rgba(47, 91, 255, 0.2)" : "transparent",
+                      color: currentView === item.id ? "#8bb2ff" : "var(--mut)",
                       display: "flex",
                       alignItems: "center",
-                      justifyContent: "space-between"
+                      justifyContent: "space-between",
+                      fontFamily: "var(--mono)"
                     }}
                   >
                     <span>{item.label}</span>
-                    {currentView === item.id && <CheckCircle size={14} />}
+                    {currentView === item.id && <CheckCircle size={14} color="var(--blue)" />}
                   </div>
                 ))}
 
-                <div style={{ fontSize: "0.75rem", fontWeight: "700", color: "var(--accent-purple)", marginTop: "14px", marginBottom: "8px", textTransform: "uppercase" }}>
-                  Admin Suite (Pages 11–20)
+                <div style={{ fontSize: "0.72rem", fontWeight: "700", color: "var(--coral)", marginTop: "14px", marginBottom: "8px", fontFamily: "var(--mono)" }}>
+                  ADMIN SUITE (PAGES 11–20)
                 </div>
                 {[
                   { id: "page11_login", label: "Page 11: Admin Login / 2FA" },
                   { id: "page12_admin_dashboard", label: "Page 12: Admin Master Dashboard" },
                   { id: "page13_registrations", label: "Page 13: Candidate Registrations" },
                   { id: "page14_candidate_details", label: "Page 14: Candidate Details Profiler" },
-                  { id: "page15_proctoring", label: "Page 15: Live Proctoring Deck" },
+                  { id: "page15_proctoring", label: "Page 15: Live Proctoring Grid" },
                   { id: "page16_question_bank", label: "Page 16: Question Bank Studio" },
                   { id: "page17_quiz_config", label: "Page 17: Quiz Configuration" },
                   { id: "page18_analytics", label: "Page 18: Results & Shortlisting" },
@@ -194,18 +198,19 @@ export const Navbar = () => {
                     }}
                     style={{
                       padding: "8px 10px",
-                      borderRadius: "6px",
+                      borderRadius: "2px",
                       fontSize: "0.82rem",
                       cursor: "pointer",
-                      background: currentView === item.id ? "rgba(139, 92, 246, 0.15)" : "transparent",
-                      color: currentView === item.id ? "var(--accent-purple)" : "var(--text-secondary)",
+                      background: currentView === item.id ? "rgba(232, 53, 43, 0.15)" : "transparent",
+                      color: currentView === item.id ? "var(--coral)" : "var(--mut)",
                       display: "flex",
                       alignItems: "center",
-                      justifyContent: "space-between"
+                      justifyContent: "space-between",
+                      fontFamily: "var(--mono)"
                     }}
                   >
                     <span>{item.label}</span>
-                    {currentView === item.id && <CheckCircle size={14} />}
+                    {currentView === item.id && <CheckCircle size={14} color="var(--red)" />}
                   </div>
                 ))}
               </div>
@@ -217,19 +222,19 @@ export const Navbar = () => {
             <div
               onClick={() => setCurrentView("page9_dashboard")}
               className="badge badge-cyan mono"
-              style={{ cursor: "pointer", padding: "6px 12px", display: "flex", alignItems: "center", gap: "6px" }}
+              style={{ cursor: "pointer", padding: "6px 12px" }}
               title="Click to view candidate dashboard"
             >
-              <User size={14} />
+              <User size={13} />
               <span>ROLL: {activeCandidate.rollNumber}</span>
             </div>
           ) : (
             <button
               onClick={() => setCurrentView("page2_register")}
               className="btn btn-primary"
-              style={{ padding: "8px 18px", fontSize: "0.85rem", minHeight: "38px" }}
+              style={{ padding: "8px 16px", fontSize: "0.85rem", minHeight: "38px" }}
             >
-              Register
+              [ Register ]
             </button>
           )}
 
@@ -241,19 +246,19 @@ export const Navbar = () => {
                 setCurrentView("page1_landing");
               }}
               className="btn btn-secondary"
-              style={{ padding: "8px 12px", fontSize: "0.85rem", minHeight: "38px" }}
+              style={{ padding: "8px 10px", minHeight: "38px" }}
               title="Logout Admin"
             >
-              <LogOut size={15} />
+              <LogOut size={14} />
             </button>
           ) : (
             <button
               onClick={() => setCurrentView("page11_login")}
               className="btn btn-secondary"
-              style={{ padding: "8px 12px", fontSize: "0.85rem", minHeight: "38px" }}
+              style={{ padding: "8px 10px", minHeight: "38px" }}
               title="Admin Portal"
             >
-              <Terminal size={15} />
+              <Terminal size={14} />
             </button>
           )}
         </div>
