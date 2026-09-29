@@ -31,7 +31,7 @@ import { Page20UserManagement } from "./components/admin/Page20UserManagement";
 import { AdminSidebar } from "./components/admin/AdminSidebar";
 
 const PlatformRouter = () => {
-  const { currentView, setCurrentView, isQuizActive } = useQuiz();
+  const { currentView, setCurrentView, isQuizActive, isAdminLoggedIn } = useQuiz();
 
   React.useEffect(() => {
     const handleHashAndShortcut = () => {
@@ -135,6 +135,45 @@ const PlatformRouter = () => {
         <main style={{ flex: 1 }}>{renderActiveView()}</main>
       )}
       {!isQuizActive && !isAdminView && <Footer />}
+
+      {/* Floating Admin Return Widget (Active when admin previews candidate portal) */}
+      {isAdminLoggedIn && !isAdminView && !isQuizActive && (
+        <div style={{
+          position: "fixed",
+          bottom: "24px",
+          right: "24px",
+          background: "rgba(13, 16, 23, 0.96)",
+          border: "2px solid var(--accent-purple)",
+          borderRadius: "12px",
+          padding: "10px 18px",
+          boxShadow: "0 8px 32px rgba(0,0,0,0.6)",
+          display: "flex",
+          alignItems: "center",
+          gap: "14px",
+          zIndex: 9999,
+          backdropFilter: "blur(10px)",
+          animation: "fadeIn 0.3s ease"
+        }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+            <span style={{ fontSize: "1.05rem" }}>👑</span>
+            <span style={{ fontSize: "0.82rem", fontWeight: "700", color: "var(--accent-purple)" }}>
+              Admin Preview Active
+            </span>
+          </div>
+          <button
+            onClick={() => setCurrentView("page12_admin_dashboard")}
+            className="btn btn-primary"
+            style={{
+              padding: "6px 14px",
+              fontSize: "0.8rem",
+              background: "linear-gradient(135deg, var(--accent-purple), var(--accent-cyan))",
+              fontWeight: "700"
+            }}
+          >
+            <span>Return to Admin Dashboard →</span>
+          </button>
+        </div>
+      )}
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useQuiz } from "../../context/QuizContext";
-import { Shield, User, Terminal, LogOut, ChevronDown, CheckCircle, Clock, Send } from "lucide-react";
+import { Shield, User, Terminal, LogOut, ChevronDown, CheckCircle, Clock, Send, LayoutDashboard } from "lucide-react";
 
 export const Navbar = () => {
   const {
@@ -161,13 +161,27 @@ export const Navbar = () => {
 
         {/* Right Menu */}
         <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-          {/* Admin Mode Badge */}
+          {/* Return to Admin Dashboard Button (Visible when logged in as admin) */}
           {isAdminLoggedIn && (
-            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <span className="badge badge-purple" style={{ fontSize: "0.75rem", padding: "4px 10px" }}>
-                ADMIN CONSOLE
-              </span>
-            </div>
+            <button
+              onClick={() => setCurrentView("page12_admin_dashboard")}
+              className="btn btn-primary pulse-glow"
+              style={{
+                padding: "8px 16px",
+                fontSize: "0.85rem",
+                minHeight: "38px",
+                background: "linear-gradient(135deg, var(--accent-purple), var(--accent-cyan))",
+                borderColor: "var(--accent-purple)",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "8px",
+                fontWeight: "700"
+              }}
+              title="Return to Admin Dashboard"
+            >
+              <LayoutDashboard size={15} />
+              <span>Admin Dashboard →</span>
+            </button>
           )}
 
           {/* Active Candidate Badge or Register CTA */}
