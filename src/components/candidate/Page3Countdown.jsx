@@ -166,7 +166,7 @@ export const Page3Countdown = () => {
           <ul style={{ color: "var(--text-secondary)", fontSize: "0.88rem", lineHeight: "1.7", paddingLeft: "18px" }}>
             <li>Switching tabs or minimizing the browser triggers violations.</li>
             <li>Exceeding 3 recorded infractions triggers auto-submission.</li>
-            <li>Your Roll Number is watermarked dynamically across the viewport.</li>
+            <li>Your Registration Number is watermarked dynamically across the viewport.</li>
           </ul>
         </div>
       </div>

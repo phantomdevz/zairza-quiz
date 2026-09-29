@@ -37,7 +37,7 @@ export const Page9CandidateDashboard = () => {
     }
   };
 
-  // If no candidate is active, show quick Roll Number check-in
+  // If no candidate is active, show quick Registration Number check-in
   if (!activeCandidate) {
     return (
       <div className="container" style={{ padding: "60px 20px 80px", maxWidth: "540px", textAlign: "center" }}>

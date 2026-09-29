@@ -22,14 +22,14 @@ export const Page13Registrations = () => {
     return matchSearch && matchWing && matchYear;
   });
 
-  // Duplicate Roll Number / Email Detection Check
+  // Duplicate Registration Number / Email Detection Check
   const rollCounts = candidates.reduce((acc, c) => {
     acc[c.rollNumber] = (acc[c.rollNumber] || 0) + 1;
     return acc;
   }, {});
 
   const exportCSV = () => {
-    const headers = ["Roll Number", "Full Name", "Email", "Mobile", "Year", "Branch", "Gender", "Wing", "Status", "Score"];
+    const headers = ["Registration Number", "Full Name", "Email", "Mobile", "Year", "Branch", "Gender", "Wing", "Status", "Score"];
     const rows = candidates.map((c) => [
       c.rollNumber,
       `"${c.fullName}"`,

@@ -134,7 +134,7 @@ export const Page4PreQuizCheck = () => {
             2. <strong>Violation Limit</strong>: After <strong>3 recorded infractions</strong>, the quiz will automatically lock and submit your responses as-is.
           </p>
           <p style={{ marginBottom: "10px" }}>
-            3. <strong>Dynamic Watermarking</strong>: Your roll number <strong>({roll})</strong> and timestamp are stamped dynamically over the question viewport.
+            3. <strong>Dynamic Watermarking</strong>: Your Registration Number <strong>({roll})</strong> and timestamp are stamped dynamically over the question viewport.
           </p>
           <p>
             4. <strong>Auto-Save</strong>: Your answers are saved continuously after every click. If your connection flickers, simply refresh or re-enter and your responses will restore immediately.

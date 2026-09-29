@@ -76,71 +76,6 @@ export const Page5ProctoredQuiz = () => {
 
   return (
     <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", background: "var(--bg-primary)" }}>
-      {/* Quiz Top HUD */}
-      <div style={{
-        height: "64px",
-        background: "rgba(13, 18, 29, 0.95)",
-        borderBottom: "1px solid var(--border-subtle)",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        padding: "0 20px",
-        position: "sticky",
-        top: 0,
-        zIndex: 500
-      }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-          <div className="badge badge-cyan mono" style={{ fontSize: "0.85rem", padding: "6px 12px" }}>
-            ROLL: {roll}
-          </div>
-          <div className="badge badge-emerald" style={{ display: "none", md: "inline-flex" }}>
-            <Wifi size={13} /> ONLINE
-          </div>
-          <div className={`badge ${violationCount > 0 ? "badge-amber" : "badge-cyan"}`}>
-            <Shield size={13} /> {violationCount} / {quizConfig.maxViolationsAllowed} VIOLATIONS
-          </div>
-        </div>
-
-        {/* Center Countdown Clock */}
-        <div style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "8px",
-          background: timeRemaining < 300 ? "rgba(244, 63, 94, 0.2)" : "rgba(255, 255, 255, 0.04)",
-          border: timeRemaining < 300 ? "1px solid var(--accent-rose)" : "1px solid var(--border-subtle)",
-          padding: "6px 16px",
-          borderRadius: "10px"
-        }}>
-          <Clock size={16} color={timeRemaining < 300 ? "var(--accent-rose)" : "var(--accent-cyan)"} />
-          <span
-            className="mono"
-            style={{
-              fontWeight: "800",
-              fontSize: "1.15rem",
-              color: timeRemaining < 300 ? "var(--accent-rose)" : "var(--text-main)"
-            }}
-          >
-            {formatTime(timeRemaining)}
-          </span>
-        </div>
-
-        {/* Right Action / Progress */}
-        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-          <div style={{ fontSize: "0.88rem", color: "var(--text-secondary)" }}>
-            Answered: <strong style={{ color: "var(--accent-cyan)" }}>{answeredCount}</strong> / {quizConfig.totalQuestions}
-          </div>
-
-          <button
-            onClick={() => setShowSubmitModal(true)}
-            className="btn btn-primary"
-            style={{ padding: "8px 18px", fontSize: "0.88rem", minHeight: "38px" }}
-          >
-            <Send size={15} />
-            <span>Finish & Submit</span>
-          </button>
-        </div>
-      </div>
-
       {/* Main Body */}
       <div className="container" style={{ flex: 1, padding: "24px 20px 80px", maxWidth: "1280px" }}>
         {/* Section Switcher Bar */}
@@ -243,7 +178,7 @@ export const Page5ProctoredQuiz = () => {
                 </button>
               </div>
 
-              <div style={{ display: "flex", gap: "10px" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
                 <button
                   onClick={() => handleJumpToQuestion(Math.max(0, currentQuestionIndex - 1))}
                   disabled={currentQuestionIndex === 0}
@@ -254,15 +189,34 @@ export const Page5ProctoredQuiz = () => {
                   <span>Previous</span>
                 </button>
 
-                <button
-                  onClick={() => handleJumpToQuestion(Math.min(questions.length - 1, currentQuestionIndex + 1))}
-                  disabled={currentQuestionIndex === questions.length - 1}
-                  className="btn btn-primary"
-                  style={{ padding: "10px 20px", minHeight: "42px" }}
-                >
-                  <span>Next Question</span>
-                  <ChevronRight size={16} />
-                </button>
+                {currentQuestionIndex < questions.length - 1 ? (
+                  <button
+                    onClick={() => handleJumpToQuestion(currentQuestionIndex + 1)}
+                    className="btn btn-primary"
+                    style={{ padding: "10px 20px", minHeight: "42px" }}
+                  >
+                    <span>Next Question</span>
+                    <ChevronRight size={16} />
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => setShowSubmitModal(true)}
+                    className="btn btn-primary pulse-glow"
+                    style={{
+                      padding: "10px 24px",
+                      minHeight: "42px",
+                      background: "var(--accent-emerald)",
+                      borderColor: "var(--accent-emerald)",
+                      fontWeight: "700",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "8px"
+                    }}
+                  >
+                    <span>Submit Quiz</span>
+                    <Send size={16} />
+                  </button>
+                )}
               </div>
             </div>
           </div>
@@ -372,6 +326,32 @@ export const Page5ProctoredQuiz = () => {
                 );
               })}
             </div>
+
+            {/* Prominent Submit Button in Question Palette */}
+            <div style={{ marginTop: "24px", paddingTop: "16px", borderTop: "1px solid var(--border-subtle)" }}>
+              <button
+                onClick={() => setShowSubmitModal(true)}
+                className="btn btn-primary pulse-glow"
+                style={{
+                  width: "100%",
+                  padding: "13px",
+                  fontSize: "0.95rem",
+                  fontWeight: "700",
+                  background: "var(--accent-emerald)",
+                  borderColor: "var(--accent-emerald)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "8px"
+                }}
+              >
+                <Send size={16} />
+                <span>Submit Quiz ({answeredCount}/30)</span>
+              </button>
+              <div style={{ textAlign: "center", fontSize: "0.75rem", color: "var(--text-muted)", marginTop: "8px" }}>
+                You can submit or review at any time
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -405,14 +385,23 @@ export const Page5ProctoredQuiz = () => {
           <ChevronLeft size={18} />
         </button>
 
-        <button
-          onClick={() => handleJumpToQuestion(Math.min(questions.length - 1, currentQuestionIndex + 1))}
-          disabled={currentQuestionIndex === questions.length - 1}
-          className="btn btn-primary"
-          style={{ minHeight: "44px", padding: "8px 14px" }}
-        >
-          <ChevronRight size={18} />
-        </button>
+        {currentQuestionIndex < questions.length - 1 ? (
+          <button
+            onClick={() => handleJumpToQuestion(currentQuestionIndex + 1)}
+            className="btn btn-primary"
+            style={{ minHeight: "44px", padding: "8px 14px" }}
+          >
+            <ChevronRight size={18} />
+          </button>
+        ) : (
+          <button
+            onClick={() => setShowSubmitModal(true)}
+            className="btn btn-primary pulse-glow"
+            style={{ minHeight: "44px", padding: "8px 14px", background: "var(--accent-emerald)", borderColor: "var(--accent-emerald)" }}
+          >
+            <Send size={18} />
+          </button>
+        )}
       </div>
 
       {/* Mobile Bottom Sheet Drawer for Palette */}

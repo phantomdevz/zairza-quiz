@@ -62,11 +62,11 @@ export const Page2Registration = () => {
     const errs = {};
     if (!formData.fullName.trim()) errs.fullName = "Full name is required.";
 
-    // OUTR Roll Number validation (e.g. 2401106042 or 2301106xxx)
+    // OUTR Registration Number validation (e.g. 2401106042 or 2301106xxx)
     if (!formData.rollNumber.trim()) {
-      errs.rollNumber = "OUTR Roll Number is required.";
+      errs.rollNumber = "OUTR Registration Number is required.";
     } else if (formData.rollNumber.trim().length < 8) {
-      errs.rollNumber = "Please enter a valid university roll number.";
+      errs.rollNumber = "Please enter a valid university Registration Number.";
     }
 
     // Email validation
@@ -119,7 +119,7 @@ export const Page2Registration = () => {
           Candidate Registration
         </h1>
         <p style={{ color: "var(--text-secondary)", fontSize: "0.95rem" }}>
-          Fill in your OUTR credentials. Your Roll Number serves as your primary quiz identifier.
+          Fill in your OUTR credentials. Your Registration Number serves as your primary quiz identifier.
         </p>
       </div>
 

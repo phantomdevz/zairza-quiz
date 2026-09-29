@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useQuiz } from "../../context/QuizContext";
-import { Shield, User, Terminal, LogOut, ChevronDown, CheckCircle } from "lucide-react";
+import { Shield, User, Terminal, LogOut, ChevronDown, CheckCircle, Clock, Send } from "lucide-react";
 
 export const Navbar = () => {
   const {
@@ -9,28 +9,34 @@ export const Navbar = () => {
     activeCandidate,
     isAdminLoggedIn,
     logoutAdmin,
-    isQuizActive
+    isQuizActive,
+    timeRemaining,
+    setShowSubmitModal
   } = useQuiz();
 
   const [navDropdownOpen, setNavDropdownOpen] = useState(false);
 
   // During active quiz, show minimal HUD to prevent distractions
   if (isQuizActive) {
+    const mins = Math.floor(timeRemaining / 60);
+    const secs = timeRemaining % 60;
+    const formattedTimer = `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+
     return (
       <header style={{
-        padding: "16px 0",
+        padding: "12px 0",
         borderBottom: "1px solid var(--line)",
-        background: "rgba(11, 12, 16, 0.95)",
-        backdropFilter: "blur(6px)",
+        background: "rgba(11, 12, 16, 0.98)",
+        backdropFilter: "blur(8px)",
         position: "sticky",
         top: 0,
         zIndex: 1000
       }}>
-        <div className="container" style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        <div className="container" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "10px" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
             <div style={{
-              width: "42px",
-              height: "42px",
+              width: "38px",
+              height: "38px",
               borderRadius: "50%",
               background: "#fff",
               border: "2px solid var(--red)",
@@ -45,22 +51,62 @@ export const Navbar = () => {
               />
             </div>
             <div>
-              <b style={{ fontSize: "1.1rem" }}>Zairza</b>
+              <b style={{ fontSize: "1.05rem" }}>Zairza</b>
               <span style={{ display: "block", font: "400 .72rem var(--mono)", color: "var(--mut)" }}>
-                Wonder • Think • Create
+                Induction Quiz 2026
               </span>
             </div>
           </div>
 
+          {/* Central Countdown Clock */}
+          <div style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "8px",
+            background: timeRemaining < 300 ? "rgba(244, 63, 94, 0.2)" : "rgba(255, 255, 255, 0.05)",
+            border: timeRemaining < 300 ? "1px solid var(--accent-rose)" : "1px solid var(--border-subtle)",
+            padding: "6px 14px",
+            borderRadius: "8px"
+          }}>
+            <Clock size={16} color={timeRemaining < 300 ? "var(--accent-rose)" : "var(--accent-cyan)"} />
+            <span
+              className="mono"
+              style={{
+                fontWeight: "800",
+                fontSize: "1.15rem",
+                color: timeRemaining < 300 ? "var(--accent-rose)" : "var(--text-main)"
+              }}
+            >
+              {formattedTimer}
+            </span>
+          </div>
+
+          {/* Right Actions: Roll & Submit */}
           <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-            <div className="badge badge-rose">
-              <Shield size={13} /> PROCTORING LOCKED
-            </div>
             {activeCandidate && (
-              <div className="badge badge-cyan mono">
+              <div className="badge badge-cyan mono" style={{ fontSize: "0.8rem", padding: "6px 10px" }}>
                 ROLL: {activeCandidate.rollNumber}
               </div>
             )}
+
+            <button
+              onClick={() => setShowSubmitModal(true)}
+              className="btn btn-primary pulse-glow"
+              style={{
+                padding: "8px 20px",
+                fontSize: "0.88rem",
+                minHeight: "38px",
+                background: "var(--accent-emerald)",
+                borderColor: "var(--accent-emerald)",
+                fontWeight: "700",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "8px"
+              }}
+            >
+              <Send size={15} />
+              <span>Submit Quiz</span>
+            </button>
           </div>
         </div>
       </header>

@@ -156,12 +156,12 @@ export const QuizProvider = ({ children }) => {
 
   // Register Candidate
   const registerCandidate = (formData) => {
-    // Check if roll number already registered
+    // Check if Registration Number already registered
     const existing = candidates.find(
       (c) => c.rollNumber.trim().toUpperCase() === formData.rollNumber.trim().toUpperCase()
     );
     if (existing) {
-      return { success: false, error: `Roll Number ${formData.rollNumber} is already registered!` };
+      return { success: false, error: `Registration Number ${formData.rollNumber} is already registered!` };
     }
 
     const newCandidate = {
@@ -213,7 +213,7 @@ export const QuizProvider = ({ children }) => {
     return { success: true, candidate: newCandidate };
   };
 
-  // Candidate Login (Check in via Roll Number)
+  // Candidate Login (Check in via Registration Number)
   const loginCandidateByRoll = (rollNumber) => {
     const candidate = candidates.find(
       (c) => c.rollNumber.trim().toUpperCase() === rollNumber.trim().toUpperCase()
