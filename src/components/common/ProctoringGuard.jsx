@@ -89,7 +89,7 @@ export const ProctoringGuard = () => {
       document.removeEventListener("contextmenu", handleContextMenu);
       window.removeEventListener("resize", handleResize);
     };
-  }, [isQuizActive, isQuizSubmitted]);
+  }, [isQuizActive, isQuizSubmitted, triggerViolation]);
 
   return null;
 };

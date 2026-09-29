@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useState, useEffect, useRef, useCallback } from "react";
 import { QUIZ_CONFIG, INITIAL_QUESTIONS, QUIZ_ANSWER_KEYS, INITIAL_CANDIDATES, INITIAL_AUDIT_LOGS } from "../data/mockQuizData";
 import { supabase, isSupabaseConfigured } from "../lib/supabaseClient";
 
@@ -151,12 +151,41 @@ export const QuizProvider = ({ children }) => {
   const [timeRemaining, setTimeRemaining] = useState(1800); // 30 minutes
   const [isQuizActive, setIsQuizActive] = useState(false);
   const [isQuizSubmitted, setIsQuizSubmitted] = useState(false);
+  const isQuizActiveRef = useRef(false);
+  const isQuizSubmittedRef = useRef(false);
+
+  useEffect(() => {
+    isQuizActiveRef.current = isQuizActive;
+  }, [isQuizActive]);
+
+  useEffect(() => {
+    isQuizSubmittedRef.current = isQuizSubmitted;
+  }, [isQuizSubmitted]);
 
   // Anti-Cheat & Proctoring Telemetry (Page 6)
   const [violations, setViolations] = useState([]);
   const [violationCount, setViolationCount] = useState(0);
+  const violationCountRef = useRef(0);
   const [latestViolationMessage, setLatestViolationMessage] = useState("");
-  const [showViolationModal, setShowViolationModal] = useState(false);
+  const [showViolationModal, setShowViolationModalState] = useState(false);
+  const showViolationModalRef = useRef(false);
+  const lastViolationTimeRef = useRef(0);
+  const handleFinalSubmitRef = useRef(null);
+  const activeCandidateRef = useRef(activeCandidate);
+
+  useEffect(() => {
+    activeCandidateRef.current = activeCandidate;
+  }, [activeCandidate]);
+
+  const setShowViolationModal = useCallback((val) => {
+    showViolationModalRef.current = Boolean(val);
+    setShowViolationModalState(val);
+    if (!val) {
+      // 600ms grace period after dismissing modal so refocus doesn't immediately re-trigger
+      lastViolationTimeRef.current = Date.now() + 600;
+    }
+  }, []);
+
   const [showSubmitModal, setShowSubmitModal] = useState(false);
 
   // Mobile Bottom Sheet toggle
@@ -220,20 +249,40 @@ export const QuizProvider = ({ children }) => {
   }, [isQuizActive, isQuizSubmitted, timeRemaining]);
 
   // Anti-Cheat Violation Trigger
-  const triggerViolation = (violationType, details = "") => {
-    if (!isQuizActive || isQuizSubmitted) return;
+  const triggerViolation = useCallback((violationType, details = "") => {
+    if (!isQuizActiveRef.current || isQuizSubmittedRef.current) return;
+    if (showViolationModalRef.current) return;
 
+    const now = Date.now();
+    // 800ms throttle to prevent concurrent events (e.g. window blur + visibility change) from double-counting
+    if (now - lastViolationTimeRef.current < 800) return;
+    lastViolationTimeRef.current = now;
+
+    violationCountRef.current += 1;
+    const currentCount = violationCountRef.current;
+    setViolationCount(currentCount);
+
+    const cand = activeCandidateRef.current;
     const newViolation = {
       id: "v_" + Date.now(),
       type: violationType,
       details,
       timestamp: new Date().toLocaleTimeString(),
-      rollNumber: activeCandidate ? activeCandidate.rollNumber : "GUEST"
+      rollNumber: cand ? cand.rollNumber : "GUEST"
     };
 
-    const newCount = violationCount + 1;
-    setViolationCount(newCount);
     setViolations((prev) => [newViolation, ...prev]);
+
+    // Update real-time candidate proctoring violation count in state
+    if (cand) {
+      setCandidates((prev) =>
+        prev.map((c) =>
+          c.rollNumber === cand.rollNumber
+            ? { ...c, violationsCount: currentCount }
+            : c
+        )
+      );
+    }
 
     // Stream violation to Supabase Realtime
     if (isSupabaseConfigured && supabase) {
@@ -262,15 +311,18 @@ export const QuizProvider = ({ children }) => {
     }
 
     setLatestViolationMessage(message);
-    setShowViolationModal(true);
+    showViolationModalRef.current = true;
+    setShowViolationModalState(true);
 
     // Auto-submission on exceeding violation threshold
-    if (newCount >= quizConfig.maxViolationsAllowed) {
+    if (currentCount >= quizConfig.maxViolationsAllowed) {
       setTimeout(() => {
-        handleFinalSubmit("AUTO_SUBMIT_MAX_VIOLATIONS");
+        if (handleFinalSubmitRef.current) {
+          handleFinalSubmitRef.current("AUTO_SUBMIT_MAX_VIOLATIONS");
+        }
       }, 1500);
     }
-  };
+  }, [quizConfig.maxViolationsAllowed]);
 
   // Register Candidate
   const registerCandidate = (formData) => {
@@ -346,10 +398,16 @@ export const QuizProvider = ({ children }) => {
   // Start Assessment
   const startQuiz = () => {
     setIsQuizActive(true);
+    isQuizActiveRef.current = true;
     setIsQuizSubmitted(false);
+    isQuizSubmittedRef.current = false;
     setTimeRemaining(quizConfig.durationMinutes * 60);
     setViolationCount(0);
+    violationCountRef.current = 0;
     setViolations([]);
+    showViolationModalRef.current = false;
+    setShowViolationModalState(false);
+    lastViolationTimeRef.current = 0;
     setCurrentQuestionIndex(0);
     setCurrentSectionId("logical");
     setCurrentView("page5_quiz");
@@ -400,9 +458,12 @@ export const QuizProvider = ({ children }) => {
   // Server-Side Score Evaluation & Final Submit
   const handleFinalSubmit = (submissionReason = "MANUAL_SUBMIT") => {
     setIsQuizActive(false);
+    isQuizActiveRef.current = false;
     setIsQuizSubmitted(true);
+    isQuizSubmittedRef.current = true;
     setShowSubmitModal(false);
-    setShowViolationModal(false);
+    showViolationModalRef.current = false;
+    setShowViolationModalState(false);
 
     // Compute scores using the isolated QUIZ_ANSWER_KEYS table (evaluated against candidate's allocated questions)
     let totalScore = 0;
@@ -443,7 +504,7 @@ export const QuizProvider = ({ children }) => {
         quizStatus: "COMPLETED",
         score: finalScore,
         timeTakenSeconds: timeTaken,
-        violationsCount: violationCount,
+        violationsCount: violationCountRef.current,
         sectionScores: sectionBreakdown,
         correctCount,
         incorrectCount,
@@ -475,7 +536,7 @@ export const QuizProvider = ({ children }) => {
           correct_count: correctCount,
           incorrect_count: incorrectCount,
           unanswered_count: unansweredCount,
-          violations_count: violationCount,
+          violations_count: violationCountRef.current,
           time_taken_seconds: timeTaken,
           submission_reason: submissionReason
         }]).then(({ error }) => {
@@ -486,6 +547,10 @@ export const QuizProvider = ({ children }) => {
 
     setCurrentView("page8_success");
   };
+
+  useEffect(() => {
+    handleFinalSubmitRef.current = handleFinalSubmit;
+  });
 
   // Admin Login
   const loginAdmin = (username, password) => {
