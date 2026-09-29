@@ -9,15 +9,29 @@ export const QuizProvider = ({ children }) => {
   const [currentView, setCurrentView] = useState("page1_landing");
   const [selectedCandidateForDetails, setSelectedCandidateForDetails] = useState("2401106042");
 
-  // Configuration (Hydrated with .env variables if present)
-  const [quizConfig, setQuizConfig] = useState(() => ({
-    ...QUIZ_CONFIG,
-    oaStartEpoch: import.meta.env.VITE_OA_WINDOW_START || QUIZ_CONFIG.oaStartEpoch,
-    oaEndEpoch: import.meta.env.VITE_OA_WINDOW_END || QUIZ_CONFIG.oaEndEpoch,
-    registrationCutoffEpoch: import.meta.env.VITE_REGISTRATION_CUTOFF || QUIZ_CONFIG.registrationCutoffEpoch,
-    durationMinutes: parseInt(import.meta.env.VITE_ATTEMPT_DURATION_MINUTES) || QUIZ_CONFIG.durationMinutes,
-    maxViolationsAllowed: parseInt(import.meta.env.VITE_MAX_VIOLATIONS_ALLOWED) || QUIZ_CONFIG.maxViolationsAllowed
-  }));
+  // Configuration (Hydrated from localStorage with .env as initial fallback)
+  const [quizConfig, setQuizConfig] = useState(() => {
+    const saved = localStorage.getItem("zairza_quiz_config");
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch (e) {
+        // Fallback to defaults
+      }
+    }
+    return {
+      ...QUIZ_CONFIG,
+      oaStartEpoch: import.meta.env.VITE_OA_WINDOW_START || QUIZ_CONFIG.oaStartEpoch,
+      oaEndEpoch: import.meta.env.VITE_OA_WINDOW_END || QUIZ_CONFIG.oaEndEpoch,
+      registrationCutoffEpoch: import.meta.env.VITE_REGISTRATION_CUTOFF || QUIZ_CONFIG.registrationCutoffEpoch,
+      durationMinutes: parseInt(import.meta.env.VITE_ATTEMPT_DURATION_MINUTES) || QUIZ_CONFIG.durationMinutes,
+      maxViolationsAllowed: parseInt(import.meta.env.VITE_MAX_VIOLATIONS_ALLOWED) || QUIZ_CONFIG.maxViolationsAllowed
+    };
+  });
+
+  useEffect(() => {
+    localStorage.setItem("zairza_quiz_config", JSON.stringify(quizConfig));
+  }, [quizConfig]);
   const [questions, setQuestions] = useState(INITIAL_QUESTIONS);
   const [candidates, setCandidates] = useState(INITIAL_CANDIDATES);
   const [auditLogs, setAuditLogs] = useState(INITIAL_AUDIT_LOGS);
