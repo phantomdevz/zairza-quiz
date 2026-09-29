@@ -63,7 +63,7 @@ export const Page6ViolationModal = () => {
 
         {isTerminated ? (
           <div style={{ color: "var(--accent-rose)", fontWeight: "600", fontSize: "0.95rem" }}>
-            Maximum violation threshold exceeded. Your assessment is being automatically locked and submitted.
+            Maximum violation threshold exceeded. Your quiz is being automatically locked and submitted.
           </div>
         ) : (
           <button
@@ -71,7 +71,7 @@ export const Page6ViolationModal = () => {
             className="btn btn-primary"
             style={{ width: "100%", padding: "12px", fontSize: "1rem" }}
           >
-            <span>I Understand • Return to Assessment</span>
+            <span>I Understand • Return to Quiz</span>
             <ArrowRight size={16} />
           </button>
         )}

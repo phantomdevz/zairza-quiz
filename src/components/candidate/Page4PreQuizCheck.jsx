@@ -86,7 +86,7 @@ export const Page4PreQuizCheck = () => {
             { key: "jsAndStorage", label: "DOM Storage & Engine", detail: "IndexedDB & LocalStorage active for zero data-loss recovery." },
             { key: "latency", label: "Network Latency & Server Sync", detail: "Ping test: 38ms (Stable WebSocket connection)." },
             { key: "fullscreen", label: isMobile ? "Mobile Viewport Optimization" : "Fullscreen API Capability", detail: isMobile ? "Touch-friendly bottom sheet and viewport locking active." : "Full window takeover enabled." },
-            { key: "session", label: "Session Integrity & Roll Verification", detail: `OUTR Roll Number ${roll} locked to current device.` }
+            { key: "session", label: "Session Integrity & Roll Verification", detail: `Registration Number ${roll} locked to current device.` }
           ].map((item) => (
             <div
               key={item.key}
@@ -131,7 +131,7 @@ export const Page4PreQuizCheck = () => {
             1. <strong>Strict Window Focus</strong>: Leaving the test tab, minimizing the browser, or switching apps on mobile will be recorded immediately.
           </p>
           <p style={{ marginBottom: "10px" }}>
-            2. <strong>Violation Limit</strong>: After <strong>3 recorded infractions</strong>, the assessment will automatically lock and submit your responses as-is.
+            2. <strong>Violation Limit</strong>: After <strong>3 recorded infractions</strong>, the quiz will automatically lock and submit your responses as-is.
           </p>
           <p style={{ marginBottom: "10px" }}>
             3. <strong>Dynamic Watermarking</strong>: Your roll number <strong>({roll})</strong> and timestamp are stamped dynamically over the question viewport.
@@ -150,7 +150,7 @@ export const Page4PreQuizCheck = () => {
               style={{ width: "18px", height: "18px" }}
             />
             <span style={{ fontWeight: "600", fontSize: "0.92rem", color: "var(--text-main)" }}>
-              I understand the proctoring rules and agree to take the assessment under strict integrity monitoring.
+              I understand the proctoring rules and agree to take the quiz under strict integrity monitoring.
             </span>
           </label>
         </div>
@@ -171,7 +171,7 @@ export const Page4PreQuizCheck = () => {
           className="btn btn-primary pulse-glow"
           style={{ padding: "14px 36px", fontSize: "1.05rem" }}
         >
-          <span>Start Assessment (30 Mins)</span>
+          <span>Start Quiz (30 Mins)</span>
           <ArrowRight size={18} />
         </button>
       </div>

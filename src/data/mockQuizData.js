@@ -513,7 +513,7 @@ export const INITIAL_CANDIDATES = [
 ];
 
 export const INITIAL_AUDIT_LOGS = [
-  { id: "log_1", action: "SYSTEM_INITIALIZED", admin: "SuperAdmin (zairza_core)", details: "Platform initialized for Induction 2026 OA Window", timestamp: "2026-09-29T12:00:00+05:30" },
+  { id: "log_1", action: "SYSTEM_INITIALIZED", admin: "SuperAdmin (zairza_core)", details: "Platform initialized for Induction 2026 Quiz Window", timestamp: "2026-09-29T12:00:00+05:30" },
   { id: "log_2", action: "QUIZ_CONFIG_SAVED", admin: "QuizManager (leads_team)", details: "Configured 30 questions across 3 parts (30 mins duration)", timestamp: "2026-09-29T12:15:00+05:30" },
   { id: "log_3", action: "CANDIDATE_SUBMIT", admin: "System Auto-Verifier", details: "Candidate 2401106042 successfully submitted response", timestamp: "2026-09-29T13:00:00+05:30" }
 ];

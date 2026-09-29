@@ -5,8 +5,8 @@ import { CheckCircle2, Clock, Calendar, Shield, AlertTriangle, ArrowRight, Lapto
 export const Page3Countdown = () => {
   const { activeCandidate, setCurrentView, startQuiz } = useQuiz();
 
-  // Simulated OA status
-  // 24-hr OA Window: 29th Sept 8 PM to 30th Sept 8 PM
+  // Simulated Quiz status
+  // 24-hr Quiz Window: 29th Sept 8 PM to 30th Sept 8 PM
   const [timeLeft, setTimeLeft] = useState({ hours: 2, minutes: 14, seconds: 37 });
   const [isLive, setIsLive] = useState(true); // Can toggle or test live mode immediately
 
@@ -64,7 +64,7 @@ export const Page3Countdown = () => {
           border: "1px solid var(--border-subtle)"
         }}>
           <div>
-            <div style={{ fontSize: "0.75rem", color: "var(--text-muted)", textTransform: "uppercase" }}>OUTR Roll Number</div>
+            <div style={{ fontSize: "0.75rem", color: "var(--text-muted)", textTransform: "uppercase" }}>Registration Number</div>
             <div className="mono" style={{ fontWeight: "700", color: "var(--accent-cyan)", fontSize: "1.05rem" }}>
               {candidateRoll}
             </div>
@@ -83,11 +83,11 @@ export const Page3Countdown = () => {
           {isLive ? (
             <span className="badge badge-emerald">
               <span style={{ width: "8px", height: "8px", borderRadius: "50%", background: "var(--accent-emerald)", display: "inline-block", animation: "pulseGlow 1.5s infinite" }} />
-              ASSESSMENT IS CURRENTLY LIVE
+              QUIZ IS CURRENTLY LIVE
             </span>
           ) : (
             <span className="badge badge-amber">
-              <Clock size={13} /> ASSESSMENT STARTS IN
+              <Clock size={13} /> QUIZ STARTS IN
             </span>
           )}
         </div>

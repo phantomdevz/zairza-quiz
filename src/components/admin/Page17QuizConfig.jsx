@@ -61,12 +61,12 @@ export const Page17QuizConfig = () => {
         <div style={{ marginBottom: "30px" }}>
           <h3 style={{ fontSize: "1.15rem", color: "var(--accent-cyan)", marginBottom: "16px", display: "flex", alignItems: "center", gap: "8px" }}>
             <Calendar size={18} />
-            <span>24-Hour Online Assessment Window & Cutoff</span>
+            <span>24-Hour Induction Quiz Window &amp; Cutoff</span>
           </h3>
 
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "16px" }}>
             <div className="form-group">
-              <label className="form-label">OA Window Starts (ISO / Local)</label>
+              <label className="form-label">Quiz Window Starts (ISO / Local)</label>
               <input
                 type="text"
                 className="form-input mono"
@@ -77,7 +77,7 @@ export const Page17QuizConfig = () => {
             </div>
 
             <div className="form-group">
-              <label className="form-label">OA Window Closes (ISO / Local)</label>
+              <label className="form-label">Quiz Window Closes (ISO / Local)</label>
               <input
                 type="text"
                 className="form-input mono"

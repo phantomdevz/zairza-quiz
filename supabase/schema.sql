@@ -1,7 +1,7 @@
 -- ============================================================================
 -- ZAIRZA INDUCTION PLATFORM — SUPABASE POSTGRES SCHEMA
 -- Designed for 24-hr OA Window, 300+ Concurrent Students & Live Proctoring
--- Primary Identifier: OUTR Roll Number (No synthetic Candidate ID)
+-- Primary Identifier: Registration Number (No synthetic Candidate ID)
 -- ============================================================================
 
 -- 1. Enable UUID Extension

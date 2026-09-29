@@ -22,7 +22,7 @@ export const QuizProvider = ({ children }) => {
   const [candidates, setCandidates] = useState(INITIAL_CANDIDATES);
   const [auditLogs, setAuditLogs] = useState(INITIAL_AUDIT_LOGS);
 
-  // Active Candidate Session (Identified by OUTR Roll Number)
+  // Active Candidate Session (Identified by Registration Number)
   const [activeCandidate, setActiveCandidate] = useState(() => {
     const saved = localStorage.getItem("zairza_candidate_session");
     if (saved) {
@@ -222,7 +222,7 @@ export const QuizProvider = ({ children }) => {
       setActiveCandidate(candidate);
       return { success: true, candidate };
     }
-    return { success: false, error: "OUTR Roll Number not found. Please register first." };
+    return { success: false, error: "Registration Number not found. Please register first." };
   };
 
   // Start Assessment

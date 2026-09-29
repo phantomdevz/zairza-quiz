@@ -350,7 +350,7 @@ export const Page5ProctoredQuiz = () => {
 
             {/* Part 3 */}
             <div style={{ fontSize: "0.75rem", fontWeight: "700", color: "var(--accent-emerald)", marginBottom: "8px" }}>
-              PART 3: HR & CULTURE (Q26–Q30)
+              PART 3: The COFFEE TEST (Q26–Q30)
             </div>
             <div className="palette-grid">
               {questions.slice(25, 30).map((q, idx) => {
@@ -459,7 +459,7 @@ export const Page5ProctoredQuiz = () => {
           className="btn btn-primary"
           style={{ width: "100%", padding: "12px" }}
         >
-          <span>Submit Assessment</span>
+          <span>Submit Quiz</span>
           <Send size={16} />
         </button>
       </div>

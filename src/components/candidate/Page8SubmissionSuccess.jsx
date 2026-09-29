@@ -46,11 +46,11 @@ export const Page8SubmissionSuccess = () => {
         </span>
 
         <h1 style={{ fontSize: "clamp(2rem, 4vw, 2.5rem)", marginBottom: "10px" }}>
-          Assessment Submitted Successfully
+          Induction Quiz Submitted Successfully
         </h1>
 
-        <p style={{ color: "var(--text-secondary)", fontSize: "1rem", lineHeight: "1.6", maxWidth: "500px", margin: "0 auto 30px" }}>
-          Thank you, <strong>{name}</strong>! Your 30 responses across all three parts have been securely recorded and locked in the Zairza induction database.
+        <p style={{ color: "var(--text-secondary)", fontSize: "1rem", lineHeight: "1.6", maxWidth: "520px", margin: "0 auto 30px" }}>
+          Thank you, <strong>{name}</strong>! Your 30 responses across all three parts have been securely recorded in the Zairza induction database.
         </p>
 
         {/* Candidate Receipt Card */}
@@ -60,11 +60,11 @@ export const Page8SubmissionSuccess = () => {
           borderRadius: "14px",
           padding: "20px 24px",
           textAlign: "left",
-          marginBottom: "30px"
+          marginBottom: "24px"
         }}>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
             <div>
-              <div style={{ fontSize: "0.75rem", color: "var(--text-muted)", textTransform: "uppercase" }}>OUTR Roll Number</div>
+              <div style={{ fontSize: "0.75rem", color: "var(--text-muted)", textTransform: "uppercase" }}>Registration Number</div>
               <div className="mono" style={{ fontSize: "1.1rem", fontWeight: "700", color: "var(--accent-cyan)" }}>
                 {roll}
               </div>
@@ -79,7 +79,7 @@ export const Page8SubmissionSuccess = () => {
 
             <div>
               <div style={{ fontSize: "0.75rem", color: "var(--text-muted)", textTransform: "uppercase" }}>Assessment Mode</div>
-              <div style={{ fontSize: "0.95rem", fontWeight: "600" }}>24-Hr Online Assessment</div>
+              <div style={{ fontSize: "0.95rem", fontWeight: "600" }}>24-Hr Induction Quiz</div>
             </div>
 
             <div>
@@ -89,18 +89,24 @@ export const Page8SubmissionSuccess = () => {
           </div>
         </div>
 
-        {/* Notice on Results */}
+        {/* Ideathon PS Unlocked Box */}
         <div style={{
-          padding: "16px",
-          borderRadius: "10px",
-          background: "rgba(6, 182, 212, 0.08)",
-          border: "1px solid rgba(6, 182, 212, 0.25)",
-          color: "var(--text-secondary)",
-          fontSize: "0.9rem",
-          lineHeight: "1.5",
+          padding: "20px",
+          borderRadius: "12px",
+          background: "rgba(47, 91, 255, 0.08)",
+          border: "1px solid rgba(47, 91, 255, 0.35)",
+          textAlign: "left",
           marginBottom: "30px"
         }}>
-          <strong>Results Announcement:</strong> Assessment evaluations are kept confidential while the 24-hour OA window remains open. Final shortlists for the Technical & HR interview rounds will be declared on the candidate portal.
+          <div style={{ display: "flex", alignItems: "center", gap: "8px", color: "var(--blue)", fontWeight: "800", fontSize: "1rem", marginBottom: "8px" }}>
+            <span>⚡ NEXT STAGE UNLOCKED: IDEATHON PROBLEM STATEMENTS (PS)</span>
+          </div>
+          <p style={{ color: "#dbe3f5", fontSize: "0.9rem", lineHeight: "1.6", margin: "0 0 12px" }}>
+            Now that you have submitted your quiz, you have gained immediate access to the <strong>Ideathon Problem Statements</strong>! Start brainstorming your solution right away.
+          </p>
+          <div style={{ padding: "10px 14px", borderRadius: "8px", background: "rgba(0, 0, 0, 0.4)", border: "1px solid rgba(255,255,255,0.08)", fontSize: "0.85rem", color: "var(--text-secondary)" }}>
+            🗓️ <strong>Timeline:</strong> Ideathon presentation &amp; Personal Interviews (PI) run from <strong>1st October to 3rd October</strong>. Following this, the <strong>Final Inductees List</strong> will be released.
+          </div>
         </div>
 
         {/* CTAs */}
@@ -110,7 +116,7 @@ export const Page8SubmissionSuccess = () => {
             className="btn btn-primary"
             style={{ padding: "12px 28px" }}
           >
-            <span>Candidate Dashboard</span>
+            <span>View Ideathon PS in Dashboard</span>
             <ArrowRight size={16} />
           </button>
 

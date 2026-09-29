@@ -19,8 +19,8 @@ export const Page1Landing = () => {
       a: "1st and 2nd year students from any branch of OUTR Bhubaneswar."
     },
     {
-      q: "How does the 24-hour OA window work?",
-      a: "The test opens at 10:00 PM on 29th September and closes at 10:00 PM on 30th September. Once you initiate your test, you receive 30 minutes to solve 30 questions across Logical Reasoning, Tech Knowledge, and HR."
+      q: "How does the 24-hour Quiz window work?",
+      a: "The quiz window opens at 8:00 PM on 29th September and closes at 8:00 PM on 30th September. Once you initiate your quiz, you receive 30 minutes to solve 30 questions across Logical Reasoning, Tech Knowledge, and HR. Submitting the quiz unlocks the Problem Statements (PS) for the Ideathon."
     },
     {
       q: "Can I take the quiz on a phone or laptop?",
@@ -173,23 +173,27 @@ export const Page1Landing = () => {
         <h2 style={{ fontSize: "clamp(1.9rem, 5vw, 3rem)", lineHeight: 1, letterSpacing: "-.03em", margin: "0 0 10px", fontWeight: 800 }}>
           How induction works
         </h2>
-        <p className="lead">Four steps from curious to inducted.</p>
+        <p className="lead">From curious to inducted — step by step.</p>
         <ol className="steps">
           <li>
             <b>1. Register</b>
-            <span>Fill in the induction form with your details, OUTR Roll Number, and preferred wing before 30th Sept 12:00 PM.</span>
+            <span>Fill in the induction form with your details, Registration Number, and preferred wing before 30th Sept 12:00 PM.</span>
           </li>
           <li>
-            <b>2. Attend the Online Assessment (OA)</b>
-            <span>A 30-minute proctored test across 3 parts: Logical Reasoning, Tech Knowledge, and HR. Open from 29th Sept 8 PM to 30th Sept 8 PM.</span>
+            <b>2. Attend the Induction Quiz</b>
+            <span>A 30-minute proctored quiz across 3 parts: Logical Reasoning, Tech Knowledge, and HR. Window open from 29th Sept 8 PM to 30th Sept 8 PM.</span>
           </li>
           <li>
-            <b>3. Get shortlisted</b>
-            <span>Interview shortlists announced based on sectional thresholds and domain strengths.</span>
+            <b>3. Access Ideathon Problem Statements (PS)</b>
+            <span>Immediately upon submitting your quiz, get instant access to the official Problem Statements (PS) for the Ideathon round.</span>
           </li>
           <li>
-            <b>4. Get inducted</b>
-            <span>Join your wing, meet your mentors, and start your first project sprint in the club lab.</span>
+            <b>4. Ideathon &amp; Personal Interviews (PI)</b>
+            <span>Present your ideas/prototypes and attend one-on-one personal interviews held from 1st October to 3rd October.</span>
+          </li>
+          <li>
+            <b>5. Inductees List Released</b>
+            <span>Final selection list announced. Welcome to the Zairza family — start building in the lab!</span>
           </li>
         </ol>
       </section>
@@ -198,12 +202,12 @@ export const Page1Landing = () => {
       <section id="quiz" style={{ paddingTop: "76px" }}>
         <div className="path">~/quiz</div>
         <h2 style={{ fontSize: "clamp(1.9rem, 5vw, 3rem)", lineHeight: 1, letterSpacing: "-.03em", margin: "0 0 10px", fontWeight: 800 }}>
-          Online Assessment details
+          Induction Quiz details
         </h2>
         <div className="specs">
           <div className="spec">
-            <small>OA WINDOW</small>
-            <strong>29th 8 PM – 30th 8 PM</strong>
+            <small>QUIZ WINDOW</small>
+            <strong>29th Sept 8 PM – 30th Sept 8 PM</strong>
           </div>
           <div className="spec">
             <small>REGISTRATION CLOSE</small>
@@ -216,13 +220,13 @@ export const Page1Landing = () => {
         </div>
 
         <div className="card">
-          <h3>Assessment &amp; Anti-Cheat Rules</h3>
+          <h3>Quiz &amp; Anti-Cheat Rules</h3>
           <ul style={{ margin: "14px 0 0", paddingLeft: "1.2em", color: "#c5c9d4", lineHeight: "1.8" }}>
-            <li>Candidates must enter with a verified university OUTR Roll Number.</li>
-            <li>3 Distinct Sections: Logical Reasoning (10 Qs), Tech Knowledge (15 Qs), HR &amp; Cultural Fit (5 Qs).</li>
+            <li>Candidates must enter with a verified university Registration Number.</li>
+            <li>3 Distinct Sections: Logical Reasoning (10 Qs), Tech Knowledge (15 Qs), The Coffee Test (5 Qs).</li>
             <li>Full screen and focus monitoring active. Tab switching triggers violation warnings.</li>
             <li>Exceeding 3 infractions causes automated attempt submission.</li>
-            <li>Mobile and laptop both supported with dynamic watermark matrix.</li>
+            <li>Submitting the quiz instantly unlocks the Problem Statements (PS) for the Ideathon round.</li>
           </ul>
         </div>
       </section>

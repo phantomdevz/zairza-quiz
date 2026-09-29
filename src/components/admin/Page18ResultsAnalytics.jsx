@@ -17,7 +17,7 @@ export const Page18ResultsAnalytics = () => {
   });
 
   const exportShortlist = () => {
-    const headers = ["OUTR Roll Number", "Full Name", "Email", "Wing", "Total Score (of 30)", "Logical Score", "Tech Score", "HR Score"];
+    const headers = ["Registration Number", "Full Name", "Email", "Wing", "Total Score (of 30)", "Logical Score", "Tech Score", "HR Score"];
     const rows = shortlisted.map((c) => [
       c.rollNumber,
       `"${c.fullName}"`,

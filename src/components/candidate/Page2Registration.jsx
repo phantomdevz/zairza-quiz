@@ -69,10 +69,10 @@ export const Page2Registration = () => {
   const validate = () => {
     const errs = {};
     if (!formData.fullName.trim()) errs.fullName = "Full name is required.";
-    
-    // OUTR Roll number validation (e.g. 2401106042 or 2301106xxx)
+
+    // Registration Number validation (e.g. 2401106042 or 2301106xxx)
     if (!formData.rollNumber.trim()) {
-      errs.rollNumber = "OUTR Roll number is required.";
+      errs.rollNumber = "Registration Number is required.";
     } else if (formData.rollNumber.trim().length < 8) {
       errs.rollNumber = "Please enter a valid university roll number.";
     }
@@ -123,7 +123,7 @@ export const Page2Registration = () => {
           Candidate Registration
         </h1>
         <p style={{ color: "var(--text-secondary)", fontSize: "0.95rem" }}>
-          Fill in your OUTR credentials. Your Roll Number serves as your primary assessment identifier.
+          Fill in your OUTR credentials. Your Roll Number serves as your primary quiz identifier.
         </p>
       </div>
 
@@ -166,7 +166,7 @@ export const Page2Registration = () => {
             </div>
 
             <div className="form-group">
-              <label className="form-label">OUTR Roll Number *</label>
+              <label className="form-label">Registration Number *</label>
               <input
                 type="text"
                 className="form-input mono"
@@ -178,11 +178,11 @@ export const Page2Registration = () => {
             </div>
 
             <div className="form-group">
-              <label className="form-label">OUTR Email ID *</label>
+              <label className="form-label">Email ID *</label>
               <input
                 type="email"
                 className="form-input"
-                placeholder="name.branch@outr.ac.in"
+                placeholder=""
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               />
@@ -372,7 +372,7 @@ export const Page2Registration = () => {
               style={{ marginTop: "4px" }}
             />
             <span style={{ fontSize: "0.85rem", color: "var(--text-secondary)", lineHeight: "1.5" }}>
-              I agree to abide by the anti-cheating guidelines of Zairza. I understand that tab switching, window blurring, and exiting fullscreen during the 30-minute online assessment will be recorded and may lead to automatic disqualification.
+              I agree to abide by the anti-cheating guidelines of Zairza. I understand that tab switching, window blurring, and exiting fullscreen during the 30-minute induction quiz will be recorded and may lead to automatic disqualification.
             </span>
           </label>
           {errors.acceptedTerms && <div className="form-error" style={{ marginBottom: "16px" }}>{errors.acceptedTerms}</div>}

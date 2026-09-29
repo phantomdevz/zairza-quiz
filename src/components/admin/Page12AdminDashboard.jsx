@@ -59,7 +59,7 @@ export const Page12AdminDashboard = () => {
             <Users size={18} />
           </div>
           <div className="mono" style={{ fontSize: "2rem", fontWeight: "800" }}>{totalRegs}</div>
-          <div style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginTop: "4px" }}>Verified OUTR Roll Numbers</div>
+          <div style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginTop: "4px" }}>Verified Registration Numbers</div>
         </div>
 
         <div className="glass-panel" style={{ padding: "20px" }}>

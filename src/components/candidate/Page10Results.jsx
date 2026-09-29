@@ -39,7 +39,7 @@ export const Page10Results = () => {
           Candidate Scorecard
         </h1>
         <p style={{ color: "var(--text-secondary)", fontSize: "0.95rem" }}>
-          Official induction performance breakdown for OUTR Roll Number: <strong className="mono" style={{ color: "var(--accent-cyan)" }}>{candidate.rollNumber}</strong> ({candidate.fullName}).
+          Official induction performance breakdown for Registration Number: <strong className="mono" style={{ color: "var(--accent-cyan)" }}>{candidate.rollNumber}</strong> ({candidate.fullName}).
         </p>
       </div>
 
@@ -172,7 +172,7 @@ export const Page10Results = () => {
       <div className="glass-panel" style={{ padding: "26px", textAlign: "center", borderTop: "3px solid var(--accent-cyan)" }}>
         <h4 style={{ fontSize: "1.2rem", marginBottom: "8px" }}>What's Next in Induction 2026?</h4>
         <p style={{ color: "var(--text-secondary)", fontSize: "0.92rem", maxWidth: "600px", margin: "0 auto 20px" }}>
-          Interview slots for Round 2 will be assigned based on your section scores and wing preference. Keep checking your registered OUTR email.
+          You now have direct access to the <strong>Ideathon Problem Statements (PS)</strong> on your dashboard. <strong>Ideathon presentations &amp; Personal Interviews (PI)</strong> will take place from <strong>1st October to 3rd October</strong>, followed by the release of the <strong>Final Inductees List</strong>!
         </p>
 
         <div style={{ display: "flex", justifyContent: "center", gap: "14px" }}>
@@ -180,7 +180,7 @@ export const Page10Results = () => {
             onClick={() => setCurrentView("page9_dashboard")}
             className="btn btn-primary"
           >
-            <span>Return to Dashboard</span>
+            <span>View Ideathon PS on Dashboard</span>
             <ArrowRight size={16} />
           </button>
         </div>
