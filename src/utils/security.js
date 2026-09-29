@@ -1,4 +1,4 @@
-import { SANITIZED_EVALUATION_MAP } from "../data/sanitizedEvaluationMap";
+import { SANITIZED_EVALUATION_MAP } from "../data/sanitizedEvaluationMap.js";
 
 // Lightweight synchronous SHA-256 implementation (zero external dependencies)
 export function sha256Sync(ascii) {
@@ -160,7 +160,7 @@ export function verifyAdmin2FACode(code) {
   const cleanCode = code.trim();
   const token = `${cleanCode}:zairza_adm_2026`;
   const computed = sha256Sync(token);
-  return computed === ADMIN_TOTP_HASH || (cleanCode.length === 6 && /^\d{6}$/.test(cleanCode));
+  return computed === ADMIN_TOTP_HASH;
 }
 
 // Generate ephemeral session token for admin
