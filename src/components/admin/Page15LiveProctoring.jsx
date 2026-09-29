@@ -102,7 +102,7 @@ export const Page15LiveProctoring = () => {
                 const isFlagged = c.violationsCount > 0;
                 return (
                   <tr key={c.rollNumber} style={{ borderBottom: "1px solid rgba(255,255,255,0.04)" }}>
-                    <td style={{ padding: "14px 10px" }} className="mono" style={{ fontWeight: "700", color: "var(--accent-cyan)" }}>
+                    <td className="mono" style={{ padding: "14px 10px", fontWeight: "700", color: "var(--accent-cyan)" }}>
                       {c.rollNumber}
                     </td>
 

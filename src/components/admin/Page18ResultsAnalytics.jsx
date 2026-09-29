@@ -158,7 +158,7 @@ export const Page18ResultsAnalytics = () => {
               ) : (
                 shortlisted.map((c) => (
                   <tr key={c.rollNumber} style={{ borderBottom: "1px solid rgba(255,255,255,0.04)" }}>
-                    <td style={{ padding: "12px 10px" }} className="mono" style={{ color: "var(--accent-cyan)", fontWeight: "700" }}>
+                    <td className="mono" style={{ padding: "12px 10px", color: "var(--accent-cyan)", fontWeight: "700" }}>
                       {c.rollNumber}
                     </td>
                     <td style={{ padding: "12px 10px", fontWeight: "600" }}>{c.fullName}</td>
@@ -168,7 +168,7 @@ export const Page18ResultsAnalytics = () => {
                     <td style={{ padding: "12px 10px" }} className="mono">{c.sectionScores?.logical ?? "—"}</td>
                     <td style={{ padding: "12px 10px" }} className="mono">{c.sectionScores?.tech ?? "—"}</td>
                     <td style={{ padding: "12px 10px" }} className="mono">{c.sectionScores?.hr ?? "—"}</td>
-                    <td style={{ padding: "12px 10px" }} className="mono" style={{ fontWeight: "800", color: "var(--accent-emerald)" }}>
+                    <td className="mono" style={{ padding: "12px 10px", fontWeight: "800", color: "var(--accent-emerald)" }}>
                       {c.score}
                     </td>
                     <td style={{ padding: "12px 10px" }}>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useQuiz } from "../../context/QuizContext";
 import { Lock, Mail, Key, ShieldCheck, ArrowRight, AlertCircle } from "lucide-react";
+import { verifyAdminCredentials, verifyAdmin2FACode } from "../../utils/security";
 
 export const Page11AdminLogin = () => {
   const { loginAdmin, setCurrentView, isAdminLoggedIn } = useQuiz();
@@ -11,7 +12,7 @@ export const Page11AdminLogin = () => {
   const [step, setStep] = useState(1); // 1: Password, 2: 2FA TOTP
   const [error, setError] = useState("");
 
-  const handlePasswordSubmit = (e) => {
+  const handlePasswordSubmit = async (e) => {
     e.preventDefault();
     setError("");
     if (!email.trim() || !password.trim()) {
@@ -19,14 +20,15 @@ export const Page11AdminLogin = () => {
       return;
     }
 
-    if (email.trim().toLowerCase() === "admin@zairza.in" && password === "zairza2026") {
+    const isValid = await verifyAdminCredentials(email, password);
+    if (isValid) {
       setStep(2); // Proceed to 2FA challenge
     } else {
       setError("Invalid admin credentials. Please verify your email and password.");
     }
   };
 
-  const handle2FASubmit = (e) => {
+  const handle2FASubmit = async (e) => {
     e.preventDefault();
     setError("");
     if (!twoFactorCode.trim()) {
@@ -34,10 +36,12 @@ export const Page11AdminLogin = () => {
       return;
     }
 
-    if (twoFactorCode.trim() === "202609" || twoFactorCode.trim().length === 6) {
-      const ok = loginAdmin(email, password);
+    if (verifyAdmin2FACode(twoFactorCode)) {
+      const ok = await loginAdmin(email, password);
       if (ok) {
         setCurrentView("page12_admin_dashboard");
+      } else {
+        setError("Admin authentication failed. Please retry.");
       }
     } else {
       setError("Invalid 2FA Authenticator token. Enter valid 6-digit code.");

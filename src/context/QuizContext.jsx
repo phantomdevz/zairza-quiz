@@ -1,6 +1,11 @@
 import React, { createContext, useContext, useState, useEffect, useRef, useCallback } from "react";
-import { QUIZ_CONFIG, INITIAL_QUESTIONS, QUIZ_ANSWER_KEYS, INITIAL_CANDIDATES, INITIAL_AUDIT_LOGS } from "../data/mockQuizData";
+import { QUIZ_CONFIG, INITIAL_QUESTIONS, INITIAL_CANDIDATES, INITIAL_AUDIT_LOGS } from "../data/mockQuizData";
 import { supabase, isSupabaseConfigured } from "../lib/supabaseClient";
+import {
+  evaluateCandidateQuiz,
+  verifyAdminCredentials,
+  generateAdminSession
+} from "../utils/security";
 
 const QuizContext = createContext(null);
 
@@ -42,20 +47,10 @@ export const QuizProvider = ({ children }) => {
   const [candidates, setCandidates] = useState(INITIAL_CANDIDATES);
   const [auditLogs, setAuditLogs] = useState(INITIAL_AUDIT_LOGS);
 
-  // Isolated Answer Keys State (Segregated from candidate questions)
-  const [answerKeys, setAnswerKeys] = useState(() => {
-    const saved = localStorage.getItem("zairza_quiz_answer_keys");
-    if (saved) {
-      try {
-        return { ...QUIZ_ANSWER_KEYS, ...JSON.parse(saved) };
-      } catch (e) {}
-    }
-    return QUIZ_ANSWER_KEYS;
-  });
-
+  // Security: Purge any legacy answer keys from browser local storage
   useEffect(() => {
-    localStorage.setItem("zairza_quiz_answer_keys", JSON.stringify(answerKeys));
-  }, [answerKeys]);
+    localStorage.removeItem("zairza_quiz_answer_keys");
+  }, []);
 
   const updateAnswerKey = (questionId, correctOptionId, explanation = null) => {
     setAnswerKeys((prev) => {
@@ -133,9 +128,18 @@ export const QuizProvider = ({ children }) => {
     return null;
   });
 
-  // Admin Session
-  const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
-  const [adminUser, setAdminUser] = useState(null);
+  // Admin Session (Backed by ephemeral sessionStorage)
+  const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(() => {
+    return Boolean(sessionStorage.getItem("zairza_admin_token"));
+  });
+  const [adminUser, setAdminUser] = useState(() => {
+    const token = sessionStorage.getItem("zairza_admin_token");
+    return token ? { username: "admin@zairza.in", role: "Super Admin", name: "Core Convener", token } : null;
+  });
+
+  // Submission Idempotency & Double-Click Lock
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const isSubmittingRef = useRef(false);
 
   // In-Quiz State (Page 5)
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -456,7 +460,11 @@ export const QuizProvider = ({ children }) => {
   };
 
   // Server-Side Score Evaluation & Final Submit
-  const handleFinalSubmit = (submissionReason = "MANUAL_SUBMIT") => {
+  const handleFinalSubmit = async (submissionReason = "MANUAL_SUBMIT") => {
+    if (isSubmittingRef.current) return;
+    isSubmittingRef.current = true;
+    setIsSubmitting(true);
+
     setIsQuizActive(false);
     isQuizActiveRef.current = false;
     setIsQuizSubmitted(true);
@@ -465,35 +473,16 @@ export const QuizProvider = ({ children }) => {
     showViolationModalRef.current = false;
     setShowViolationModalState(false);
 
-    // Compute scores using the isolated QUIZ_ANSWER_KEYS table (evaluated against candidate's allocated questions)
-    let totalScore = 0;
-    const sectionBreakdown = {
-      logical: 0,
-      tech: 0,
-      hr: 0
-    };
-    let correctCount = 0;
-    let incorrectCount = 0;
-    let unansweredCount = 0;
-
     const activeQuestionsList = (allocatedQuestions && allocatedQuestions.length > 0) ? allocatedQuestions : questions.slice(0, 30);
 
-    activeQuestionsList.forEach((q) => {
-      const selected = answers[q.id];
-      const solution = answerKeys[q.id] || answerKeys[String(q.id)] || QUIZ_ANSWER_KEYS[q.id];
-      if (!selected) {
-        unansweredCount++;
-      } else if (solution && selected === solution.correctOptionId) {
-        totalScore += quizConfig.marksPerQuestion;
-        sectionBreakdown[q.section] = (sectionBreakdown[q.section] || 0) + quizConfig.marksPerQuestion;
-        correctCount++;
-      } else {
-        totalScore -= quizConfig.negativeMark;
-        incorrectCount++;
-      }
+    // Cryptographically verified evaluation (Zero plaintext solution keys required)
+    const { finalScore, sectionBreakdown, correctCount, incorrectCount, unansweredCount } = evaluateCandidateQuiz({
+      allocatedQuestions: activeQuestionsList,
+      answers,
+      marksPerQuestion: quizConfig.marksPerQuestion,
+      negativeMark: quizConfig.negativeMark
     });
 
-    const finalScore = Math.max(0, Math.round(totalScore * 100) / 100);
     const timeTaken = quizConfig.durationMinutes * 60 - timeRemaining;
     const submittedAtEpoch = Date.now();
     const evaluatesAtEpoch = submittedAtEpoch + 15 * 60 * 1000; // 15-minute security cooldown
@@ -526,25 +515,28 @@ export const QuizProvider = ({ children }) => {
 
       // Record final attempt to Supabase Postgres
       if (isSupabaseConfigured && supabase) {
-        supabase.from("quiz_attempts").insert([{
-          roll_number: activeCandidate.rollNumber,
-          status: "COMPLETED",
-          score: finalScore,
-          logical_score: sectionBreakdown.logical,
-          tech_score: sectionBreakdown.tech,
-          hr_score: sectionBreakdown.hr,
-          correct_count: correctCount,
-          incorrect_count: incorrectCount,
-          unanswered_count: unansweredCount,
-          violations_count: violationCountRef.current,
-          time_taken_seconds: timeTaken,
-          submission_reason: submissionReason
-        }]).then(({ error }) => {
-          if (error) console.warn("Supabase attempt sync note:", error.message);
-        });
+        try {
+          await supabase.from("quiz_attempts").insert([{
+            roll_number: activeCandidate.rollNumber,
+            status: "COMPLETED",
+            score: finalScore,
+            logical_score: sectionBreakdown.logical,
+            tech_score: sectionBreakdown.tech,
+            hr_score: sectionBreakdown.hr,
+            correct_count: correctCount,
+            incorrect_count: incorrectCount,
+            unanswered_count: unansweredCount,
+            violations_count: violationCountRef.current,
+            time_taken_seconds: timeTaken,
+            submission_reason: submissionReason
+          }]);
+        } catch (e) {
+          console.warn("Supabase attempt sync note:", e?.message);
+        }
       }
     }
 
+    setIsSubmitting(false);
     setCurrentView("page8_success");
   };
 
@@ -552,17 +544,40 @@ export const QuizProvider = ({ children }) => {
     handleFinalSubmitRef.current = handleFinalSubmit;
   });
 
-  // Admin Login
-  const loginAdmin = (username, password) => {
-    if (username === "admin@zairza.in" && password === "zairza2026") {
+  // Admin Login (Cryptographically Salted SHA-256 + Supabase Auth)
+  const loginAdmin = async (username, password) => {
+    // 1. Supabase Auth if configured
+    if (isSupabaseConfigured && supabase) {
+      try {
+        const { data, error } = await supabase.auth.signInWithPassword({
+          email: username.trim(),
+          password: password.trim()
+        });
+        if (!error && data?.user) {
+          setIsAdminLoggedIn(true);
+          const session = generateAdminSession();
+          sessionStorage.setItem("zairza_admin_token", session.token);
+          setAdminUser({ username, role: "Super Admin", name: "Core Convener", token: session.token });
+          return true;
+        }
+      } catch (e) {
+        // Fall back to cryptographic verification
+      }
+    }
+
+    // 2. Cryptographic Salted SHA-256 (Zero plaintext credentials in source)
+    if (verifyAdminCredentials(username, password)) {
       setIsAdminLoggedIn(true);
-      setAdminUser({ username, role: "Super Admin", name: "Core Convener" });
+      const session = generateAdminSession();
+      sessionStorage.setItem("zairza_admin_token", session.token);
+      setAdminUser({ username, role: "Super Admin", name: "Core Convener", token: session.token });
       return true;
     }
     return false;
   };
 
   const logoutAdmin = () => {
+    sessionStorage.removeItem("zairza_admin_token");
     setIsAdminLoggedIn(false);
     setAdminUser(null);
   };
@@ -585,6 +600,7 @@ export const QuizProvider = ({ children }) => {
         registerCandidate,
         loginCandidateByRoll,
         startQuiz,
+        isSubmitting,
         answers,
         selectOption,
         markedForReview,

@@ -7,6 +7,7 @@ export const Page7SubmitModal = () => {
     showSubmitModal,
     setShowSubmitModal,
     handleFinalSubmit,
+    isSubmitting,
     questions,
     answers,
     markedForReview,
@@ -105,10 +106,16 @@ export const Page7SubmitModal = () => {
 
           <button
             onClick={() => handleFinalSubmit("MANUAL_CONFIRMED")}
+            disabled={isSubmitting}
             className="btn btn-primary"
-            style={{ padding: "10px 24px", fontSize: "0.9rem" }}
+            style={{
+              padding: "10px 24px",
+              fontSize: "0.9rem",
+              opacity: isSubmitting ? 0.65 : 1,
+              cursor: isSubmitting ? "not-allowed" : "pointer"
+            }}
           >
-            <span>Yes, Submit Final Responses</span>
+            <span>{isSubmitting ? "Submitting & Encrypting..." : "Yes, Submit Final Responses"}</span>
             <CheckCircle size={16} />
           </button>
         </div>

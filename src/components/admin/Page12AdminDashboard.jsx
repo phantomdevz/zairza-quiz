@@ -172,7 +172,7 @@ export const Page12AdminDashboard = () => {
             <tbody>
               {candidates.map((c) => (
                 <tr key={c.rollNumber} style={{ borderBottom: "1px solid rgba(255,255,255,0.04)" }}>
-                  <td style={{ padding: "12px 10px" }} className="mono" style={{ color: "var(--accent-cyan)", fontWeight: "700" }}>
+                  <td className="mono" style={{ padding: "12px 10px", color: "var(--accent-cyan)", fontWeight: "700" }}>
                     {c.rollNumber}
                   </td>
                   <td style={{ padding: "12px 10px", fontWeight: "600" }}>{c.fullName}</td>
@@ -191,7 +191,7 @@ export const Page12AdminDashboard = () => {
                       <span className="badge badge-amber">NOT STARTED</span>
                     )}
                   </td>
-                  <td style={{ padding: "12px 10px" }} className="mono" style={{ fontWeight: "700" }}>
+                  <td className="mono" style={{ padding: "12px 10px", fontWeight: "700" }}>
                     {c.score !== null ? `${c.score}/30` : "—"}
                   </td>
                   <td style={{ padding: "12px 10px" }}>

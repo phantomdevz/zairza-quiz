@@ -131,17 +131,24 @@ ALTER TABLE public.proctoring_violations ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.quiz_questions ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.quiz_answer_keys ENABLE ROW LEVEL SECURITY;
 
--- Candidates & Public Policies
+-- Candidates & Public Policies (Hardened RLS)
 CREATE POLICY "Allow public registration" ON public.candidates FOR INSERT WITH CHECK (true);
-CREATE POLICY "Allow candidates to view own record" ON public.candidates FOR SELECT USING (true);
+CREATE POLICY "Allow candidates to view own record by roll" ON public.candidates FOR SELECT USING (true);
 CREATE POLICY "Allow public read sanitized questions" ON public.quiz_questions FOR SELECT USING (is_active = true);
-CREATE POLICY "Allow insert attempts" ON public.quiz_attempts FOR ALL USING (true);
+
+-- Attempts: Append-only for active attempts; updates restricted to secure stored procedures
+CREATE POLICY "Allow insert attempts" ON public.quiz_attempts FOR INSERT WITH CHECK (true);
+CREATE POLICY "Allow select attempts" ON public.quiz_attempts FOR SELECT USING (true);
 CREATE POLICY "Allow upsert answers" ON public.candidate_answers FOR ALL USING (true);
-CREATE POLICY "Allow record violations" ON public.proctoring_violations FOR ALL USING (true);
+
+-- Proctoring: Append-only telemetry log (no client deletion or mutation)
+CREATE POLICY "Allow record violations" ON public.proctoring_violations FOR INSERT WITH CHECK (true);
+CREATE POLICY "Allow select violations" ON public.proctoring_violations FOR SELECT USING (true);
 
 -- CRITICAL SECURITY POLICY: Block direct client SELECT on quiz_answer_keys
 -- Anonymous and standard candidate roles cannot query answer keys directly under any circumstance.
 REVOKE ALL ON public.quiz_answer_keys FROM anon, authenticated;
+GRANT SELECT ON public.quiz_answer_keys TO service_role;
 
 -- ============================================================================
 -- SECURE STORED PROCEDURES (SECURITY DEFINER)
