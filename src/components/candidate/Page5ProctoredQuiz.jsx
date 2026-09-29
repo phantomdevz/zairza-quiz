@@ -125,7 +125,7 @@ export const Page5ProctoredQuiz = () => {
             {/* Question Header */}
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px" }}>
               <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                <span className="badge badge-cyan mono">Q{currentQ.id} of {quizConfig.totalQuestions}</span>
+                <span className="badge badge-cyan mono">Question {currentQuestionIndex + 1} of {quizConfig.totalQuestions}</span>
                 <span style={{ fontSize: "0.85rem", color: "var(--text-muted)" }}>{currentQ.sectionTitle}</span>
               </div>
               <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
@@ -273,7 +273,7 @@ export const Page5ProctoredQuiz = () => {
 
                 return (
                   <button key={q.id} onClick={() => handleJumpToQuestion(idx)} className={cls}>
-                    {q.id}
+                    {idx + 1}
                   </button>
                 );
               })}
@@ -298,7 +298,7 @@ export const Page5ProctoredQuiz = () => {
 
                 return (
                   <button key={q.id} onClick={() => handleJumpToQuestion(actualIdx)} className={cls}>
-                    {q.id}
+                    {actualIdx + 1}
                   </button>
                 );
               })}
@@ -323,7 +323,7 @@ export const Page5ProctoredQuiz = () => {
 
                 return (
                   <button key={q.id} onClick={() => handleJumpToQuestion(actualIdx)} className={cls}>
-                    {q.id}
+                    {actualIdx + 1}
                   </button>
                 );
               })}
@@ -436,7 +436,7 @@ export const Page5ProctoredQuiz = () => {
 
             return (
               <button key={q.id} onClick={() => handleJumpToQuestion(idx)} className={cls} style={{ minHeight: "44px" }}>
-                {q.id}
+                {idx + 1}
               </button>
             );
           })}

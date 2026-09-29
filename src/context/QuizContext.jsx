@@ -12,14 +12,7 @@ export const QuizProvider = ({ children }) => {
   // Configuration (Hydrated from localStorage with .env as initial fallback)
   const [quizConfig, setQuizConfig] = useState(() => {
     const saved = localStorage.getItem("zairza_quiz_config");
-    if (saved) {
-      try {
-        return JSON.parse(saved);
-      } catch (e) {
-        // Fallback to defaults
-      }
-    }
-    return {
+    let base = {
       ...QUIZ_CONFIG,
       oaStartEpoch: import.meta.env.VITE_OA_WINDOW_START || QUIZ_CONFIG.oaStartEpoch,
       oaEndEpoch: import.meta.env.VITE_OA_WINDOW_END || QUIZ_CONFIG.oaEndEpoch,
@@ -27,6 +20,19 @@ export const QuizProvider = ({ children }) => {
       durationMinutes: parseInt(import.meta.env.VITE_ATTEMPT_DURATION_MINUTES) || QUIZ_CONFIG.durationMinutes,
       maxViolationsAllowed: parseInt(import.meta.env.VITE_MAX_VIOLATIONS_ALLOWED) || QUIZ_CONFIG.maxViolationsAllowed
     };
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        return {
+          ...base,
+          ...parsed,
+          sections: QUIZ_CONFIG.sections
+        };
+      } catch (e) {
+        // Fallback to defaults
+      }
+    }
+    return base;
   });
 
   useEffect(() => {
@@ -39,7 +45,12 @@ export const QuizProvider = ({ children }) => {
   // Isolated Answer Keys State (Segregated from candidate questions)
   const [answerKeys, setAnswerKeys] = useState(() => {
     const saved = localStorage.getItem("zairza_quiz_answer_keys");
-    return saved ? JSON.parse(saved) : QUIZ_ANSWER_KEYS;
+    if (saved) {
+      try {
+        return { ...QUIZ_ANSWER_KEYS, ...JSON.parse(saved) };
+      } catch (e) {}
+    }
+    return QUIZ_ANSWER_KEYS;
   });
 
   useEffect(() => {

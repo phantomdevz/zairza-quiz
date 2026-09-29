@@ -42,7 +42,7 @@ export const Page16QuestionBank = () => {
           ? "Part 1: Logical Reasoning"
           : newQ.section === "tech"
           ? "Part 2: Tech Knowledge"
-          : "Part 3: HR & Cultural Alignment",
+          : "Part 3: Coffee Test (HR & Culture)",
       prompt: newQ.prompt,
       options: [
         { id: "opt_1", text: newQ.optA || "Option A" },
@@ -167,7 +167,7 @@ export const Page16QuestionBank = () => {
         </div>
 
         <div className="glass-panel" style={{ padding: "16px 20px", borderLeft: "3px solid var(--accent-emerald)" }}>
-          <div style={{ fontSize: "0.75rem", color: "var(--text-muted)", textTransform: "uppercase", fontWeight: "700" }}>Part 3: HR &amp; Alignment</div>
+          <div style={{ fontSize: "0.75rem", color: "var(--text-muted)", textTransform: "uppercase", fontWeight: "700" }}>☕ Part 3: Coffee Test (HR &amp; Fit)</div>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginTop: "6px" }}>
             <span style={{ fontSize: "1.3rem", fontWeight: "800" }}>{questions.filter(q => q.section === "hr").length} in Pool</span>
             <span className="badge badge-emerald" style={{ fontSize: "0.72rem" }}>5 Allotted / Attempt</span>
@@ -195,9 +195,9 @@ export const Page16QuestionBank = () => {
               onChange={(e) => setSelectedSection(e.target.value)}
             >
               <option value="ALL">All Sections ({questions.length} Questions Pool)</option>
-              <option value="logical">Part 1: Logical Reasoning ({questions.filter((q) => q.section === "logical").length} pool • 10 allotted)</option>
-              <option value="tech">Part 2: Tech Knowledge ({questions.filter((q) => q.section === "tech").length} pool • 15 allotted)</option>
-              <option value="hr">Part 3: HR &amp; Culture ({questions.filter((q) => q.section === "hr").length} pool • 5 allotted)</option>
+              <option value="logical">🧩 Part 1: Logical Reasoning ({questions.filter((q) => q.section === "logical").length} pool • 10 allotted)</option>
+              <option value="tech">⚡ Part 2: Tech Knowledge ({questions.filter((q) => q.section === "tech").length} pool • 15 allotted)</option>
+              <option value="hr">☕ Part 3: Coffee Test ({questions.filter((q) => q.section === "hr").length} pool • 5 allotted)</option>
             </select>
           </div>
         </div>
