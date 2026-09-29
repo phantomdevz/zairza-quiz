@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { QUIZ_CONFIG, INITIAL_QUESTIONS, INITIAL_CANDIDATES, INITIAL_AUDIT_LOGS } from "../data/mockQuizData";
+import { QUIZ_CONFIG, INITIAL_QUESTIONS, QUIZ_ANSWER_KEYS, INITIAL_CANDIDATES, INITIAL_AUDIT_LOGS } from "../data/mockQuizData";
 import { supabase, isSupabaseConfigured } from "../lib/supabaseClient";
 
 const QuizContext = createContext(null);
@@ -63,6 +63,26 @@ export const QuizProvider = ({ children }) => {
 
   // Mobile Bottom Sheet toggle
   const [mobilePaletteOpen, setMobilePaletteOpen] = useState(false);
+
+  // Real-time tick for 15-minute cooldown countdown
+  const [currentTime, setCurrentTime] = useState(Date.now());
+  useEffect(() => {
+    const interval = setInterval(() => setCurrentTime(Date.now()), 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Security layer: Check if 15-minute post-submission cooldown has elapsed
+  const isEvaluationUnlocked = (cand = activeCandidate) => {
+    if (!cand) return false;
+    // If no evaluatesAtEpoch (e.g. legacy demo candidates), treat as unlocked
+    if (!cand.evaluatesAtEpoch) return true;
+    return currentTime >= cand.evaluatesAtEpoch;
+  };
+
+  const getUnlockRemainingSeconds = (cand = activeCandidate) => {
+    if (!cand || !cand.evaluatesAtEpoch) return 0;
+    return Math.max(0, Math.floor((cand.evaluatesAtEpoch - currentTime) / 1000));
+  };
 
   // Save session to localStorage
   useEffect(() => {
@@ -279,7 +299,7 @@ export const QuizProvider = ({ children }) => {
     setShowSubmitModal(false);
     setShowViolationModal(false);
 
-    // Compute scores server-side
+    // Compute scores using the isolated QUIZ_ANSWER_KEYS table (never exposed to question objects)
     let totalScore = 0;
     const sectionBreakdown = {
       logical: 0,
@@ -292,11 +312,12 @@ export const QuizProvider = ({ children }) => {
 
     questions.forEach((q) => {
       const selected = answers[q.id];
+      const solution = QUIZ_ANSWER_KEYS[q.id];
       if (!selected) {
         unansweredCount++;
-      } else if (selected === q.correctOptionId) {
+      } else if (solution && selected === solution.correctOptionId) {
         totalScore += quizConfig.marksPerQuestion;
-        sectionBreakdown[q.section] += quizConfig.marksPerQuestion;
+        sectionBreakdown[q.section] = (sectionBreakdown[q.section] || 0) + quizConfig.marksPerQuestion;
         correctCount++;
       } else {
         totalScore -= quizConfig.negativeMark;
@@ -306,6 +327,8 @@ export const QuizProvider = ({ children }) => {
 
     const finalScore = Math.max(0, Math.round(totalScore * 100) / 100);
     const timeTaken = quizConfig.durationMinutes * 60 - timeRemaining;
+    const submittedAtEpoch = Date.now();
+    const evaluatesAtEpoch = submittedAtEpoch + 15 * 60 * 1000; // 15-minute security cooldown
 
     if (activeCandidate) {
       const updatedCandidate = {
@@ -319,7 +342,10 @@ export const QuizProvider = ({ children }) => {
         incorrectCount,
         unansweredCount,
         submissionReason,
-        submittedAt: new Date().toLocaleTimeString()
+        submittedAt: new Date().toLocaleTimeString(),
+        submittedAtEpoch,
+        evaluatesAtEpoch,
+        candidateAnswers: answers
       };
 
       setActiveCandidate(updatedCandidate);
@@ -414,7 +440,9 @@ export const QuizProvider = ({ children }) => {
         logoutAdmin,
         adminUser,
         selectedCandidateForDetails,
-        setSelectedCandidateForDetails
+        setSelectedCandidateForDetails,
+        isEvaluationUnlocked,
+        getUnlockRemainingSeconds
       }}
     >
       {children}

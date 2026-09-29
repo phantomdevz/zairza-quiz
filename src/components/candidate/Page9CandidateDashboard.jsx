@@ -10,7 +10,9 @@ import {
   Shield,
   Layers,
   Calendar,
-  ExternalLink
+  ExternalLink,
+  Lock,
+  ShieldAlert
 } from "lucide-react";
 
 export const Page9CandidateDashboard = () => {
@@ -18,7 +20,9 @@ export const Page9CandidateDashboard = () => {
     activeCandidate,
     loginCandidateByRoll,
     setCurrentView,
-    quizConfig
+    quizConfig,
+    isEvaluationUnlocked,
+    getUnlockRemainingSeconds
   } = useQuiz();
 
   const [inputRoll, setInputRoll] = useState("");
@@ -111,6 +115,14 @@ export const Page9CandidateDashboard = () => {
   } = activeCandidate;
 
   const isCompleted = quizStatus === "COMPLETED";
+  const isUnlocked = isCompleted && isEvaluationUnlocked(activeCandidate);
+  const remainingSeconds = getUnlockRemainingSeconds(activeCandidate);
+
+  const formatRemaining = (seconds) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+  };
 
   return (
     <div className="container" style={{ padding: "40px 20px 80px", maxWidth: "980px" }}>
@@ -134,11 +146,11 @@ export const Page9CandidateDashboard = () => {
           {isCompleted ? (
             <button
               onClick={() => setCurrentView("page10_results")}
-              className="btn btn-primary"
+              className={`btn ${isUnlocked ? "btn-primary" : "btn-secondary"}`}
               style={{ padding: "10px 22px" }}
             >
-              <Award size={16} />
-              <span>View Scorecard</span>
+              {isUnlocked ? <Award size={16} /> : <Lock size={16} color="var(--accent-amber)" />}
+              <span>{isUnlocked ? "View Scorecard" : `Scorecard (${formatRemaining(remainingSeconds)})`}</span>
             </button>
           ) : (
             <button
@@ -192,12 +204,12 @@ export const Page9CandidateDashboard = () => {
             background: isCompleted ? "rgba(47, 91, 255, 0.12)" : "rgba(255, 255, 255, 0.02)",
             border: isCompleted ? "1px solid rgba(47, 91, 255, 0.4)" : "1px solid var(--border-subtle)"
           }}>
-            <div style={{ display: "flex", alignItems: "center", gap: "8px", color: isCompleted ? "var(--blue)" : "var(--text-muted)", fontWeight: "700", marginBottom: "4px" }}>
-              <Calendar size={16} />
+            <div style={{ display: "flex", alignItems: "center", gap: "8px", color: isCompleted ? (isUnlocked ? "var(--blue)" : "var(--accent-amber)") : "var(--text-muted)", fontWeight: "700", marginBottom: "4px" }}>
+              {isUnlocked ? <Calendar size={16} /> : (isCompleted ? <Lock size={16} /> : <Calendar size={16} />)}
               <span>3. IDEATHON &amp; PI</span>
             </div>
-            <div style={{ fontSize: "0.85rem", color: isCompleted ? "#c5c9d4" : "var(--text-muted)" }}>
-              {isCompleted ? "1st – 3rd Oct • PS Unlocked" : "Unlocks after quiz"}
+            <div style={{ fontSize: "0.85rem", color: isCompleted ? (isUnlocked ? "#c5c9d4" : "var(--accent-amber)") : "var(--text-muted)" }}>
+              {isCompleted ? (isUnlocked ? "1st – 3rd Oct • PS Unlocked" : `Unlocks in ${formatRemaining(remainingSeconds)}`) : "Unlocks after quiz + 15m"}
             </div>
           </div>
 
@@ -215,12 +227,20 @@ export const Page9CandidateDashboard = () => {
       </div>
 
       {/* Ideathon Problem Statements Section */}
-      <div className="glass-panel" style={{ padding: "26px", marginBottom: "30px", border: isCompleted ? "1px solid rgba(47, 91, 255, 0.4)" : "1px solid var(--border-subtle)" }}>
+      <div className="glass-panel" style={{
+        padding: "26px",
+        marginBottom: "30px",
+        border: isUnlocked
+          ? "1px solid rgba(47, 91, 255, 0.4)"
+          : isCompleted
+            ? "1px solid rgba(245, 158, 11, 0.4)"
+            : "1px solid var(--border-subtle)"
+      }}>
         <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "center", gap: "12px", marginBottom: "16px" }}>
           <div>
             <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <span className={`badge ${isCompleted ? "badge-blue" : "badge-purple"}`} style={{ fontSize: "0.75rem" }}>
-                {isCompleted ? "PS UNLOCKED ✓" : "UNLOCKED POST-QUIZ"}
+              <span className={`badge ${isUnlocked ? "badge-blue" : isCompleted ? "badge-amber" : "badge-purple"}`} style={{ fontSize: "0.75rem" }}>
+                {isUnlocked ? "PS UNLOCKED ✓" : isCompleted ? `SECURITY HOLD: ${formatRemaining(remainingSeconds)}` : "UNLOCKED POST-QUIZ + 15M"}
               </span>
               <span className="mono" style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>ROUND 2 BRIEF</span>
             </div>
@@ -237,54 +257,116 @@ export const Page9CandidateDashboard = () => {
           </div>
         </div>
 
-        <p style={{ color: "var(--text-secondary)", fontSize: "0.92rem", lineHeight: "1.6", marginBottom: "20px" }}>
-          {isCompleted
-            ? "Congratulations on completing your quiz! Review the domain problem statements below. Choose your track to build or design your concept. You will present your solution during the Ideathon & Personal Interviews (PI) from 1st to 3rd October."
-            : "Complete your Induction Quiz to officially unlock the Ideathon problem statements and presentation guidelines."}
-        </p>
+        {isCompleted && !isUnlocked ? (
+          /* 15-Minute Security Lock State */
+          <div style={{
+            padding: "24px",
+            borderRadius: "12px",
+            background: "rgba(245, 158, 11, 0.06)",
+            border: "1px solid rgba(245, 158, 11, 0.3)",
+            marginBottom: "20px",
+            textAlign: "center"
+          }}>
+            <div style={{
+              width: "56px",
+              height: "56px",
+              borderRadius: "50%",
+              background: "rgba(245, 158, 11, 0.12)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              margin: "0 auto 12px",
+              color: "var(--accent-amber)"
+            }}>
+              <Lock size={26} />
+            </div>
 
-        {/* PS Cards Grid */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "16px", marginBottom: "20px" }}>
-          <div style={{ padding: "18px", borderRadius: "10px", background: "rgba(255, 255, 255, 0.02)", border: "1px solid var(--border-subtle)" }}>
-            <div className="badge badge-cyan" style={{ marginBottom: "8px" }}>SOFTWARE WING</div>
-            <div style={{ fontWeight: "700", fontSize: "0.95rem", marginBottom: "6px", color: "var(--text-main)" }}>
-              Automated Campus Resource &amp; Event Platform
+            <div className="mono" style={{ fontSize: "1.8rem", fontWeight: "800", color: "var(--text-main)", marginBottom: "6px" }}>
+              {formatRemaining(remainingSeconds)}
             </div>
-            <div style={{ fontSize: "0.82rem", color: "var(--text-secondary)", lineHeight: "1.5" }}>
-              Build an automated system for equipment checkouts, room slots, and team collaborations. Deliverable: Architecture diagram, repo or working prototype.
-            </div>
-          </div>
 
-          <div style={{ padding: "18px", borderRadius: "10px", background: "rgba(255, 255, 255, 0.02)", border: "1px solid var(--border-subtle)" }}>
-            <div className="badge badge-purple" style={{ marginBottom: "8px" }}>HARDWARE &amp; IOT WING</div>
-            <div style={{ fontWeight: "700", fontSize: "0.95rem", marginBottom: "6px", color: "var(--text-main)" }}>
-              Smart Lab Access &amp; Environmental Telemetry Matrix
+            <div style={{ fontWeight: "700", color: "var(--accent-amber)", fontSize: "0.95rem", marginBottom: "8px" }}>
+              Problem Statements Protected During 15-Minute Security Review Window
             </div>
-            <div style={{ fontSize: "0.82rem", color: "var(--text-secondary)", lineHeight: "1.5" }}>
-              Architect a microcontroller sensor network monitoring club air quality, power spikes, and RFID check-ins. Deliverable: Circuit schematics &amp; firmware flowchart.
-            </div>
-          </div>
 
-          <div style={{ padding: "18px", borderRadius: "10px", background: "rgba(255, 255, 255, 0.02)", border: "1px solid var(--border-subtle)" }}>
-            <div className="badge badge-rose" style={{ marginBottom: "8px" }}>DESIGN &amp; UI/UX WING</div>
-            <div style={{ fontWeight: "700", fontSize: "0.95rem", marginBottom: "6px", color: "var(--text-main)" }}>
-              Next-Gen Club Portal &amp; Spatial Onboarding
-            </div>
-            <div style={{ fontSize: "0.82rem", color: "var(--text-secondary)", lineHeight: "1.5" }}>
-              Create an intuitive, neo-brutalist digital brand and dashboard UI for incoming OUTR tech freshers. Deliverable: High-fidelity Figma prototype &amp; design tokens.
-            </div>
-          </div>
+            <p style={{ color: "var(--text-secondary)", fontSize: "0.88rem", lineHeight: "1.6", maxWidth: "600px", margin: "0 auto 16px" }}>
+              To uphold examination integrity and prevent answer/prompt collusion during active quiz testing, Ideathon Problem Statements and detailed question evaluations unlock automatically 15 minutes after quiz submission.
+            </p>
 
-          <div style={{ padding: "18px", borderRadius: "10px", background: "rgba(255, 255, 255, 0.02)", border: "1px solid var(--border-subtle)" }}>
-            <div className="badge badge-emerald" style={{ marginBottom: "8px" }}>ROBOTICS WING</div>
-            <div style={{ fontWeight: "700", fontSize: "0.95rem", marginBottom: "6px", color: "var(--text-main)" }}>
-              Indoor Autonomous Navigation &amp; Courier Rover
-            </div>
-            <div style={{ fontSize: "0.82rem", color: "var(--text-secondary)", lineHeight: "1.5" }}>
-              Propose a ROS2-driven indoor rover capable of obstacle avoidance and payload delivery across departments. Deliverable: CAD model or simulation algorithm.
-            </div>
+            <button
+              onClick={() => setCurrentView("page10_results")}
+              className="btn btn-secondary"
+              style={{ padding: "8px 18px", fontSize: "0.85rem" }}
+            >
+              <Award size={14} color="var(--accent-cyan)" />
+              <span>Check Scorecard Status</span>
+            </button>
           </div>
-        </div>
+        ) : isUnlocked ? (
+          /* Unlocked Problem Statements */
+          <>
+            <p style={{ color: "var(--text-secondary)", fontSize: "0.92rem", lineHeight: "1.6", marginBottom: "20px" }}>
+              Congratulations on completing your quiz! Review the domain problem statements below. Choose your track to build or design your concept. You will present your solution during the Ideathon &amp; Personal Interviews (PI) from 1st to 3rd October.
+            </p>
+
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "16px", marginBottom: "20px" }}>
+              <div style={{ padding: "18px", borderRadius: "10px", background: "rgba(255, 255, 255, 0.02)", border: "1px solid var(--border-subtle)" }}>
+                <div className="badge badge-cyan" style={{ marginBottom: "8px" }}>SOFTWARE WING</div>
+                <div style={{ fontWeight: "700", fontSize: "0.95rem", marginBottom: "6px", color: "var(--text-main)" }}>
+                  Automated Campus Resource &amp; Event Platform
+                </div>
+                <div style={{ fontSize: "0.82rem", color: "var(--text-secondary)", lineHeight: "1.5" }}>
+                  Build an automated system for equipment checkouts, room slots, and team collaborations. Deliverable: Architecture diagram, repo or working prototype.
+                </div>
+              </div>
+
+              <div style={{ padding: "18px", borderRadius: "10px", background: "rgba(255, 255, 255, 0.02)", border: "1px solid var(--border-subtle)" }}>
+                <div className="badge badge-purple" style={{ marginBottom: "8px" }}>HARDWARE &amp; IOT WING</div>
+                <div style={{ fontWeight: "700", fontSize: "0.95rem", marginBottom: "6px", color: "var(--text-main)" }}>
+                  Smart Lab Access &amp; Environmental Telemetry Matrix
+                </div>
+                <div style={{ fontSize: "0.82rem", color: "var(--text-secondary)", lineHeight: "1.5" }}>
+                  Architect a microcontroller sensor network monitoring club air quality, power spikes, and RFID check-ins. Deliverable: Circuit schematics &amp; firmware flowchart.
+                </div>
+              </div>
+
+              <div style={{ padding: "18px", borderRadius: "10px", background: "rgba(255, 255, 255, 0.02)", border: "1px solid var(--border-subtle)" }}>
+                <div className="badge badge-rose" style={{ marginBottom: "8px" }}>DESIGN &amp; UI/UX WING</div>
+                <div style={{ fontWeight: "700", fontSize: "0.95rem", marginBottom: "6px", color: "var(--text-main)" }}>
+                  Next-Gen Club Portal &amp; Spatial Onboarding
+                </div>
+                <div style={{ fontSize: "0.82rem", color: "var(--text-secondary)", lineHeight: "1.5" }}>
+                  Create an intuitive, neo-brutalist digital brand and dashboard UI for incoming OUTR tech freshers. Deliverable: High-fidelity Figma prototype &amp; design tokens.
+                </div>
+              </div>
+
+              <div style={{ padding: "18px", borderRadius: "10px", background: "rgba(255, 255, 255, 0.02)", border: "1px solid var(--border-subtle)" }}>
+                <div className="badge badge-emerald" style={{ marginBottom: "8px" }}>ROBOTICS WING</div>
+                <div style={{ fontWeight: "700", fontSize: "0.95rem", marginBottom: "6px", color: "var(--text-main)" }}>
+                  Indoor Autonomous Navigation &amp; Courier Rover
+                </div>
+                <div style={{ fontSize: "0.82rem", color: "var(--text-secondary)", lineHeight: "1.5" }}>
+                  Propose a ROS2-driven indoor rover capable of obstacle avoidance and payload delivery across departments. Deliverable: CAD model or simulation algorithm.
+                </div>
+              </div>
+            </div>
+          </>
+        ) : (
+          /* Pre-Quiz Lock State */
+          <div style={{ padding: "20px", borderRadius: "10px", background: "rgba(255,255,255,0.02)", border: "1px solid var(--border-subtle)", textAlign: "center" }}>
+            <p style={{ color: "var(--text-secondary)", fontSize: "0.92rem", lineHeight: "1.6", margin: "0 0 14px" }}>
+              Complete your Induction Quiz to officially unlock the Ideathon problem statements and presentation guidelines.
+            </p>
+            <button
+              onClick={() => setCurrentView("page4_precheck")}
+              className="btn btn-primary"
+              style={{ padding: "10px 22px" }}
+            >
+              <span>Take Induction Quiz</span>
+              <ArrowRight size={16} />
+            </button>
+          </div>
+        )}
 
         <div style={{ padding: "12px 16px", borderRadius: "8px", background: "rgba(232, 53, 43, 0.08)", border: "1px solid rgba(232, 53, 43, 0.25)", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "10px" }}>
           <div style={{ fontSize: "0.85rem", color: "#f0726a" }}>

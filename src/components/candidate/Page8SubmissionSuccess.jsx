@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { useQuiz } from "../../context/QuizContext";
 import confetti from "canvas-confetti";
-import { CheckCircle2, Calendar, Clock, Award, ArrowRight, Home } from "lucide-react";
+import { CheckCircle2, Calendar, Clock, Award, ArrowRight, Home, Lock, ShieldCheck, ShieldAlert } from "lucide-react";
 
 export const Page8SubmissionSuccess = () => {
-  const { activeCandidate, setCurrentView } = useQuiz();
+  const { activeCandidate, setCurrentView, isEvaluationUnlocked, getUnlockRemainingSeconds } = useQuiz();
 
   useEffect(() => {
     // Launch celebration confetti
@@ -22,6 +22,15 @@ export const Page8SubmissionSuccess = () => {
   const roll = activeCandidate?.rollNumber || "2401106042";
   const name = activeCandidate?.fullName || "Aarav Mohapatra";
   const submittedAt = activeCandidate?.submittedAt || new Date().toLocaleTimeString();
+
+  const isUnlocked = isEvaluationUnlocked(activeCandidate);
+  const remainingSeconds = getUnlockRemainingSeconds(activeCandidate);
+
+  const formatRemaining = (seconds) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+  };
 
   return (
     <div className="container" style={{ padding: "60px 20px 80px", maxWidth: "680px", textAlign: "center" }}>
@@ -89,25 +98,63 @@ export const Page8SubmissionSuccess = () => {
           </div>
         </div>
 
-        {/* Ideathon PS Unlocked Box */}
-        <div style={{
-          padding: "20px",
-          borderRadius: "12px",
-          background: "rgba(47, 91, 255, 0.08)",
-          border: "1px solid rgba(47, 91, 255, 0.35)",
-          textAlign: "left",
-          marginBottom: "30px"
-        }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "8px", color: "var(--blue)", fontWeight: "800", fontSize: "1rem", marginBottom: "8px" }}>
-            <span>⚡ NEXT STAGE UNLOCKED: IDEATHON PROBLEM STATEMENTS (PS)</span>
+        {/* 15-Minute Security Review Window Banner */}
+        {!isUnlocked ? (
+          <div style={{
+            padding: "22px",
+            borderRadius: "12px",
+            background: "rgba(245, 158, 11, 0.08)",
+            border: "1px solid rgba(245, 158, 11, 0.35)",
+            textAlign: "left",
+            marginBottom: "30px"
+          }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "10px", marginBottom: "10px" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "8px", color: "var(--accent-amber)", fontWeight: "800", fontSize: "0.95rem" }}>
+                <Lock size={18} />
+                <span>15-MINUTE SECURITY REVIEW PROTOCOL ACTIVE</span>
+              </div>
+              <div className="mono" style={{
+                background: "rgba(0, 0, 0, 0.6)",
+                border: "1px solid rgba(245, 158, 11, 0.5)",
+                padding: "4px 12px",
+                borderRadius: "6px",
+                color: "var(--accent-amber)",
+                fontWeight: "700",
+                fontSize: "1.05rem"
+              }}>
+                Unlocks in {formatRemaining(remainingSeconds)}
+              </div>
+            </div>
+
+            <p style={{ color: "var(--text-secondary)", fontSize: "0.88rem", lineHeight: "1.6", margin: "0 0 12px" }}>
+              To ensure 100% exam integrity during the 24-hr quiz window, correct answers and detailed scorecards are locked for <strong>15 minutes</strong>. Both your <strong>Performance Scorecard</strong> and the <strong>Ideathon Problem Statements (PS)</strong> will unlock automatically when the countdown completes.
+            </p>
+
+            <div style={{ padding: "10px 14px", borderRadius: "8px", background: "rgba(0, 0, 0, 0.4)", border: "1px solid rgba(255,255,255,0.08)", fontSize: "0.85rem", color: "var(--text-muted)" }}>
+              🗓️ <strong>Next Stage:</strong> Ideathon presentation &amp; Personal Interviews (PI) run from <strong>1st October to 3rd October</strong>, followed by the announcement of the <strong>Final Inductees List</strong>.
+            </div>
           </div>
-          <p style={{ color: "#dbe3f5", fontSize: "0.9rem", lineHeight: "1.6", margin: "0 0 12px" }}>
-            Now that you have submitted your quiz, you have gained immediate access to the <strong>Ideathon Problem Statements</strong>! Start brainstorming your solution right away.
-          </p>
-          <div style={{ padding: "10px 14px", borderRadius: "8px", background: "rgba(0, 0, 0, 0.4)", border: "1px solid rgba(255,255,255,0.08)", fontSize: "0.85rem", color: "var(--text-secondary)" }}>
-            🗓️ <strong>Timeline:</strong> Ideathon presentation &amp; Personal Interviews (PI) run from <strong>1st October to 3rd October</strong>. Following this, the <strong>Final Inductees List</strong> will be released.
+        ) : (
+          <div style={{
+            padding: "20px",
+            borderRadius: "12px",
+            background: "rgba(47, 91, 255, 0.08)",
+            border: "1px solid rgba(47, 91, 255, 0.35)",
+            textAlign: "left",
+            marginBottom: "30px"
+          }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "8px", color: "var(--blue)", fontWeight: "800", fontSize: "1rem", marginBottom: "8px" }}>
+              <ShieldCheck size={18} />
+              <span>⚡ NEXT STAGE UNLOCKED: IDEATHON PROBLEM STATEMENTS (PS)</span>
+            </div>
+            <p style={{ color: "#dbe3f5", fontSize: "0.9rem", lineHeight: "1.6", margin: "0 0 12px" }}>
+              Your 15-minute review window is complete! You now have direct access to your verified scorecard and all 4 domain <strong>Ideathon Problem Statements</strong> on your dashboard.
+            </p>
+            <div style={{ padding: "10px 14px", borderRadius: "8px", background: "rgba(0, 0, 0, 0.4)", border: "1px solid rgba(255,255,255,0.08)", fontSize: "0.85rem", color: "var(--text-secondary)" }}>
+              🗓️ <strong>Timeline:</strong> Ideathon presentation &amp; Personal Interviews (PI) run from <strong>1st October to 3rd October</strong>. Following this, the <strong>Final Inductees List</strong> will be released.
+            </div>
           </div>
-        </div>
+        )}
 
         {/* CTAs */}
         <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "14px" }}>
@@ -116,7 +163,7 @@ export const Page8SubmissionSuccess = () => {
             className="btn btn-primary"
             style={{ padding: "12px 28px" }}
           >
-            <span>View Ideathon PS in Dashboard</span>
+            <span>Go to Candidate Dashboard</span>
             <ArrowRight size={16} />
           </button>
 
@@ -126,7 +173,7 @@ export const Page8SubmissionSuccess = () => {
             style={{ padding: "12px 24px" }}
           >
             <Award size={16} color="var(--accent-cyan)" />
-            <span>Preview Performance Scorecard</span>
+            <span>{!isUnlocked ? `View Scorecard Status (${formatRemaining(remainingSeconds)})` : "View Verified Scorecard"}</span>
           </button>
 
           <button
