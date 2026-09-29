@@ -161,112 +161,13 @@ export const Navbar = () => {
 
         {/* Right Menu */}
         <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-          {/* Admin Navigation Menu (Visible ONLY when logged in as Admin) */}
+          {/* Admin Mode Badge */}
           {isAdminLoggedIn && (
-            <div style={{ position: "relative" }}>
-              <button
-                onClick={() => setNavDropdownOpen(!navDropdownOpen)}
-                className="btn btn-secondary"
-                style={{ padding: "8px 14px", fontSize: "0.82rem", minHeight: "38px" }}
-              >
-                <span>Admin Suite (20 Pages)</span>
-                <ChevronDown size={14} />
-              </button>
-
-              {navDropdownOpen && (
-                <div
-                  className="card"
-                  style={{
-                    position: "absolute",
-                    right: 0,
-                    top: "46px",
-                    width: "320px",
-                    maxHeight: "440px",
-                    overflowY: "auto",
-                    padding: "12px",
-                    zIndex: 2000,
-                    border: "2px solid #f4f4f6",
-                    boxShadow: "6px 6px 0 var(--red)"
-                  }}
-                >
-                <div style={{ fontSize: "0.72rem", fontWeight: "700", color: "var(--coral)", marginBottom: "8px", fontFamily: "var(--mono)" }}>
-                  CANDIDATE PORTAL (PAGES 1–10)
-                </div>
-                {[
-                  { id: "page1_landing", label: "Page 1: Landing / Home" },
-                  { id: "page2_register", label: "Page 2: Candidate Registration" },
-                  { id: "page3_countdown", label: "Page 3: Success & Countdown" },
-                  { id: "page4_precheck", label: "Page 4: Pre-Quiz Diagnostics" },
-                  { id: "page5_quiz", label: "Page 5: Proctored Quiz Engine" },
-                  { id: "page8_success", label: "Page 8: Submission Successful" },
-                  { id: "page9_dashboard", label: "Page 9: Candidate Dashboard" },
-                  { id: "page10_results", label: "Page 10: Performance Scorecard" }
-                ].map((item) => (
-                  <div
-                    key={item.id}
-                    onClick={() => {
-                      setCurrentView(item.id);
-                      setNavDropdownOpen(false);
-                    }}
-                    style={{
-                      padding: "8px 10px",
-                      borderRadius: "2px",
-                      fontSize: "0.82rem",
-                      cursor: "pointer",
-                      background: currentView === item.id ? "rgba(47, 91, 255, 0.2)" : "transparent",
-                      color: currentView === item.id ? "#8bb2ff" : "var(--mut)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                      fontFamily: "var(--mono)"
-                    }}
-                  >
-                    <span>{item.label}</span>
-                    {currentView === item.id && <CheckCircle size={14} color="var(--blue)" />}
-                  </div>
-                ))}
-
-                <div style={{ fontSize: "0.72rem", fontWeight: "700", color: "var(--coral)", marginTop: "14px", marginBottom: "8px", fontFamily: "var(--mono)" }}>
-                  ADMIN SUITE (PAGES 11–20)
-                </div>
-                {[
-                  { id: "page11_login", label: "Page 11: Admin Login / 2FA" },
-                  { id: "page12_admin_dashboard", label: "Page 12: Admin Master Dashboard" },
-                  { id: "page13_registrations", label: "Page 13: Candidate Registrations" },
-                  { id: "page14_candidate_details", label: "Page 14: Candidate Details Profiler" },
-                  { id: "page15_proctoring", label: "Page 15: Live Proctoring Grid" },
-                  { id: "page16_question_bank", label: "Page 16: Question Bank Studio" },
-                  { id: "page17_quiz_config", label: "Page 17: Quiz Configuration" },
-                  { id: "page18_analytics", label: "Page 18: Results & Shortlisting" },
-                  { id: "page19_audit_logs", label: "Page 19: Audit & Security Trail" },
-                  { id: "page20_users", label: "Page 20: Admin RBAC & Users" }
-                ].map((item) => (
-                  <div
-                    key={item.id}
-                    onClick={() => {
-                      setCurrentView(item.id);
-                      setNavDropdownOpen(false);
-                    }}
-                    style={{
-                      padding: "8px 10px",
-                      borderRadius: "2px",
-                      fontSize: "0.82rem",
-                      cursor: "pointer",
-                      background: currentView === item.id ? "rgba(232, 53, 43, 0.15)" : "transparent",
-                      color: currentView === item.id ? "var(--coral)" : "var(--mut)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                      fontFamily: "var(--mono)"
-                    }}
-                  >
-                    <span>{item.label}</span>
-                    {currentView === item.id && <CheckCircle size={14} color="var(--red)" />}
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
+            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <span className="badge badge-purple" style={{ fontSize: "0.75rem", padding: "4px 10px" }}>
+                ADMIN CONSOLE
+              </span>
+            </div>
           )}
 
           {/* Active Candidate Badge or Register CTA */}

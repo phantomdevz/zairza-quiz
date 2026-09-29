@@ -28,6 +28,7 @@ import { Page17QuizConfig } from "./components/admin/Page17QuizConfig";
 import { Page18ResultsAnalytics } from "./components/admin/Page18ResultsAnalytics";
 import { Page19AuditLogs } from "./components/admin/Page19AuditLogs";
 import { Page20UserManagement } from "./components/admin/Page20UserManagement";
+import { AdminSidebar } from "./components/admin/AdminSidebar";
 
 const PlatformRouter = () => {
   const { currentView, setCurrentView, isQuizActive } = useQuiz();
@@ -103,6 +104,18 @@ const PlatformRouter = () => {
     }
   };
 
+  const isAdminView = [
+    "page12_admin_dashboard",
+    "page13_registrations",
+    "page14_candidate_details",
+    "page15_proctoring",
+    "page16_question_bank",
+    "page17_quiz_config",
+    "page18_analytics",
+    "page19_audit_logs",
+    "page20_users"
+  ].includes(currentView);
+
   return (
     <div className="page-wrapper">
       <ProctoringGuard />
@@ -111,8 +124,17 @@ const PlatformRouter = () => {
       <Page7SubmitModal />
 
       <Navbar />
-      <main style={{ flex: 1 }}>{renderActiveView()}</main>
-      {!isQuizActive && <Footer />}
+      {isAdminView ? (
+        <div style={{ display: "flex", flex: 1, minHeight: "calc(100vh - 72px)" }}>
+          <AdminSidebar />
+          <main style={{ flex: 1, overflowX: "hidden", minWidth: 0 }}>
+            {renderActiveView()}
+          </main>
+        </div>
+      ) : (
+        <main style={{ flex: 1 }}>{renderActiveView()}</main>
+      )}
+      {!isQuizActive && !isAdminView && <Footer />}
     </div>
   );
 };
