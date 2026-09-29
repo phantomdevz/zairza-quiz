@@ -25,7 +25,7 @@ export const QUIZ_CONFIG = {
     },
     {
       "id": "tech",
-      "name": "Part 2: Tech Knowledge",
+      "name": "Part 2: Tech Knowledge & Trends",
       "icon": "⚡",
       "poolSize": 29,
       "drawCount": 15
@@ -42,7 +42,7 @@ export const QUIZ_CONFIG = {
 
 // ==============================================================================
 // PUBLIC QUESTION POOL (Sanitized: NO correctOptionId or explanation)
-// Random questions drawn from each section for each candidate
+// Beginner-friendly for 1st Year Freshers: History, Riddles, Trends & Global News
 // ==============================================================================
 export const INITIAL_QUESTIONS = [
   {
@@ -288,360 +288,360 @@ export const INITIAL_QUESTIONS = [
   {
     "id": 11,
     "section": "tech",
-    "sectionTitle": "Part 2: Tech Knowledge (Software & Systems)",
-    "prompt": "In Git, what is the key difference between 'git pull' and 'git fetch'?",
+    "sectionTitle": "Part 2: Tech Knowledge (History & Origin)",
+    "prompt": "Why is an unexpected glitch or software error in computer programming famously called a 'bug'?",
     "options": [
       {
         "id": "opt_1",
-        "text": "'git fetch' downloads commits and immediately merges them into working tree."
+        "text": "In 1947, engineers found an actual moth trapped inside the relays of the Harvard Mark II computer"
       },
       {
         "id": "opt_2",
-        "text": "'git pull' executes 'git fetch' followed by 'git merge' into the active branch."
+        "text": "Early punch cards were made of wood and frequently infested with termites"
       },
       {
         "id": "opt_3",
-        "text": "'git pull' only works on the main branch, whereas fetch works everywhere."
+        "text": "Thomas Edison's nickname when building telegraphs was 'The Little Bug'"
       },
       {
         "id": "opt_4",
-        "text": "'git fetch' deletes local branches that no longer exist on remote."
+        "text": "Computer viruses look like microscopic insects under an electron microscope"
       }
     ]
   },
   {
     "id": 12,
     "section": "tech",
-    "sectionTitle": "Part 2: Tech Knowledge (Software & Algorithms)",
-    "prompt": "What is the worst-case time complexity of searching an element in a balanced Binary Search Tree (AVL / Red-Black Tree)?",
+    "sectionTitle": "Part 2: Tech Knowledge (AI & Current Trends)",
+    "prompt": "Everyone is using ChatGPT today. What does the 'GPT' in ChatGPT actually stand for?",
     "options": [
       {
         "id": "opt_1",
-        "text": "O(1)"
+        "text": "Generative Pre-trained Transformer"
       },
       {
         "id": "opt_2",
-        "text": "O(log N)"
+        "text": "General Programming Technology"
       },
       {
         "id": "opt_3",
-        "text": "O(N)"
+        "text": "Global Prompt Telemetry"
       },
       {
         "id": "opt_4",
-        "text": "O(N log N)"
+        "text": "Guided Predictive Typing"
       }
     ]
   },
   {
     "id": 13,
     "section": "tech",
-    "sectionTitle": "Part 2: Tech Knowledge (Robotics & IoT)",
-    "prompt": "Which communication protocol is full-duplex, synchronous, uses master-slave architecture, and relies on 4 lines (MISO, MOSI, SCK, SS)?",
+    "sectionTitle": "Part 2: Tech Knowledge (Tech History)",
+    "prompt": "Who is widely celebrated in world history as the world's very first computer programmer for writing an algorithm for Charles Babbage's mechanical computer?",
     "options": [
       {
         "id": "opt_1",
-        "text": "I2C"
+        "text": "Ada Lovelace"
       },
       {
         "id": "opt_2",
-        "text": "UART"
+        "text": "Alan Turing"
       },
       {
         "id": "opt_3",
-        "text": "SPI"
+        "text": "Grace Hopper"
       },
       {
         "id": "opt_4",
-        "text": "CAN Bus"
+        "text": "Nikola Tesla"
       }
     ]
   },
   {
     "id": 14,
     "section": "tech",
-    "sectionTitle": "Part 2: Tech Knowledge (Robotics & Hardware)",
-    "prompt": "What is the primary role of an H-bridge circuit in mobile robotics?",
+    "sectionTitle": "Part 2: Tech Knowledge (Fun Riddle)",
+    "prompt": "Tech Riddle: 'I remember everything you are working on while your laptop is awake, but the moment you turn off the power, I forget everything instantly. What am I?'",
     "options": [
       {
         "id": "opt_1",
-        "text": "To amplify radio frequency signals from RC controller"
+        "text": "RAM (Random Access Memory)"
       },
       {
         "id": "opt_2",
-        "text": "To allow DC motors to run in both forward and reverse directions"
+        "text": "SSD (Solid State Drive)"
       },
       {
         "id": "opt_3",
-        "text": "To convert 5V DC into 220V AC for microcontrollers"
+        "text": "Processor Cooling Fan"
       },
       {
         "id": "opt_4",
-        "text": "To filter electromagnetic interference from sensors"
+        "text": "Wi-Fi Antenna"
       }
     ]
   },
   {
     "id": 15,
     "section": "tech",
-    "sectionTitle": "Part 2: Tech Knowledge (Design & UI/UX)",
-    "prompt": "According to Fitts's Law in UI/UX design, what two factors determine the time required to rapidly move to a target area?",
+    "sectionTitle": "Part 2: Tech Knowledge (Current Trends & News)",
+    "prompt": "Why has NVIDIA recently skyrocketed to become one of the most valuable tech corporations in the world alongside Apple and Microsoft?",
     "options": [
       {
         "id": "opt_1",
-        "text": "Color contrast and typography weight"
+        "text": "Their GPUs (Graphics Processing Units) provide the high-speed parallel computing hardware powering modern Generative AI"
       },
       {
         "id": "opt_2",
-        "text": "Distance to the target and target size/width"
+        "text": "They manufacture 90% of all electric cars in Asia"
       },
       {
         "id": "opt_3",
-        "text": "Viewport refresh rate and finger pressure"
+        "text": "They purchased the global fiber optic undersea cables"
       },
       {
         "id": "opt_4",
-        "text": "Shadow blur radius and animation duration"
+        "text": "They own the YouTube video streaming servers"
       }
     ]
   },
   {
     "id": 16,
     "section": "tech",
-    "sectionTitle": "Part 2: Tech Knowledge (Software & Web)",
-    "prompt": "In modern JavaScript / React, what is the key difference between 'localStorage' and 'sessionStorage'?",
+    "sectionTitle": "Part 2: Tech Knowledge (Tech Startup History)",
+    "prompt": "Tech giants like Apple (Steve Jobs), Google (Larry & Sergey), and Amazon (Jeff Bezos) famously started their initial operations out of which humble location?",
     "options": [
       {
         "id": "opt_1",
-        "text": "localStorage data persists until explicitly cleared, while sessionStorage expires when browser tab closes."
+        "text": "A residential home garage"
       },
       {
         "id": "opt_2",
-        "text": "sessionStorage holds up to 50MB, whereas localStorage only holds 5KB."
+        "text": "A NASA research laboratory"
       },
       {
         "id": "opt_3",
-        "text": "localStorage is accessible only over HTTPS; sessionStorage works on HTTP."
+        "text": "A 5-star hotel conference center"
       },
       {
         "id": "opt_4",
-        "text": "sessionStorage can be accessed by server headers; localStorage cannot."
+        "text": "A government military bunker"
       }
     ]
   },
   {
     "id": 17,
     "section": "tech",
-    "sectionTitle": "Part 2: Tech Knowledge (Robotics & Sensors)",
-    "prompt": "Which sensor would you use to calculate both the angular velocity and linear acceleration of an autonomous drone?",
+    "sectionTitle": "Part 2: Tech Knowledge (Everyday Web Tech)",
+    "prompt": "When browsing the web, what does the classic HTTP status code '404' displayed on your screen indicate?",
     "options": [
       {
         "id": "opt_1",
-        "text": "HC-SR04 Ultrasonic Sensor"
+        "text": "Page Not Found — the requested link does not exist on the server"
       },
       {
         "id": "opt_2",
-        "text": "6-DoF IMU (Inertial Measurement Unit like MPU6050)"
+        "text": "Your internet bill payment is overdue"
       },
       {
         "id": "opt_3",
-        "text": "LDR (Light Dependent Resistor)"
+        "text": "The website server has caught fire"
       },
       {
         "id": "opt_4",
-        "text": "PIR Motion Sensor"
+        "text": "Your browser requires an immediate Windows update"
       }
     ]
   },
   {
     "id": 18,
     "section": "tech",
-    "sectionTitle": "Part 2: Tech Knowledge (Design & Systems)",
-    "prompt": "What does the 60-30-10 color rule in UI and brand design prescribe?",
+    "sectionTitle": "Part 2: Tech Knowledge (Digital India & FinTech)",
+    "prompt": "India's UPI (Unified Payments Interface) is celebrated as a global gold standard for instant real-time bank payments. Which organization built and operates UPI?",
     "options": [
       {
         "id": "opt_1",
-        "text": "60% font size, 30% line height, 10% letter spacing"
+        "text": "NPCI (National Payments Corporation of India)"
       },
       {
         "id": "opt_2",
-        "text": "60% dominant base color, 30% secondary/surface color, 10% accent color"
+        "text": "NITI Aayog"
       },
       {
         "id": "opt_3",
-        "text": "60% imagery, 30% text, 10% whitespace"
+        "text": "World Bank"
       },
       {
         "id": "opt_4",
-        "text": "60% dark mode, 30% light mode, 10% high-contrast mode"
+        "text": "Federal Reserve"
       }
     ]
   },
   {
     "id": 19,
     "section": "tech",
-    "sectionTitle": "Part 2: Tech Knowledge (Software & Networking)",
-    "prompt": "Which HTTP status code is returned when a requested client resource requires authentication or permission is denied?",
+    "sectionTitle": "Part 2: Tech Knowledge (Space Exploration & Robotics)",
+    "prompt": "In August 2023, India made history by landing near the moon's South Pole with Chandrayaan-3. What was the name of the 6-wheeled robotic rover deployed on the lunar surface?",
     "options": [
       {
         "id": "opt_1",
-        "text": "301 Moved Permanently"
+        "text": "Pragyan"
       },
       {
         "id": "opt_2",
-        "text": "403 Forbidden"
+        "text": "Vikram"
       },
       {
         "id": "opt_3",
-        "text": "502 Bad Gateway"
+        "text": "Mangalyaan"
       },
       {
         "id": "opt_4",
-        "text": "204 No Content"
+        "text": "Pushpak"
       }
     ]
   },
   {
     "id": 20,
     "section": "tech",
-    "sectionTitle": "Part 2: Tech Knowledge (Computer Science)",
-    "prompt": "Which data structure follows the LIFO (Last-In, First-Out) principle and is used for function call stacks?",
+    "sectionTitle": "Part 2: Tech Knowledge (Fun Riddle)",
+    "prompt": "Tech Riddle: 'I connect billions of devices across oceans via fiber-optic glass cables carrying pulses of light. Without me, you couldn't view Instagram reels, Google answers, or write this online quiz. What am I?'",
     "options": [
       {
         "id": "opt_1",
-        "text": "Queue"
+        "text": "The World Wide Web / The Internet"
       },
       {
         "id": "opt_2",
-        "text": "Stack"
+        "text": "Bluetooth"
       },
       {
         "id": "opt_3",
-        "text": "Priority Queue"
+        "text": "FM Radio Frequency"
       },
       {
         "id": "opt_4",
-        "text": "Circular Buffer"
+        "text": "GPS Receiver"
       }
     ]
   },
   {
     "id": 21,
     "section": "tech",
-    "sectionTitle": "Part 2: Tech Knowledge (Robotics & IoT)",
-    "prompt": "On an ESP32 or Arduino board, what does PWM (Pulse Width Modulation) allow you to do with a digital output pin?",
+    "sectionTitle": "Part 2: Tech Knowledge (Consumer Tech & Standards)",
+    "prompt": "To reduce electronic waste and cable clutter, which universal connector standard has been legally mandated for all future smartphones, laptops, and earphones in India and the EU?",
     "options": [
       {
         "id": "opt_1",
-        "text": "Simulate variable analog voltage output by rapidly cycling on/off duty cycle"
+        "text": "USB Type-C"
       },
       {
         "id": "opt_2",
-        "text": "Double the processor clock frequency dynamically"
+        "text": "Lightning Cable"
       },
       {
         "id": "opt_3",
-        "text": "Read ambient atmospheric pressure directly"
+        "text": "Micro-USB"
       },
       {
         "id": "opt_4",
-        "text": "Connect to Wi-Fi without antennas"
+        "text": "VGA Port"
       }
     ]
   },
   {
     "id": 22,
     "section": "tech",
-    "sectionTitle": "Part 2: Tech Knowledge (Software & Database)",
-    "prompt": "In relational databases, what does the ACID acronym stand for?",
+    "sectionTitle": "Part 2: Tech Knowledge (Open Source & OS)",
+    "prompt": "Android smartphones, NASA's Mars rovers, and 100% of the world's top 500 supercomputers run on variations of an open-source OS kernel created by university student Linus Torvalds in 1991. What is it?",
     "options": [
       {
         "id": "opt_1",
-        "text": "Asynchronous, Consistent, Indexed, Distributed"
+        "text": "Linux"
       },
       {
         "id": "opt_2",
-        "text": "Atomicity, Consistency, Isolation, Durability"
+        "text": "Windows 95"
       },
       {
         "id": "opt_3",
-        "text": "Authentication, Cryptography, Integrity, Decryption"
+        "text": "Macintosh System 7"
       },
       {
         "id": "opt_4",
-        "text": "Automated, Clustered, Integrated, Dynamic"
+        "text": "Symbian"
       }
     ]
   },
   {
     "id": 23,
     "section": "tech",
-    "sectionTitle": "Part 2: Tech Knowledge (Design & Graphics)",
-    "prompt": "What is the primary advantage of SVG (Scalable Vector Graphics) over raster formats like PNG and JPEG?",
+    "sectionTitle": "Part 2: Tech Knowledge (Hardware Fundamentals)",
+    "prompt": "Why does a modern laptop with an SSD (Solid State Drive) boot in 8 seconds, while an older laptop with an HDD (Hard Disk Drive) took over 2 minutes?",
     "options": [
       {
         "id": "opt_1",
-        "text": "SVGs can store audio clips inside them"
+        "text": "SSDs use electronic flash memory with zero mechanical moving parts, whereas HDDs have to physically spin magnetic platters and move reader heads"
       },
       {
         "id": "opt_2",
-        "text": "SVGs scale to any screen resolution without loss of clarity or pixelation"
+        "text": "SSDs draw power directly from ambient Wi-Fi signals"
       },
       {
         "id": "opt_3",
-        "text": "SVGs require specialized GPU hardware to render"
+        "text": "HDDs only work when connected to a LAN ethernet cable"
       },
       {
         "id": "opt_4",
-        "text": "SVGs cannot be styled with CSS"
+        "text": "SSDs are water-cooled"
       }
     ]
   },
   {
     "id": 24,
     "section": "tech",
-    "sectionTitle": "Part 2: Tech Knowledge (Software Development)",
-    "prompt": "What does the command 'git commit -m \"message\"' do?",
+    "sectionTitle": "Part 2: Tech Knowledge (Fun Riddle)",
+    "prompt": "Tech Riddle: 'I have keys but no door locks. I have space but no rooms. You can Enter, but you can never leave me physically. What am I?'",
     "options": [
       {
         "id": "opt_1",
-        "text": "Pushes local files directly to GitHub"
+        "text": "A Computer Keyboard"
       },
       {
         "id": "opt_2",
-        "text": "Records a snapshot of the staged changes in the local repository with a log message"
+        "text": "A Pendrive"
       },
       {
         "id": "opt_3",
-        "text": "Discards all modified files since the last clone"
+        "text": "A Motherboard"
       },
       {
         "id": "opt_4",
-        "text": "Creates a new branch named 'message'"
+        "text": "An HDMI Cable"
       }
     ]
   },
   {
     "id": 25,
     "section": "tech",
-    "sectionTitle": "Part 2: Tech Knowledge (Robotics / Computing)",
-    "prompt": "Which operating system framework is widely used in cutting-edge robotics for inter-process node messaging, publishers, and subscribers?",
+    "sectionTitle": "Part 2: Tech Knowledge (Open Source Philosophy)",
+    "prompt": "When software like VLC Media Player, Python, or Blender is described as 'Open Source', what does it mean to the user community?",
     "options": [
       {
         "id": "opt_1",
-        "text": "ROS (Robot Operating System)"
+        "text": "The creator has published the original source code freely for anyone in the world to inspect, improve, learn from, and build upon"
       },
       {
         "id": "opt_2",
-        "text": "FreeDOS"
+        "text": "The app only operates during daytime office hours"
       },
       {
         "id": "opt_3",
-        "text": "OpenWrt"
+        "text": "You must pay a monthly subscription fee after 30 days"
       },
       {
         "id": "opt_4",
-        "text": "ReactOS"
+        "text": "The app cannot be installed on laptops"
       }
     ]
   },
@@ -960,336 +960,336 @@ export const INITIAL_QUESTIONS = [
   {
     "id": 39,
     "section": "tech",
-    "sectionTitle": "Part 2: Tech Knowledge (Software Engineering)",
-    "prompt": "Which Git command allows you to select a specific individual commit from another branch and apply it to your current working branch?",
+    "sectionTitle": "Part 2: Tech Knowledge (Computing Architectures)",
+    "prompt": "In modern computing, what is the fundamental conceptual difference between a CPU and a GPU?",
     "options": [
       {
         "id": "opt_1",
-        "text": "git rebase --onto"
+        "text": "A CPU has a few powerful cores optimized for complex sequential tasks, while a GPU has thousands of smaller cores built for simultaneous parallel math (graphics & AI)"
       },
       {
         "id": "opt_2",
-        "text": "git cherry-pick <commit-hash>"
+        "text": "CPUs only process audio signals; GPUs only process letters"
       },
       {
         "id": "opt_3",
-        "text": "git merge --squash"
+        "text": "A CPU is inside the screen; a GPU is inside the mouse"
       },
       {
         "id": "opt_4",
-        "text": "git stash apply"
+        "text": "A CPU requires liquid cooling; a GPU never gets warm"
       }
     ]
   },
   {
     "id": 40,
     "section": "tech",
-    "sectionTitle": "Part 2: Tech Knowledge (Electronics & IoT)",
-    "prompt": "In digital electronics and microcontrollers, what is the primary role of a pull-up or pull-down resistor on an input pin connected to a momentary button?",
+    "sectionTitle": "Part 2: Tech Knowledge (Tech Geography & History)",
+    "prompt": "Why is California's famous tech hub called 'Silicon Valley'?",
     "options": [
       {
         "id": "opt_1",
-        "text": "To prevent a floating high-impedance state and ensure a deterministic digital voltage level (HIGH or LOW)"
+        "text": "Because the region pioneered silicon semiconductor microchips and transistors that sparked the modern computer revolution"
       },
       {
         "id": "opt_2",
-        "text": "To amplify small wireless radio signals"
+        "text": "Because of large silicon sand dunes along its beaches"
       },
       {
         "id": "opt_3",
-        "text": "To speed up serial clock transmission"
+        "text": "Because early computer screens were made of kitchen silicone baking molds"
       },
       {
         "id": "opt_4",
-        "text": "To regulate USB power from 5V to 3.3V"
+        "text": "It was named after an early valley pioneer named John Silicon"
       }
     ]
   },
   {
     "id": 41,
     "section": "tech",
-    "sectionTitle": "Part 2: Tech Knowledge (Database & Systems)",
-    "prompt": "What does the 'ACID' acronym stand for in relational database transactional processing?",
+    "sectionTitle": "Part 2: Tech Knowledge (Fun Riddle)",
+    "prompt": "Tech Riddle: 'You talk to me in English, and I write essays, solve physics puzzles, and write code. But I don't possess a human brain—I just predict the most statistically probable next word. What am I?'",
     "options": [
       {
         "id": "opt_1",
-        "text": "Atomicity, Consistency, Isolation, Durability"
+        "text": "A Large Language Model (Generative AI)"
       },
       {
         "id": "opt_2",
-        "text": "Access, Control, Indexing, Delivery"
+        "text": "An Excel Spreadsheet"
       },
       {
         "id": "opt_3",
-        "text": "Authentication, Cryptography, Integrity, Decryption"
+        "text": "A Microwave Oven"
       },
       {
         "id": "opt_4",
-        "text": "Asynchronous, Cached, Idempotent, Distributed"
+        "text": "A Laser Printer"
       }
     ]
   },
   {
     "id": 42,
     "section": "tech",
-    "sectionTitle": "Part 2: Tech Knowledge (Robotics)",
-    "prompt": "Which sensor module integrates a 3-axis accelerometer and a 3-axis gyroscope to track angular velocity, roll, pitch, and yaw for rovers and drones?",
+    "sectionTitle": "Part 2: Tech Knowledge (Everyday Privacy)",
+    "prompt": "What does 'Incognito Mode' or 'Private Browsing' in web browsers actually guarantee?",
     "options": [
       {
         "id": "opt_1",
-        "text": "IMU (Inertial Measurement Unit e.g. MPU6050)"
+        "text": "It stops your device from saving your browsing history, site cookies, and form data locally after closing the window"
       },
       {
         "id": "opt_2",
-        "text": "Ultrasonic HC-SR04"
+        "text": "It hides your location from your Wi-Fi provider, college network, and government completely"
       },
       {
         "id": "opt_3",
-        "text": "DHT11 Humidity Sensor"
+        "text": "It blocks someone physically standing behind you from seeing your monitor"
       },
       {
         "id": "opt_4",
-        "text": "PIR Passive Infrared Detector"
+        "text": "It doubles your home internet bandwidth"
       }
     ]
   },
   {
     "id": 43,
     "section": "tech",
-    "sectionTitle": "Part 2: Tech Knowledge (Algorithms)",
-    "prompt": "What is the worst-case time complexity of searching for an item in a balanced self-sorting Binary Search Tree (like an AVL or Red-Black Tree)?",
+    "sectionTitle": "Part 2: Tech Knowledge (AI Milestones)",
+    "prompt": "In 1997, which IBM supercomputer stunned the world by defeating the reigning World Chess Champion Garry Kasparov in a classical match?",
     "options": [
       {
         "id": "opt_1",
-        "text": "O(1)"
+        "text": "Deep Blue"
       },
       {
         "id": "opt_2",
-        "text": "O(log n)"
+        "text": "AlphaGo"
       },
       {
         "id": "opt_3",
-        "text": "O(n)"
+        "text": "Watson"
       },
       {
         "id": "opt_4",
-        "text": "O(n log n)"
+        "text": "Skynet"
       }
     ]
   },
   {
     "id": 44,
     "section": "tech",
-    "sectionTitle": "Part 2: Tech Knowledge (Web Development)",
-    "prompt": "In modern React.js, which Hook is used to execute side effects such as data synchronization, subscriptions, or manual DOM adjustments?",
+    "sectionTitle": "Part 2: Tech Knowledge (Current Space Tech)",
+    "prompt": "Which aerospace company founded by Elon Musk revolutionized rocket launches by landing orbital Falcon 9 boosters upright on ocean autonomous drone ships so they can be reflown?",
     "options": [
       {
         "id": "opt_1",
-        "text": "useState"
+        "text": "SpaceX"
       },
       {
         "id": "opt_2",
-        "text": "useEffect"
+        "text": "Blue Origin"
       },
       {
         "id": "opt_3",
-        "text": "useContext"
+        "text": "Boeing Starliner"
       },
       {
         "id": "opt_4",
-        "text": "useMemo"
+        "text": "Virgin Galactic"
       }
     ]
   },
   {
     "id": 45,
     "section": "tech",
-    "sectionTitle": "Part 2: Tech Knowledge (Hardware Design)",
-    "prompt": "Why are decoupling ceramic capacitors (typically 0.1 µF) placed as close as physically possible to the power pins of integrated circuits (ICs) on PCBs?",
+    "sectionTitle": "Part 2: Tech Knowledge (Tech Trivia)",
+    "prompt": "What was Google's original research project name when founders Larry Page and Sergey Brin started developing the search engine at Stanford University in 1996?",
     "options": [
       {
         "id": "opt_1",
-        "text": "To bypass high-frequency voltage noise to ground and supply instantaneous local charge during clock switching"
+        "text": "BackRub (named after analyzing web backlinks)"
       },
       {
         "id": "opt_2",
-        "text": "To boost battery life by converting heat back to electricity"
+        "text": "Yahoo! Junior"
       },
       {
         "id": "opt_3",
-        "text": "To act as digital memory cells"
+        "text": "WebCrawler"
       },
       {
         "id": "opt_4",
-        "text": "To radiate RF radio signals for telemetry"
+        "text": "Ask Jeeves"
       }
     ]
   },
   {
     "id": 46,
     "section": "tech",
-    "sectionTitle": "Part 2: Tech Knowledge (UI/UX & CSS)",
-    "prompt": "In modern responsive CSS, what does setting 'justify-content: space-between' on a flex container achieve?",
+    "sectionTitle": "Part 2: Tech Knowledge (Units & Measurement)",
+    "prompt": "Tech Trivia: If a single binary digit (0 or 1) is called a 'bit', what is a group of 8 bits traditionally called in computer memory?",
     "options": [
       {
         "id": "opt_1",
-        "text": "Items are aligned flush against the top and bottom edges"
+        "text": "A Byte"
       },
       {
         "id": "opt_2",
-        "text": "First item is on the start line, last on the end line, with equal space distributed between adjacent items"
+        "text": "A Nibble"
       },
       {
         "id": "opt_3",
-        "text": "All items are packed tightly in the exact center"
+        "text": "A Pixel"
       },
       {
         "id": "opt_4",
-        "text": "Items wrap automatically onto a new line"
+        "text": "A Word"
       }
     ]
   },
   {
     "id": 47,
     "section": "tech",
-    "sectionTitle": "Part 2: Tech Knowledge (Computer Networks)",
-    "prompt": "Which layer in the 7-layer OSI networking reference model provides end-to-end data transmission reliability, segment flow control, and port multiplexing?",
+    "sectionTitle": "Part 2: Tech Knowledge (Cybersecurity Basics)",
+    "prompt": "Why is Two-Factor Authentication (2FA) strongly recommended for personal college and email accounts?",
     "options": [
       {
         "id": "opt_1",
-        "text": "Network Layer"
+        "text": "Because even if an attacker steals or guesses your password, they still cannot gain access without your secondary phone code or physical security key"
       },
       {
         "id": "opt_2",
-        "text": "Transport Layer"
+        "text": "Because it makes web pages load twice as fast"
       },
       {
         "id": "opt_3",
-        "text": "Data Link Layer"
+        "text": "Because it lets you share passwords with classmates without risk"
       },
       {
         "id": "opt_4",
-        "text": "Session Layer"
+        "text": "Because it prevents your computer from getting physical dust"
       }
     ]
   },
   {
     "id": 48,
     "section": "tech",
-    "sectionTitle": "Part 2: Tech Knowledge (Computer Vision & AI)",
-    "prompt": "In convolutional neural networks (CNNs) and OpenCV edge detection, what mathematical operation slides a small matrix (kernel) across pixels to compute feature maps?",
+    "sectionTitle": "Part 2: Tech Knowledge (Robotics)",
+    "prompt": "Boston Dynamics produces viral YouTube videos showing robots dancing, backflipping, and inspecting industrial sites. What is the name of their famous 4-legged yellow robot dog?",
     "options": [
       {
         "id": "opt_1",
-        "text": "Matrix Convolution"
+        "text": "Spot"
       },
       {
         "id": "opt_2",
-        "text": "Euclidean Distance"
+        "text": "Atlas"
       },
       {
         "id": "opt_3",
-        "text": "Fast Fourier Transform"
+        "text": "Optimus"
       },
       {
         "id": "opt_4",
-        "text": "Singular Value Decomposition"
+        "text": "BigDog"
       }
     ]
   },
   {
     "id": 49,
     "section": "tech",
-    "sectionTitle": "Part 2: Tech Knowledge (Aeronautics & Drones)",
-    "prompt": "Why do standard X-configuration quadcopters use two Clockwise (CW) and two Counter-Clockwise (CCW) rotating propellers rather than all four spinning in the same direction?",
+    "sectionTitle": "Part 2: Tech Knowledge (Internet History)",
+    "prompt": "What was the name of the revolutionary network created in 1969 by the US Department of Defense that sent the first host-to-host message ('LO') and laid the groundwork for today's Internet?",
     "options": [
       {
         "id": "opt_1",
-        "text": "To cancel out aerodynamic reaction torque (yaw momentum) so the drone does not spin continuously in place"
+        "text": "ARPANET"
       },
       {
         "id": "opt_2",
-        "text": "Because CW motors use half as much electrical current as CCW motors"
+        "text": "Ethernet"
       },
       {
         "id": "opt_3",
-        "text": "To maintain forward momentum without using battery power"
+        "text": "Usenet"
       },
       {
         "id": "opt_4",
-        "text": "To enable underwater navigation mode"
+        "text": "World Wide Web"
       }
     ]
   },
   {
     "id": 50,
     "section": "tech",
-    "sectionTitle": "Part 2: Tech Knowledge (Linux & DevOps)",
-    "prompt": "Which Linux terminal utility provides an interactive, real-time visual monitor of system processes, CPU thread load, memory usage, and swap space?",
+    "sectionTitle": "Part 2: Tech Knowledge (Fun Keyboard Shortcut)",
+    "prompt": "Tech Riddle: 'Press us together on Windows, and we summon the Task Manager, unlock screens, or help reboot when applications freeze up. What legendary trio of keys are we?'",
     "options": [
       {
         "id": "opt_1",
-        "text": "ls -la"
+        "text": "Ctrl + Alt + Delete"
       },
       {
         "id": "opt_2",
-        "text": "htop / top"
+        "text": "Shift + Tab + Enter"
       },
       {
         "id": "opt_3",
-        "text": "grep -r"
+        "text": "Alt + F4 + Space"
       },
       {
         "id": "opt_4",
-        "text": "chmod 777"
+        "text": "Ctrl + Z + Y"
       }
     ]
   },
   {
     "id": 51,
     "section": "tech",
-    "sectionTitle": "Part 2: Tech Knowledge (Object-Oriented Programming)",
-    "prompt": "Which core OOP pillar allows a child subclass to provide a specific, customized implementation of a method that is already declared in its parent class?",
+    "sectionTitle": "Part 2: Tech Knowledge (Cloud Computing)",
+    "prompt": "People frequently say photos or code are stored 'in the Cloud' (AWS, Google Cloud, Azure). What does 'The Cloud' physically mean?",
     "options": [
       {
         "id": "opt_1",
-        "text": "Polymorphism (Method Overriding)"
+        "text": "Massive air-conditioned warehouses full of high-performance server computers connected globally across the Internet"
       },
       {
         "id": "opt_2",
-        "text": "Encapsulation"
+        "text": "Data converted into radio signals permanently floating in clouds in the atmosphere"
       },
       {
         "id": "opt_3",
-        "text": "Data Hiding"
+        "text": "External hard drives strapped to weather balloons"
       },
       {
         "id": "opt_4",
-        "text": "Static Compilation"
+        "text": "A futuristic quantum dimension inside monitors"
       }
     ]
   },
   {
     "id": 52,
     "section": "tech",
-    "sectionTitle": "Part 2: Tech Knowledge (Embedded Protocols)",
-    "prompt": "Comparing I2C and SPI serial communication buses on microcontrollers, which statement is physically correct?",
+    "sectionTitle": "Part 2: Tech Knowledge (Programming Trivia)",
+    "prompt": "Guido van Rossum created the popular Python programming language in 1991. What was the name 'Python' actually inspired by?",
     "options": [
       {
         "id": "opt_1",
-        "text": "I2C uses 2 lines (SDA/SCL) with addressing, while SPI uses 4 lines (MOSI/MISO/SCK/CS) and achieves significantly higher clock throughput"
+        "text": "The British comedy television sketch show 'Monty Python's Flying Circus'"
       },
       {
         "id": "opt_2",
-        "text": "SPI only works over optical fiber cables"
+        "text": "The dangerous African rock python snake in his garden"
       },
       {
         "id": "opt_3",
-        "text": "I2C requires 8 wires for parallel communication"
+        "text": "His daughter's favorite pet reptile"
       },
       {
         "id": "opt_4",
-        "text": "SPI does not use a master clock signal"
+        "text": "An anagram of 'Typing On'"
       }
     ]
   },
@@ -1532,84 +1532,84 @@ export const QUIZ_ANSWER_KEYS = {
     "explanation": "The first three are software language translation tools; Microcontroller is an integrated hardware component."
   },
   "11": {
-    "correctOptionId": "opt_2",
-    "explanation": "git pull is a convenience command that downloads the remote changes (git fetch) and immediately merges them into the current active branch (git merge)."
+    "correctOptionId": "opt_1",
+    "explanation": "In 1947, computer pioneer Grace Hopper recorded an actual moth taped into the Harvard Mark II logbook as the 'First actual case of bug being found'."
   },
   "12": {
-    "correctOptionId": "opt_2",
-    "explanation": "Balanced binary search trees maintain a height strictly bounded by O(log N), guaranteeing O(log N) search even in the worst case."
+    "correctOptionId": "opt_1",
+    "explanation": "GPT stands for Generative Pre-trained Transformer, an AI model architecture introduced by Google researchers in 2017 and expanded by OpenAI."
   },
   "13": {
-    "correctOptionId": "opt_3",
-    "explanation": "Serial Peripheral Interface (SPI) is a synchronous, full-duplex protocol using four dedicated lines."
+    "correctOptionId": "opt_1",
+    "explanation": "Ada Lovelace wrote an algorithm in 1843 to calculate Bernoulli numbers on Babbage's Analytical Engine, making her the world's first programmer."
   },
   "14": {
-    "correctOptionId": "opt_2",
-    "explanation": "An H-bridge circuit enables voltage to be applied across a load (such as a DC motor) in either direction."
+    "correctOptionId": "opt_1",
+    "explanation": "RAM is volatile memory: it provides ultra-fast temporary working memory to the CPU while powered on, but wipes completely upon shutdown."
   },
   "15": {
-    "correctOptionId": "opt_2",
-    "explanation": "Fitts's Law states that MT = a + b * log2(2D / W), where D is distance and W is target width."
+    "correctOptionId": "opt_1",
+    "explanation": "NVIDIA's specialized graphics chips (like H100 and B200) execute matrix math in parallel, making them indispensable for training modern AI models."
   },
   "16": {
     "correctOptionId": "opt_1",
-    "explanation": "localStorage persists across browser sessions and tab closes, whereas sessionStorage is scoped to the tab lifecycle."
+    "explanation": "Silicon Valley folklore is filled with garage beginnings: Jobs & Wozniak in Los Altos, Page & Brin in Susan Wojcicki's Menlo Park garage, and Bezos in Bellevue."
   },
   "17": {
-    "correctOptionId": "opt_2",
-    "explanation": "An IMU combines a 3-axis accelerometer (linear acceleration) and a 3-axis gyroscope (angular rate)."
+    "correctOptionId": "opt_1",
+    "explanation": "HTTP 404 Not Found is a standard web protocol client-side error status indicating that the browser could communicate with the server, but the requested page does not exist."
   },
   "18": {
-    "correctOptionId": "opt_2",
-    "explanation": "The 60-30-10 rule creates visual balance: 60% neutral/dominant backdrop, 30% structure/secondary, and 10% punchy accent for CTAs."
+    "correctOptionId": "opt_1",
+    "explanation": "National Payments Corporation of India (NPCI) launched UPI in 2016, enabling instant mobile payments across competing banks."
   },
   "19": {
-    "correctOptionId": "opt_2",
-    "explanation": "403 Forbidden indicates the server understood the request but refuses to authorize access."
+    "correctOptionId": "opt_1",
+    "explanation": "The Chandrayaan-3 lander was named Vikram (after Dr. Vikram Sarabhai), while the robotic surface rover was named Pragyan ('Wisdom')."
   },
   "20": {
-    "correctOptionId": "opt_2",
-    "explanation": "Stacks operate on LIFO, matching function calls pushing frames and returning."
+    "correctOptionId": "opt_1",
+    "explanation": "Over 99% of global internet traffic travels through underwater fiber-optic submarine cables laid across ocean floors using pulses of laser light."
   },
   "21": {
     "correctOptionId": "opt_1",
-    "explanation": "PWM varies the duty cycle (percentage of time high vs low) to emulate variable output levels for LED brightness or motor speed."
+    "explanation": "USB Type-C (reversible connector, high-speed data, and USB Power Delivery) has been adopted as the common standard to eliminate e-waste."
   },
   "22": {
-    "correctOptionId": "opt_2",
-    "explanation": "ACID stands for Atomicity, Consistency, Isolation, and Durability."
+    "correctOptionId": "opt_1",
+    "explanation": "Linus Torvalds released the Linux kernel as free open-source software in 1991. It now powers the Android OS, cloud web servers, and supercomputers."
   },
   "23": {
-    "correctOptionId": "opt_2",
-    "explanation": "SVGs are vector-based XML paths that scale infinitely without pixel degradation."
+    "correctOptionId": "opt_1",
+    "explanation": "SSDs have no mechanical spinning parts or latency-heavy read heads, delivering read speeds exceeding 5,000 MB/s compared to ~120 MB/s for mechanical HDDs."
   },
   "24": {
-    "correctOptionId": "opt_2",
-    "explanation": "git commit records staged changes into the local repository history."
+    "correctOptionId": "opt_1",
+    "explanation": "A computer keyboard features character keys, the Space bar, the Enter key, and the Escape key!"
   },
   "25": {
     "correctOptionId": "opt_1",
-    "explanation": "ROS (Robot Operating System) is the global open-source robotics middleware standard."
+    "explanation": "Open-source software provides access to human-readable source code, allowing developers worldwide to audit security, fix bugs, and create modifications."
   },
   "26": {
     "correctOptionId": "opt_1",
-    "explanation": "Proactive communication, systematic troubleshooting, and collaborative resilience are core to Zairza culture."
+    "explanation": "Team empathy, active collaboration, and supportive problem-solving define great club culture."
   },
   "27": {
-    "correctOptionId": "opt_2",
-    "explanation": "A growth mindset and receptiveness to peer critique enable continuous technical leveling-up."
+    "correctOptionId": "opt_1",
+    "explanation": "Engineering integrity means transparency, quick mitigation, and staying composed under pressure."
   },
   "28": {
     "correctOptionId": "opt_1",
-    "explanation": "Genuine passion to learn, innovate, and contribute to the collective club ecosystem."
+    "explanation": "Constructive feedback from experienced peers is the fastest catalyst for technical growth."
   },
   "29": {
-    "correctOptionId": "opt_2",
-    "explanation": "Self-driven curiosity coupled with disciplined inquiry is what separates true engineers."
+    "correctOptionId": "opt_1",
+    "explanation": "Wonder, Think, Create represents the journey from curiosity to deep logic to real hardware/software creation."
   },
   "30": {
     "correctOptionId": "opt_1",
-    "explanation": "Balanced dedication and personal organization ensure academic excellence and impactful club contributions."
+    "explanation": "Time-blocking, self-discipline, and early planning allow engineering students to excel at both academics and innovation."
   },
   "31": {
     "correctOptionId": "opt_2",
@@ -1644,60 +1644,60 @@ export const QUIZ_ANSWER_KEYS = {
     "explanation": "Only daughter of Ananya's mother is Ananya herself. Hence Ananya is his mother."
   },
   "39": {
-    "correctOptionId": "opt_2",
-    "explanation": "git cherry-pick applies the diff of a specific commit onto the current branch."
+    "correctOptionId": "opt_1",
+    "explanation": "CPUs handle complex branching logic with low latency; GPUs compute thousands of repetitive mathematical vector calculations concurrently."
   },
   "40": {
     "correctOptionId": "opt_1",
-    "explanation": "Pull-up/down resistors eliminate high-impedance floating inputs, giving steady Vcc or GND."
+    "explanation": "Journalist Don Hoefler coined 'Silicon Valley' in 1971 because silicon is the base element for semiconductors made by Fairchild, Intel, and AMD."
   },
   "41": {
     "correctOptionId": "opt_1",
-    "explanation": "ACID guarantees Atomicity, Consistency, Isolation, and Durability."
+    "explanation": "LLMs like Claude, GPT-4, and Gemini use deep transformer neural networks to calculate statistical token probabilities without sentience."
   },
   "42": {
     "correctOptionId": "opt_1",
-    "explanation": "An IMU combining accelerometer and gyro delivers attitude/orientation telemetry."
+    "explanation": "Incognito only clears local browser cache, cookies, and history when closed; it does not cloak traffic from your school Wi-Fi or website servers."
   },
   "43": {
-    "correctOptionId": "opt_2",
-    "explanation": "Balanced BSTs (AVL, Red-Black) maintain height O(log n), providing O(log n) search."
+    "correctOptionId": "opt_1",
+    "explanation": "IBM Deep Blue defeated World Champion Garry Kasparov 3.5–2.5 in May 1997, calculating up to 200 million positions per second."
   },
   "44": {
-    "correctOptionId": "opt_2",
-    "explanation": "useEffect manages lifecycle side effects in React functional components."
+    "correctOptionId": "opt_1",
+    "explanation": "SpaceX's autonomous rocket recovery has flown individual Falcon 9 first stages over 20+ times each, dramatically lowering the cost of spaceflight."
   },
   "45": {
     "correctOptionId": "opt_1",
-    "explanation": "Decoupling caps act as local charge reservoirs filtering high-frequency noise spikes."
+    "explanation": "BackRub was Google's original 1996 name because the PageRank algorithm estimated website importance by tracking backlinks."
   },
   "46": {
-    "correctOptionId": "opt_2",
-    "explanation": "space-between pushes first item to start, last to end, and spaces out the middle."
+    "correctOptionId": "opt_1",
+    "explanation": "8 bits = 1 byte. (4 bits is called a 'nibble'). A byte can represent 256 unique numbers (from 0 to 255), enough for one ASCII character."
   },
   "47": {
-    "correctOptionId": "opt_2",
-    "explanation": "OSI Layer 4 (Transport, TCP/UDP) handles port multiplexing and end-to-end reliability."
+    "correctOptionId": "opt_1",
+    "explanation": "2FA combines something you know (password) with something you physically have (phone, authenticator app, or YubiKey), blocking 99% of automated credential stuffing."
   },
   "48": {
     "correctOptionId": "opt_1",
-    "explanation": "2D Convolution slides the kernel matrix over pixels to detect visual features."
+    "explanation": "Spot is Boston Dynamics' commercial quadruped robot used worldwide for autonomous plant inspections and disaster search-and-rescue."
   },
   "49": {
     "correctOptionId": "opt_1",
-    "explanation": "Equal pairs of CW and CCW props cancel out reactive rotational torque on the yaw axis."
+    "explanation": "ARPANET (Advanced Research Projects Agency Network) launched packet-switching communications between UCLA and Stanford in October 1969."
   },
   "50": {
-    "correctOptionId": "opt_2",
-    "explanation": "htop/top is the standard interactive process and resource monitor on Linux."
+    "correctOptionId": "opt_1",
+    "explanation": "David Bradley designed Ctrl+Alt+Del for the original IBM PC as a quick hardware interrupt reset without cycling the power switch."
   },
   "51": {
     "correctOptionId": "opt_1",
-    "explanation": "Polymorphism through method overriding enables child classes to specialize parent behavior."
+    "explanation": "Cloud services are physical hyperscale data centers with miles of server racks and redundant power backups that you rent remotely over fiber cables."
   },
   "52": {
     "correctOptionId": "opt_1",
-    "explanation": "I2C uses 2 wires (SDA/SCL), while SPI uses 4 wires with higher data rates and dedicated CS lines."
+    "explanation": "Guido van Rossum was a fan of the BBC comedy show 'Monty Python's Flying Circus' and named the language to make programming feel fun and lighthearted."
   },
   "53": {
     "correctOptionId": "opt_1",
@@ -1744,7 +1744,7 @@ export const INITIAL_CANDIDATES = [
     "gender": "Male",
     "residentialType": "Hosteller",
     "preferredWing": "Software",
-    "technicalInterests": ["React.js", "Python / ML", "Cybersecurity"],
+    "technicalInterests": ["Web Development", "AI & Robotics", "Design"],
     "portfolioUrl": "https://github.com/aarav-m",
     "quizStatus": "NOT_STARTED",
     "score": null,
@@ -1763,7 +1763,7 @@ export const INITIAL_CANDIDATES = [
     "gender": "Female",
     "residentialType": "Day Scholar",
     "preferredWing": "Robotics & IoT",
-    "technicalInterests": ["Embedded C", "Drone Aerodynamics", "ROS2"],
+    "technicalInterests": ["Drones", "IoT Sensors", "Robotics"],
     "portfolioUrl": "https://linkedin.com/in/priyanka-dash",
     "quizStatus": "IN_PROGRESS",
     "score": null,
@@ -1782,7 +1782,7 @@ export const INITIAL_CANDIDATES = [
     "gender": "Male",
     "residentialType": "Hosteller",
     "preferredWing": "Design",
-    "technicalInterests": ["Figma Design Systems", "3D Blender", "Next.js"],
+    "technicalInterests": ["UI/UX Design", "3D Modeling", "Frontend"],
     "portfolioUrl": "https://behance.net/rohanbehera",
     "quizStatus": "COMPLETED",
     "score": 24.5,
@@ -1804,9 +1804,9 @@ export const INITIAL_AUDIT_LOGS = [
   },
   {
     "id": "log_002",
-    "action": "QUESTION_POOL_EXPANDED",
+    "action": "CURRICULUM_REFRESH",
     "admin": "Super Admin",
-    "details": "Expanded question pool to 60 questions with random section sampling (10 Logical, 15 Tech, 5 HR).",
-    "timestamp": "2026-09-29 17:00"
+    "details": "Refreshed Tech Knowledge section for 1st Year Freshers (Tech History, Fun Riddles, AI & Space News).",
+    "timestamp": "2026-09-29 22:15"
   }
 ];

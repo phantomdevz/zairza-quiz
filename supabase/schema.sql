@@ -341,8 +341,10 @@ INSERT INTO public.quiz_config (
     updated_at = NOW();
 
 -- ============================================================================
--- SEED DATA: 30 SANITIZED QUESTIONS (NO CORRECT OPTION / EXPLANATION)
 -- ============================================================================
+-- 12. SEED DATA: 60 CURATED QUESTIONS & ANSWER KEYS (POOL-BASED)
+-- ============================================================================
+
 INSERT INTO public.quiz_questions (id, section, section_title, prompt, options, is_active)
 VALUES (
     1,
@@ -467,9 +469,9 @@ INSERT INTO public.quiz_questions (id, section, section_title, prompt, options, 
 VALUES (
     11,
     'tech',
-    'Part 2: Tech Knowledge (Software & Systems)',
-    'In Git, what is the key difference between ''git pull'' and ''git fetch''?',
-    '[{"id":"opt_1","text":"''git fetch'' downloads commits and immediately merges them into working tree."},{"id":"opt_2","text":"''git pull'' executes ''git fetch'' followed by ''git merge'' into the active branch."},{"id":"opt_3","text":"''git pull'' only works on the main branch, whereas fetch works everywhere."},{"id":"opt_4","text":"''git fetch'' deletes local branches that no longer exist on remote."}]'::jsonb,
+    'Part 2: Tech Knowledge (History & Origin)',
+    'Why is an unexpected glitch or software error in computer programming famously called a ''bug''?',
+    '[{"id":"opt_1","text":"In 1947, engineers found an actual moth trapped inside the relays of the Harvard Mark II computer"},{"id":"opt_2","text":"Early punch cards were made of wood and frequently infested with termites"},{"id":"opt_3","text":"Thomas Edison''s nickname when building telegraphs was ''The Little Bug''"},{"id":"opt_4","text":"Computer viruses look like microscopic insects under an electron microscope"}]'::jsonb,
     true
 ) ON CONFLICT (id) DO UPDATE SET
     prompt = EXCLUDED.prompt,
@@ -479,9 +481,9 @@ INSERT INTO public.quiz_questions (id, section, section_title, prompt, options, 
 VALUES (
     12,
     'tech',
-    'Part 2: Tech Knowledge (Software & Algorithms)',
-    'What is the worst-case time complexity of searching an element in a balanced Binary Search Tree (AVL / Red-Black Tree)?',
-    '[{"id":"opt_1","text":"O(1)"},{"id":"opt_2","text":"O(log N)"},{"id":"opt_3","text":"O(N)"},{"id":"opt_4","text":"O(N log N)"}]'::jsonb,
+    'Part 2: Tech Knowledge (AI & Current Trends)',
+    'Everyone is using ChatGPT today. What does the ''GPT'' in ChatGPT actually stand for?',
+    '[{"id":"opt_1","text":"Generative Pre-trained Transformer"},{"id":"opt_2","text":"General Programming Technology"},{"id":"opt_3","text":"Global Prompt Telemetry"},{"id":"opt_4","text":"Guided Predictive Typing"}]'::jsonb,
     true
 ) ON CONFLICT (id) DO UPDATE SET
     prompt = EXCLUDED.prompt,
@@ -491,9 +493,9 @@ INSERT INTO public.quiz_questions (id, section, section_title, prompt, options, 
 VALUES (
     13,
     'tech',
-    'Part 2: Tech Knowledge (Robotics & IoT)',
-    'Which communication protocol is full-duplex, synchronous, uses master-slave architecture, and relies on 4 lines (MISO, MOSI, SCK, SS)?',
-    '[{"id":"opt_1","text":"I2C"},{"id":"opt_2","text":"UART"},{"id":"opt_3","text":"SPI"},{"id":"opt_4","text":"CAN Bus"}]'::jsonb,
+    'Part 2: Tech Knowledge (Tech History)',
+    'Who is widely celebrated in world history as the world''s very first computer programmer for writing an algorithm for Charles Babbage''s mechanical computer?',
+    '[{"id":"opt_1","text":"Ada Lovelace"},{"id":"opt_2","text":"Alan Turing"},{"id":"opt_3","text":"Grace Hopper"},{"id":"opt_4","text":"Nikola Tesla"}]'::jsonb,
     true
 ) ON CONFLICT (id) DO UPDATE SET
     prompt = EXCLUDED.prompt,
@@ -503,9 +505,9 @@ INSERT INTO public.quiz_questions (id, section, section_title, prompt, options, 
 VALUES (
     14,
     'tech',
-    'Part 2: Tech Knowledge (Robotics & Hardware)',
-    'What is the primary role of an H-bridge circuit in mobile robotics?',
-    '[{"id":"opt_1","text":"To amplify radio frequency signals from RC controller"},{"id":"opt_2","text":"To allow DC motors to run in both forward and reverse directions"},{"id":"opt_3","text":"To convert 5V DC into 220V AC for microcontrollers"},{"id":"opt_4","text":"To filter electromagnetic interference from sensors"}]'::jsonb,
+    'Part 2: Tech Knowledge (Fun Riddle)',
+    'Tech Riddle: ''I remember everything you are working on while your laptop is awake, but the moment you turn off the power, I forget everything instantly. What am I?''',
+    '[{"id":"opt_1","text":"RAM (Random Access Memory)"},{"id":"opt_2","text":"SSD (Solid State Drive)"},{"id":"opt_3","text":"Processor Cooling Fan"},{"id":"opt_4","text":"Wi-Fi Antenna"}]'::jsonb,
     true
 ) ON CONFLICT (id) DO UPDATE SET
     prompt = EXCLUDED.prompt,
@@ -515,9 +517,9 @@ INSERT INTO public.quiz_questions (id, section, section_title, prompt, options, 
 VALUES (
     15,
     'tech',
-    'Part 2: Tech Knowledge (Design & UI/UX)',
-    'According to Fitts''s Law in UI/UX design, what two factors determine the time required to rapidly move to a target area?',
-    '[{"id":"opt_1","text":"Color contrast and typography weight"},{"id":"opt_2","text":"Distance to the target and target size/width"},{"id":"opt_3","text":"Viewport refresh rate and finger pressure"},{"id":"opt_4","text":"Shadow blur radius and animation duration"}]'::jsonb,
+    'Part 2: Tech Knowledge (Current Trends & News)',
+    'Why has NVIDIA recently skyrocketed to become one of the most valuable tech corporations in the world alongside Apple and Microsoft?',
+    '[{"id":"opt_1","text":"Their GPUs (Graphics Processing Units) provide the high-speed parallel computing hardware powering modern Generative AI"},{"id":"opt_2","text":"They manufacture 90% of all electric cars in Asia"},{"id":"opt_3","text":"They purchased the global fiber optic undersea cables"},{"id":"opt_4","text":"They own the YouTube video streaming servers"}]'::jsonb,
     true
 ) ON CONFLICT (id) DO UPDATE SET
     prompt = EXCLUDED.prompt,
@@ -527,9 +529,9 @@ INSERT INTO public.quiz_questions (id, section, section_title, prompt, options, 
 VALUES (
     16,
     'tech',
-    'Part 2: Tech Knowledge (Software & Web)',
-    'In modern JavaScript / React, what is the key difference between ''localStorage'' and ''sessionStorage''?',
-    '[{"id":"opt_1","text":"localStorage data persists until explicitly cleared, while sessionStorage expires when browser tab closes."},{"id":"opt_2","text":"sessionStorage holds up to 50MB, whereas localStorage only holds 5KB."},{"id":"opt_3","text":"localStorage is accessible only over HTTPS; sessionStorage works on HTTP."},{"id":"opt_4","text":"sessionStorage can be accessed by server headers; localStorage cannot."}]'::jsonb,
+    'Part 2: Tech Knowledge (Tech Startup History)',
+    'Tech giants like Apple (Steve Jobs), Google (Larry & Sergey), and Amazon (Jeff Bezos) famously started their initial operations out of which humble location?',
+    '[{"id":"opt_1","text":"A residential home garage"},{"id":"opt_2","text":"A NASA research laboratory"},{"id":"opt_3","text":"A 5-star hotel conference center"},{"id":"opt_4","text":"A government military bunker"}]'::jsonb,
     true
 ) ON CONFLICT (id) DO UPDATE SET
     prompt = EXCLUDED.prompt,
@@ -539,9 +541,9 @@ INSERT INTO public.quiz_questions (id, section, section_title, prompt, options, 
 VALUES (
     17,
     'tech',
-    'Part 2: Tech Knowledge (Robotics & Sensors)',
-    'Which sensor would you use to calculate both the angular velocity and linear acceleration of an autonomous drone?',
-    '[{"id":"opt_1","text":"HC-SR04 Ultrasonic Sensor"},{"id":"opt_2","text":"6-DoF IMU (Inertial Measurement Unit like MPU6050)"},{"id":"opt_3","text":"LDR (Light Dependent Resistor)"},{"id":"opt_4","text":"PIR Motion Sensor"}]'::jsonb,
+    'Part 2: Tech Knowledge (Everyday Web Tech)',
+    'When browsing the web, what does the classic HTTP status code ''404'' displayed on your screen indicate?',
+    '[{"id":"opt_1","text":"Page Not Found — the requested link does not exist on the server"},{"id":"opt_2","text":"Your internet bill payment is overdue"},{"id":"opt_3","text":"The website server has caught fire"},{"id":"opt_4","text":"Your browser requires an immediate Windows update"}]'::jsonb,
     true
 ) ON CONFLICT (id) DO UPDATE SET
     prompt = EXCLUDED.prompt,
@@ -551,9 +553,9 @@ INSERT INTO public.quiz_questions (id, section, section_title, prompt, options, 
 VALUES (
     18,
     'tech',
-    'Part 2: Tech Knowledge (Design & Systems)',
-    'What does the 60-30-10 color rule in UI and brand design prescribe?',
-    '[{"id":"opt_1","text":"60% font size, 30% line height, 10% letter spacing"},{"id":"opt_2","text":"60% dominant base color, 30% secondary/surface color, 10% accent color"},{"id":"opt_3","text":"60% imagery, 30% text, 10% whitespace"},{"id":"opt_4","text":"60% dark mode, 30% light mode, 10% high-contrast mode"}]'::jsonb,
+    'Part 2: Tech Knowledge (Digital India & FinTech)',
+    'India''s UPI (Unified Payments Interface) is celebrated as a global gold standard for instant real-time bank payments. Which organization built and operates UPI?',
+    '[{"id":"opt_1","text":"NPCI (National Payments Corporation of India)"},{"id":"opt_2","text":"NITI Aayog"},{"id":"opt_3","text":"World Bank"},{"id":"opt_4","text":"Federal Reserve"}]'::jsonb,
     true
 ) ON CONFLICT (id) DO UPDATE SET
     prompt = EXCLUDED.prompt,
@@ -563,9 +565,9 @@ INSERT INTO public.quiz_questions (id, section, section_title, prompt, options, 
 VALUES (
     19,
     'tech',
-    'Part 2: Tech Knowledge (Software & Networking)',
-    'Which HTTP status code is returned when a requested client resource requires authentication or permission is denied?',
-    '[{"id":"opt_1","text":"301 Moved Permanently"},{"id":"opt_2","text":"403 Forbidden"},{"id":"opt_3","text":"502 Bad Gateway"},{"id":"opt_4","text":"204 No Content"}]'::jsonb,
+    'Part 2: Tech Knowledge (Space Exploration & Robotics)',
+    'In August 2023, India made history by landing near the moon''s South Pole with Chandrayaan-3. What was the name of the 6-wheeled robotic rover deployed on the lunar surface?',
+    '[{"id":"opt_1","text":"Pragyan"},{"id":"opt_2","text":"Vikram"},{"id":"opt_3","text":"Mangalyaan"},{"id":"opt_4","text":"Pushpak"}]'::jsonb,
     true
 ) ON CONFLICT (id) DO UPDATE SET
     prompt = EXCLUDED.prompt,
@@ -575,9 +577,9 @@ INSERT INTO public.quiz_questions (id, section, section_title, prompt, options, 
 VALUES (
     20,
     'tech',
-    'Part 2: Tech Knowledge (Computer Science)',
-    'Which data structure follows the LIFO (Last-In, First-Out) principle and is used for function call stacks?',
-    '[{"id":"opt_1","text":"Queue"},{"id":"opt_2","text":"Stack"},{"id":"opt_3","text":"Priority Queue"},{"id":"opt_4","text":"Circular Buffer"}]'::jsonb,
+    'Part 2: Tech Knowledge (Fun Riddle)',
+    'Tech Riddle: ''I connect billions of devices across oceans via fiber-optic glass cables carrying pulses of light. Without me, you couldn''t view Instagram reels, Google answers, or write this online quiz. What am I?''',
+    '[{"id":"opt_1","text":"The World Wide Web / The Internet"},{"id":"opt_2","text":"Bluetooth"},{"id":"opt_3","text":"FM Radio Frequency"},{"id":"opt_4","text":"GPS Receiver"}]'::jsonb,
     true
 ) ON CONFLICT (id) DO UPDATE SET
     prompt = EXCLUDED.prompt,
@@ -587,9 +589,9 @@ INSERT INTO public.quiz_questions (id, section, section_title, prompt, options, 
 VALUES (
     21,
     'tech',
-    'Part 2: Tech Knowledge (Robotics & IoT)',
-    'On an ESP32 or Arduino board, what does PWM (Pulse Width Modulation) allow you to do with a digital output pin?',
-    '[{"id":"opt_1","text":"Simulate variable analog voltage output by rapidly cycling on/off duty cycle"},{"id":"opt_2","text":"Double the processor clock frequency dynamically"},{"id":"opt_3","text":"Read ambient atmospheric pressure directly"},{"id":"opt_4","text":"Connect to Wi-Fi without antennas"}]'::jsonb,
+    'Part 2: Tech Knowledge (Consumer Tech & Standards)',
+    'To reduce electronic waste and cable clutter, which universal connector standard has been legally mandated for all future smartphones, laptops, and earphones in India and the EU?',
+    '[{"id":"opt_1","text":"USB Type-C"},{"id":"opt_2","text":"Lightning Cable"},{"id":"opt_3","text":"Micro-USB"},{"id":"opt_4","text":"VGA Port"}]'::jsonb,
     true
 ) ON CONFLICT (id) DO UPDATE SET
     prompt = EXCLUDED.prompt,
@@ -599,9 +601,9 @@ INSERT INTO public.quiz_questions (id, section, section_title, prompt, options, 
 VALUES (
     22,
     'tech',
-    'Part 2: Tech Knowledge (Software & Database)',
-    'In relational databases, what does the ACID acronym stand for?',
-    '[{"id":"opt_1","text":"Asynchronous, Consistent, Indexed, Distributed"},{"id":"opt_2","text":"Atomicity, Consistency, Isolation, Durability"},{"id":"opt_3","text":"Authentication, Cryptography, Integrity, Decryption"},{"id":"opt_4","text":"Automated, Clustered, Integrated, Dynamic"}]'::jsonb,
+    'Part 2: Tech Knowledge (Open Source & OS)',
+    'Android smartphones, NASA''s Mars rovers, and 100% of the world''s top 500 supercomputers run on variations of an open-source OS kernel created by university student Linus Torvalds in 1991. What is it?',
+    '[{"id":"opt_1","text":"Linux"},{"id":"opt_2","text":"Windows 95"},{"id":"opt_3","text":"Macintosh System 7"},{"id":"opt_4","text":"Symbian"}]'::jsonb,
     true
 ) ON CONFLICT (id) DO UPDATE SET
     prompt = EXCLUDED.prompt,
@@ -611,9 +613,9 @@ INSERT INTO public.quiz_questions (id, section, section_title, prompt, options, 
 VALUES (
     23,
     'tech',
-    'Part 2: Tech Knowledge (Design & Graphics)',
-    'What is the primary advantage of SVG (Scalable Vector Graphics) over raster formats like PNG and JPEG?',
-    '[{"id":"opt_1","text":"SVGs can store audio clips inside them"},{"id":"opt_2","text":"SVGs scale to any screen resolution without loss of clarity or pixelation"},{"id":"opt_3","text":"SVGs require specialized GPU hardware to render"},{"id":"opt_4","text":"SVGs cannot be styled with CSS"}]'::jsonb,
+    'Part 2: Tech Knowledge (Hardware Fundamentals)',
+    'Why does a modern laptop with an SSD (Solid State Drive) boot in 8 seconds, while an older laptop with an HDD (Hard Disk Drive) took over 2 minutes?',
+    '[{"id":"opt_1","text":"SSDs use electronic flash memory with zero mechanical moving parts, whereas HDDs have to physically spin magnetic platters and move reader heads"},{"id":"opt_2","text":"SSDs draw power directly from ambient Wi-Fi signals"},{"id":"opt_3","text":"HDDs only work when connected to a LAN ethernet cable"},{"id":"opt_4","text":"SSDs are water-cooled"}]'::jsonb,
     true
 ) ON CONFLICT (id) DO UPDATE SET
     prompt = EXCLUDED.prompt,
@@ -623,9 +625,9 @@ INSERT INTO public.quiz_questions (id, section, section_title, prompt, options, 
 VALUES (
     24,
     'tech',
-    'Part 2: Tech Knowledge (Software Development)',
-    'What does the command ''git commit -m "message"'' do?',
-    '[{"id":"opt_1","text":"Pushes local files directly to GitHub"},{"id":"opt_2","text":"Records a snapshot of the staged changes in the local repository with a log message"},{"id":"opt_3","text":"Discards all modified files since the last clone"},{"id":"opt_4","text":"Creates a new branch named ''message''"}]'::jsonb,
+    'Part 2: Tech Knowledge (Fun Riddle)',
+    'Tech Riddle: ''I have keys but no door locks. I have space but no rooms. You can Enter, but you can never leave me physically. What am I?''',
+    '[{"id":"opt_1","text":"A Computer Keyboard"},{"id":"opt_2","text":"A Pendrive"},{"id":"opt_3","text":"A Motherboard"},{"id":"opt_4","text":"An HDMI Cable"}]'::jsonb,
     true
 ) ON CONFLICT (id) DO UPDATE SET
     prompt = EXCLUDED.prompt,
@@ -635,9 +637,9 @@ INSERT INTO public.quiz_questions (id, section, section_title, prompt, options, 
 VALUES (
     25,
     'tech',
-    'Part 2: Tech Knowledge (Robotics / Computing)',
-    'Which operating system framework is widely used in cutting-edge robotics for inter-process node messaging, publishers, and subscribers?',
-    '[{"id":"opt_1","text":"ROS (Robot Operating System)"},{"id":"opt_2","text":"FreeDOS"},{"id":"opt_3","text":"OpenWrt"},{"id":"opt_4","text":"ReactOS"}]'::jsonb,
+    'Part 2: Tech Knowledge (Open Source Philosophy)',
+    'When software like VLC Media Player, Python, or Blender is described as ''Open Source'', what does it mean to the user community?',
+    '[{"id":"opt_1","text":"The creator has published the original source code freely for anyone in the world to inspect, improve, learn from, and build upon"},{"id":"opt_2","text":"The app only operates during daytime office hours"},{"id":"opt_3","text":"You must pay a monthly subscription fee after 30 days"},{"id":"opt_4","text":"The app cannot be installed on laptops"}]'::jsonb,
     true
 ) ON CONFLICT (id) DO UPDATE SET
     prompt = EXCLUDED.prompt,
@@ -703,9 +705,370 @@ VALUES (
     prompt = EXCLUDED.prompt,
     options = EXCLUDED.options;
 
+INSERT INTO public.quiz_questions (id, section, section_title, prompt, options, is_active)
+VALUES (
+    31,
+    'logical',
+    'Part 1: Logical Reasoning',
+    'In a row of students, Rakesh is 12th from the left and Suman is 17th from the right. If they interchange their positions, Rakesh becomes 22nd from the left. How many students are there in the row?',
+    '[{"id":"opt_1","text":"37"},{"id":"opt_2","text":"38"},{"id":"opt_3","text":"39"},{"id":"opt_4","text":"40"}]'::jsonb,
+    true
+) ON CONFLICT (id) DO UPDATE SET
+    prompt = EXCLUDED.prompt,
+    options = EXCLUDED.options;
+
+INSERT INTO public.quiz_questions (id, section, section_title, prompt, options, is_active)
+VALUES (
+    32,
+    'logical',
+    'Part 1: Logical Reasoning',
+    'If P is the brother of Q, Q is the sister of R, and R is the father of S, how is P related to S?',
+    '[{"id":"opt_1","text":"Father"},{"id":"opt_2","text":"Paternal Uncle"},{"id":"opt_3","text":"Brother"},{"id":"opt_4","text":"Grandfather"}]'::jsonb,
+    true
+) ON CONFLICT (id) DO UPDATE SET
+    prompt = EXCLUDED.prompt,
+    options = EXCLUDED.options;
+
+INSERT INTO public.quiz_questions (id, section, section_title, prompt, options, is_active)
+VALUES (
+    33,
+    'logical',
+    'Part 1: Logical Reasoning',
+    'What is the angle between the hour hand and minute hand of an analog clock at 3:40?',
+    '[{"id":"opt_1","text":"120°"},{"id":"opt_2","text":"130°"},{"id":"opt_3","text":"140°"},{"id":"opt_4","text":"125°"}]'::jsonb,
+    true
+) ON CONFLICT (id) DO UPDATE SET
+    prompt = EXCLUDED.prompt,
+    options = EXCLUDED.options;
+
+INSERT INTO public.quiz_questions (id, section, section_title, prompt, options, is_active)
+VALUES (
+    34,
+    'logical',
+    'Part 1: Logical Reasoning',
+    'Find the missing term in the sequence: 7, 26, 63, 124, 215, ?',
+    '[{"id":"opt_1","text":"342"},{"id":"opt_2","text":"343"},{"id":"opt_3","text":"328"},{"id":"opt_4","text":"511"}]'::jsonb,
+    true
+) ON CONFLICT (id) DO UPDATE SET
+    prompt = EXCLUDED.prompt,
+    options = EXCLUDED.options;
+
+INSERT INTO public.quiz_questions (id, section, section_title, prompt, options, is_active)
+VALUES (
+    35,
+    'logical',
+    'Part 1: Logical Reasoning',
+    'Five club members (A, B, C, D, E) sit in a circle facing the center. A is between E and C. B is to the immediate right of E. Who is to the immediate left of C?',
+    '[{"id":"opt_1","text":"A"},{"id":"opt_2","text":"D"},{"id":"opt_3","text":"B"},{"id":"opt_4","text":"E"}]'::jsonb,
+    true
+) ON CONFLICT (id) DO UPDATE SET
+    prompt = EXCLUDED.prompt,
+    options = EXCLUDED.options;
+
+INSERT INTO public.quiz_questions (id, section, section_title, prompt, options, is_active)
+VALUES (
+    36,
+    'logical',
+    'Part 1: Logical Reasoning',
+    'If ''ROBOT'' is encoded as ''TQDOT'' in a specific cipher, how is ''DRONE'' encoded using the same rule?',
+    '[{"id":"opt_1","text":"FTQPG"},{"id":"opt_2","text":"ESPOF"},{"id":"opt_3","text":"FTPOG"},{"id":"opt_4","text":"FTQOG"}]'::jsonb,
+    true
+) ON CONFLICT (id) DO UPDATE SET
+    prompt = EXCLUDED.prompt,
+    options = EXCLUDED.options;
+
+INSERT INTO public.quiz_questions (id, section, section_title, prompt, options, is_active)
+VALUES (
+    37,
+    'logical',
+    'Part 1: Logical Reasoning',
+    'Statement: All algorithms are logic. No logic is emotional. Conclusion I: No algorithm is emotional. Conclusion II: Some logic is an algorithm.',
+    '[{"id":"opt_1","text":"Only Conclusion I follows"},{"id":"opt_2","text":"Only Conclusion II follows"},{"id":"opt_3","text":"Neither follows"},{"id":"opt_4","text":"Both Conclusion I and II follow"}]'::jsonb,
+    true
+) ON CONFLICT (id) DO UPDATE SET
+    prompt = EXCLUDED.prompt,
+    options = EXCLUDED.options;
+
+INSERT INTO public.quiz_questions (id, section, section_title, prompt, options, is_active)
+VALUES (
+    38,
+    'logical',
+    'Part 1: Logical Reasoning',
+    'Pointing to a photograph of a drone designer, Ananya says: ''His mother is the only daughter of my mother.'' How is Ananya related to the designer?',
+    '[{"id":"opt_1","text":"Sister"},{"id":"opt_2","text":"Mother"},{"id":"opt_3","text":"Aunt"},{"id":"opt_4","text":"Grandmother"}]'::jsonb,
+    true
+) ON CONFLICT (id) DO UPDATE SET
+    prompt = EXCLUDED.prompt,
+    options = EXCLUDED.options;
+
+INSERT INTO public.quiz_questions (id, section, section_title, prompt, options, is_active)
+VALUES (
+    39,
+    'tech',
+    'Part 2: Tech Knowledge (Computing Architectures)',
+    'In modern computing, what is the fundamental conceptual difference between a CPU and a GPU?',
+    '[{"id":"opt_1","text":"A CPU has a few powerful cores optimized for complex sequential tasks, while a GPU has thousands of smaller cores built for simultaneous parallel math (graphics & AI)"},{"id":"opt_2","text":"CPUs only process audio signals; GPUs only process letters"},{"id":"opt_3","text":"A CPU is inside the screen; a GPU is inside the mouse"},{"id":"opt_4","text":"A CPU requires liquid cooling; a GPU never gets warm"}]'::jsonb,
+    true
+) ON CONFLICT (id) DO UPDATE SET
+    prompt = EXCLUDED.prompt,
+    options = EXCLUDED.options;
+
+INSERT INTO public.quiz_questions (id, section, section_title, prompt, options, is_active)
+VALUES (
+    40,
+    'tech',
+    'Part 2: Tech Knowledge (Tech Geography & History)',
+    'Why is California''s famous tech hub called ''Silicon Valley''?',
+    '[{"id":"opt_1","text":"Because the region pioneered silicon semiconductor microchips and transistors that sparked the modern computer revolution"},{"id":"opt_2","text":"Because of large silicon sand dunes along its beaches"},{"id":"opt_3","text":"Because early computer screens were made of kitchen silicone baking molds"},{"id":"opt_4","text":"It was named after an early valley pioneer named John Silicon"}]'::jsonb,
+    true
+) ON CONFLICT (id) DO UPDATE SET
+    prompt = EXCLUDED.prompt,
+    options = EXCLUDED.options;
+
+INSERT INTO public.quiz_questions (id, section, section_title, prompt, options, is_active)
+VALUES (
+    41,
+    'tech',
+    'Part 2: Tech Knowledge (Fun Riddle)',
+    'Tech Riddle: ''You talk to me in English, and I write essays, solve physics puzzles, and write code. But I don''t possess a human brain—I just predict the most statistically probable next word. What am I?''',
+    '[{"id":"opt_1","text":"A Large Language Model (Generative AI)"},{"id":"opt_2","text":"An Excel Spreadsheet"},{"id":"opt_3","text":"A Microwave Oven"},{"id":"opt_4","text":"A Laser Printer"}]'::jsonb,
+    true
+) ON CONFLICT (id) DO UPDATE SET
+    prompt = EXCLUDED.prompt,
+    options = EXCLUDED.options;
+
+INSERT INTO public.quiz_questions (id, section, section_title, prompt, options, is_active)
+VALUES (
+    42,
+    'tech',
+    'Part 2: Tech Knowledge (Everyday Privacy)',
+    'What does ''Incognito Mode'' or ''Private Browsing'' in web browsers actually guarantee?',
+    '[{"id":"opt_1","text":"It stops your device from saving your browsing history, site cookies, and form data locally after closing the window"},{"id":"opt_2","text":"It hides your location from your Wi-Fi provider, college network, and government completely"},{"id":"opt_3","text":"It blocks someone physically standing behind you from seeing your monitor"},{"id":"opt_4","text":"It doubles your home internet bandwidth"}]'::jsonb,
+    true
+) ON CONFLICT (id) DO UPDATE SET
+    prompt = EXCLUDED.prompt,
+    options = EXCLUDED.options;
+
+INSERT INTO public.quiz_questions (id, section, section_title, prompt, options, is_active)
+VALUES (
+    43,
+    'tech',
+    'Part 2: Tech Knowledge (AI Milestones)',
+    'In 1997, which IBM supercomputer stunned the world by defeating the reigning World Chess Champion Garry Kasparov in a classical match?',
+    '[{"id":"opt_1","text":"Deep Blue"},{"id":"opt_2","text":"AlphaGo"},{"id":"opt_3","text":"Watson"},{"id":"opt_4","text":"Skynet"}]'::jsonb,
+    true
+) ON CONFLICT (id) DO UPDATE SET
+    prompt = EXCLUDED.prompt,
+    options = EXCLUDED.options;
+
+INSERT INTO public.quiz_questions (id, section, section_title, prompt, options, is_active)
+VALUES (
+    44,
+    'tech',
+    'Part 2: Tech Knowledge (Current Space Tech)',
+    'Which aerospace company founded by Elon Musk revolutionized rocket launches by landing orbital Falcon 9 boosters upright on ocean autonomous drone ships so they can be reflown?',
+    '[{"id":"opt_1","text":"SpaceX"},{"id":"opt_2","text":"Blue Origin"},{"id":"opt_3","text":"Boeing Starliner"},{"id":"opt_4","text":"Virgin Galactic"}]'::jsonb,
+    true
+) ON CONFLICT (id) DO UPDATE SET
+    prompt = EXCLUDED.prompt,
+    options = EXCLUDED.options;
+
+INSERT INTO public.quiz_questions (id, section, section_title, prompt, options, is_active)
+VALUES (
+    45,
+    'tech',
+    'Part 2: Tech Knowledge (Tech Trivia)',
+    'What was Google''s original research project name when founders Larry Page and Sergey Brin started developing the search engine at Stanford University in 1996?',
+    '[{"id":"opt_1","text":"BackRub (named after analyzing web backlinks)"},{"id":"opt_2","text":"Yahoo! Junior"},{"id":"opt_3","text":"WebCrawler"},{"id":"opt_4","text":"Ask Jeeves"}]'::jsonb,
+    true
+) ON CONFLICT (id) DO UPDATE SET
+    prompt = EXCLUDED.prompt,
+    options = EXCLUDED.options;
+
+INSERT INTO public.quiz_questions (id, section, section_title, prompt, options, is_active)
+VALUES (
+    46,
+    'tech',
+    'Part 2: Tech Knowledge (Units & Measurement)',
+    'Tech Trivia: If a single binary digit (0 or 1) is called a ''bit'', what is a group of 8 bits traditionally called in computer memory?',
+    '[{"id":"opt_1","text":"A Byte"},{"id":"opt_2","text":"A Nibble"},{"id":"opt_3","text":"A Pixel"},{"id":"opt_4","text":"A Word"}]'::jsonb,
+    true
+) ON CONFLICT (id) DO UPDATE SET
+    prompt = EXCLUDED.prompt,
+    options = EXCLUDED.options;
+
+INSERT INTO public.quiz_questions (id, section, section_title, prompt, options, is_active)
+VALUES (
+    47,
+    'tech',
+    'Part 2: Tech Knowledge (Cybersecurity Basics)',
+    'Why is Two-Factor Authentication (2FA) strongly recommended for personal college and email accounts?',
+    '[{"id":"opt_1","text":"Because even if an attacker steals or guesses your password, they still cannot gain access without your secondary phone code or physical security key"},{"id":"opt_2","text":"Because it makes web pages load twice as fast"},{"id":"opt_3","text":"Because it lets you share passwords with classmates without risk"},{"id":"opt_4","text":"Because it prevents your computer from getting physical dust"}]'::jsonb,
+    true
+) ON CONFLICT (id) DO UPDATE SET
+    prompt = EXCLUDED.prompt,
+    options = EXCLUDED.options;
+
+INSERT INTO public.quiz_questions (id, section, section_title, prompt, options, is_active)
+VALUES (
+    48,
+    'tech',
+    'Part 2: Tech Knowledge (Robotics)',
+    'Boston Dynamics produces viral YouTube videos showing robots dancing, backflipping, and inspecting industrial sites. What is the name of their famous 4-legged yellow robot dog?',
+    '[{"id":"opt_1","text":"Spot"},{"id":"opt_2","text":"Atlas"},{"id":"opt_3","text":"Optimus"},{"id":"opt_4","text":"BigDog"}]'::jsonb,
+    true
+) ON CONFLICT (id) DO UPDATE SET
+    prompt = EXCLUDED.prompt,
+    options = EXCLUDED.options;
+
+INSERT INTO public.quiz_questions (id, section, section_title, prompt, options, is_active)
+VALUES (
+    49,
+    'tech',
+    'Part 2: Tech Knowledge (Internet History)',
+    'What was the name of the revolutionary network created in 1969 by the US Department of Defense that sent the first host-to-host message (''LO'') and laid the groundwork for today''s Internet?',
+    '[{"id":"opt_1","text":"ARPANET"},{"id":"opt_2","text":"Ethernet"},{"id":"opt_3","text":"Usenet"},{"id":"opt_4","text":"World Wide Web"}]'::jsonb,
+    true
+) ON CONFLICT (id) DO UPDATE SET
+    prompt = EXCLUDED.prompt,
+    options = EXCLUDED.options;
+
+INSERT INTO public.quiz_questions (id, section, section_title, prompt, options, is_active)
+VALUES (
+    50,
+    'tech',
+    'Part 2: Tech Knowledge (Fun Keyboard Shortcut)',
+    'Tech Riddle: ''Press us together on Windows, and we summon the Task Manager, unlock screens, or help reboot when applications freeze up. What legendary trio of keys are we?''',
+    '[{"id":"opt_1","text":"Ctrl + Alt + Delete"},{"id":"opt_2","text":"Shift + Tab + Enter"},{"id":"opt_3","text":"Alt + F4 + Space"},{"id":"opt_4","text":"Ctrl + Z + Y"}]'::jsonb,
+    true
+) ON CONFLICT (id) DO UPDATE SET
+    prompt = EXCLUDED.prompt,
+    options = EXCLUDED.options;
+
+INSERT INTO public.quiz_questions (id, section, section_title, prompt, options, is_active)
+VALUES (
+    51,
+    'tech',
+    'Part 2: Tech Knowledge (Cloud Computing)',
+    'People frequently say photos or code are stored ''in the Cloud'' (AWS, Google Cloud, Azure). What does ''The Cloud'' physically mean?',
+    '[{"id":"opt_1","text":"Massive air-conditioned warehouses full of high-performance server computers connected globally across the Internet"},{"id":"opt_2","text":"Data converted into radio signals permanently floating in clouds in the atmosphere"},{"id":"opt_3","text":"External hard drives strapped to weather balloons"},{"id":"opt_4","text":"A futuristic quantum dimension inside monitors"}]'::jsonb,
+    true
+) ON CONFLICT (id) DO UPDATE SET
+    prompt = EXCLUDED.prompt,
+    options = EXCLUDED.options;
+
+INSERT INTO public.quiz_questions (id, section, section_title, prompt, options, is_active)
+VALUES (
+    52,
+    'tech',
+    'Part 2: Tech Knowledge (Programming Trivia)',
+    'Guido van Rossum created the popular Python programming language in 1991. What was the name ''Python'' actually inspired by?',
+    '[{"id":"opt_1","text":"The British comedy television sketch show ''Monty Python''s Flying Circus''"},{"id":"opt_2","text":"The dangerous African rock python snake in his garden"},{"id":"opt_3","text":"His daughter''s favorite pet reptile"},{"id":"opt_4","text":"An anagram of ''Typing On''"}]'::jsonb,
+    true
+) ON CONFLICT (id) DO UPDATE SET
+    prompt = EXCLUDED.prompt,
+    options = EXCLUDED.options;
+
+INSERT INTO public.quiz_questions (id, section, section_title, prompt, options, is_active)
+VALUES (
+    53,
+    'hr',
+    'Part 3: HR & Cultural Alignment',
+    'During a 24-hour hackathon or lab build, your teammate is feeling overwhelmed and struggling to finish their module. What is your reaction?',
+    '[{"id":"opt_1","text":"Sit together, break down the remaining blocker into smaller tasks, pair-program to solve it, and encourage them"},{"id":"opt_2","text":"Publicly complain to mentors that they are slowing down your team"},{"id":"opt_3","text":"Abandon the project and leave the room"},{"id":"opt_4","text":"Pretend nothing is wrong and wait until the deadline passes"}]'::jsonb,
+    true
+) ON CONFLICT (id) DO UPDATE SET
+    prompt = EXCLUDED.prompt,
+    options = EXCLUDED.options;
+
+INSERT INTO public.quiz_questions (id, section, section_title, prompt, options, is_active)
+VALUES (
+    54,
+    'hr',
+    'Part 3: HR & Cultural Alignment',
+    'Ten minutes before a live demonstration in front of faculty and guests, you discover a bug that occasionally crashes the platform. What do you do?',
+    '[{"id":"opt_1","text":"Calmly inform your team leads, identify the root crash trigger, implement a defensive fallback/safe mode, and be transparent during the demo"},{"id":"opt_2","text":"Blame a teammate who isn''t present"},{"id":"opt_3","text":"Turn off the equipment and pretend power failed"},{"id":"opt_4","text":"Silently delete the error logs so nobody knows"}]'::jsonb,
+    true
+) ON CONFLICT (id) DO UPDATE SET
+    prompt = EXCLUDED.prompt,
+    options = EXCLUDED.options;
+
+INSERT INTO public.quiz_questions (id, section, section_title, prompt, options, is_active)
+VALUES (
+    55,
+    'hr',
+    'Part 3: HR & Cultural Alignment',
+    'A senior mentor provides direct, constructive criticism highlighting major flaws in your circuit schematic or code architecture. How do you respond?',
+    '[{"id":"opt_1","text":"Welcome the technical critique, ask targeted questions to understand the best engineering practice, and iterate on the design"},{"id":"opt_2","text":"Take it as a personal insult and stop attending club sessions"},{"id":"opt_3","text":"Argue aggressively without looking at the technical data"},{"id":"opt_4","text":"Agree verbally but never make the changes"}]'::jsonb,
+    true
+) ON CONFLICT (id) DO UPDATE SET
+    prompt = EXCLUDED.prompt,
+    options = EXCLUDED.options;
+
+INSERT INTO public.quiz_questions (id, section, section_title, prompt, options, is_active)
+VALUES (
+    56,
+    'hr',
+    'Part 3: HR & Cultural Alignment',
+    'What does the Zairza motto ''Wonder • Think • Create'' mean to you as an engineer at OUTR?',
+    '[{"id":"opt_1","text":"Cultivating curiosity, applying deep first-principles thinking, and turning bold ideas into impactful, functioning reality"},{"id":"opt_2","text":"Memorizing textbook definitions for exam marks"},{"id":"opt_3","text":"Waiting for instructions without initiating anything yourself"},{"id":"opt_4","text":"Just a catchy social media slogan"}]'::jsonb,
+    true
+) ON CONFLICT (id) DO UPDATE SET
+    prompt = EXCLUDED.prompt,
+    options = EXCLUDED.options;
+
+INSERT INTO public.quiz_questions (id, section, section_title, prompt, options, is_active)
+VALUES (
+    57,
+    'hr',
+    'Part 3: HR & Cultural Alignment',
+    'How do you balance high-tempo club projects with mid-term examinations and regular university academic coursework?',
+    '[{"id":"opt_1","text":"Plan ahead with structured weekly calendars, stay on top of coursework daily, and dedicate focused lab hours without last-minute panic"},{"id":"opt_2","text":"Bunk all semester lectures"},{"id":"opt_3","text":"Drop out of all extracurricular activities permanently"},{"id":"opt_4","text":"Leave both studies and club tasks until the night before"}]'::jsonb,
+    true
+) ON CONFLICT (id) DO UPDATE SET
+    prompt = EXCLUDED.prompt,
+    options = EXCLUDED.options;
+
+INSERT INTO public.quiz_questions (id, section, section_title, prompt, options, is_active)
+VALUES (
+    58,
+    'hr',
+    'Part 3: HR & Cultural Alignment',
+    'A fresher or classmate asks you for help understanding a programming or circuit concept that you are already proficient in. How do you handle it?',
+    '[{"id":"opt_1","text":"Patiently explain the intuition, guide them to write or build it themselves, and point them to good documentation"},{"id":"opt_2","text":"Refuse to share knowledge to protect your competitive edge"},{"id":"opt_3","text":"Do their entire work for them so they learn nothing"},{"id":"opt_4","text":"Make fun of them for not knowing the concept"}]'::jsonb,
+    true
+) ON CONFLICT (id) DO UPDATE SET
+    prompt = EXCLUDED.prompt,
+    options = EXCLUDED.options;
+
+INSERT INTO public.quiz_questions (id, section, section_title, prompt, options, is_active)
+VALUES (
+    59,
+    'hr',
+    'Part 3: HR & Cultural Alignment',
+    'Why is multi-disciplinary collaboration (Software + Hardware + Design + Robotics) critical for modern innovation at Zairza?',
+    '[{"id":"opt_1","text":"Because groundbreaking tech products require hardware sensors, intelligent algorithms, robust cloud backends, and intuitive human interfaces working harmoniously"},{"id":"opt_2","text":"It isn''t; every wing should remain in total isolation"},{"id":"opt_3","text":"Only software matters in modern engineering"},{"id":"opt_4","text":"Just to increase club headcount"}]'::jsonb,
+    true
+) ON CONFLICT (id) DO UPDATE SET
+    prompt = EXCLUDED.prompt,
+    options = EXCLUDED.options;
+
+INSERT INTO public.quiz_questions (id, section, section_title, prompt, options, is_active)
+VALUES (
+    60,
+    'hr',
+    'Part 3: HR & Cultural Alignment',
+    'The team votes on two competing architectural designs for an induction project, and your favorite proposal is not chosen. What is your attitude?',
+    '[{"id":"opt_1","text":"Disagree and commit: fully back the team''s chosen decision and contribute 100% of your energy to execute it successfully"},{"id":"opt_2","text":"Actively sabotage the chosen design so your idea looks better"},{"id":"opt_3","text":"Stop contributing to the team"},{"id":"opt_4","text":"Complain repeatedly during team meetings"}]'::jsonb,
+    true
+) ON CONFLICT (id) DO UPDATE SET
+    prompt = EXCLUDED.prompt,
+    options = EXCLUDED.options;
+
 -- ============================================================================
--- SEED DATA: ISOLATED SOLUTION KEYS (STORED SEPARATELY IN quiz_answer_keys)
+-- ISOLATED ANSWER KEYS SEED
 -- ============================================================================
+
 INSERT INTO public.quiz_answer_keys (question_id, correct_option_id, explanation)
 VALUES (
     1,
@@ -799,8 +1162,8 @@ VALUES (
 INSERT INTO public.quiz_answer_keys (question_id, correct_option_id, explanation)
 VALUES (
     11,
-    'opt_2',
-    'git pull is a convenience command that downloads the remote changes (git fetch) and immediately merges them into the current active branch (git merge).'
+    'opt_1',
+    'In 1947, computer pioneer Grace Hopper recorded an actual moth taped into the Harvard Mark II logbook as the ''First actual case of bug being found''.'
 ) ON CONFLICT (question_id) DO UPDATE SET
     correct_option_id = EXCLUDED.correct_option_id,
     explanation = EXCLUDED.explanation;
@@ -808,8 +1171,8 @@ VALUES (
 INSERT INTO public.quiz_answer_keys (question_id, correct_option_id, explanation)
 VALUES (
     12,
-    'opt_2',
-    'Balanced binary search trees maintain a height strictly bounded by O(log N), guaranteeing O(log N) search even in the worst case.'
+    'opt_1',
+    'GPT stands for Generative Pre-trained Transformer, an AI model architecture introduced by Google researchers in 2017 and expanded by OpenAI.'
 ) ON CONFLICT (question_id) DO UPDATE SET
     correct_option_id = EXCLUDED.correct_option_id,
     explanation = EXCLUDED.explanation;
@@ -817,8 +1180,8 @@ VALUES (
 INSERT INTO public.quiz_answer_keys (question_id, correct_option_id, explanation)
 VALUES (
     13,
-    'opt_3',
-    'Serial Peripheral Interface (SPI) is a synchronous, full-duplex protocol using four dedicated lines.'
+    'opt_1',
+    'Ada Lovelace wrote an algorithm in 1843 to calculate Bernoulli numbers on Babbage''s Analytical Engine, making her the world''s first programmer.'
 ) ON CONFLICT (question_id) DO UPDATE SET
     correct_option_id = EXCLUDED.correct_option_id,
     explanation = EXCLUDED.explanation;
@@ -826,8 +1189,8 @@ VALUES (
 INSERT INTO public.quiz_answer_keys (question_id, correct_option_id, explanation)
 VALUES (
     14,
-    'opt_2',
-    'An H-bridge circuit enables voltage to be applied across a load (such as a DC motor) in either direction.'
+    'opt_1',
+    'RAM is volatile memory: it provides ultra-fast temporary working memory to the CPU while powered on, but wipes completely upon shutdown.'
 ) ON CONFLICT (question_id) DO UPDATE SET
     correct_option_id = EXCLUDED.correct_option_id,
     explanation = EXCLUDED.explanation;
@@ -835,8 +1198,8 @@ VALUES (
 INSERT INTO public.quiz_answer_keys (question_id, correct_option_id, explanation)
 VALUES (
     15,
-    'opt_2',
-    'Fitts''s Law states that MT = a + b * log2(2D / W), where D is distance and W is target width.'
+    'opt_1',
+    'NVIDIA''s specialized graphics chips (like H100 and B200) execute matrix math in parallel, making them indispensable for training modern AI models.'
 ) ON CONFLICT (question_id) DO UPDATE SET
     correct_option_id = EXCLUDED.correct_option_id,
     explanation = EXCLUDED.explanation;
@@ -845,7 +1208,7 @@ INSERT INTO public.quiz_answer_keys (question_id, correct_option_id, explanation
 VALUES (
     16,
     'opt_1',
-    'localStorage persists across browser sessions and tab closes, whereas sessionStorage is scoped to the tab lifecycle.'
+    'Silicon Valley folklore is filled with garage beginnings: Jobs & Wozniak in Los Altos, Page & Brin in Susan Wojcicki''s Menlo Park garage, and Bezos in Bellevue.'
 ) ON CONFLICT (question_id) DO UPDATE SET
     correct_option_id = EXCLUDED.correct_option_id,
     explanation = EXCLUDED.explanation;
@@ -853,8 +1216,8 @@ VALUES (
 INSERT INTO public.quiz_answer_keys (question_id, correct_option_id, explanation)
 VALUES (
     17,
-    'opt_2',
-    'An IMU combines a 3-axis accelerometer (linear acceleration) and a 3-axis gyroscope (angular rate).'
+    'opt_1',
+    'HTTP 404 Not Found is a standard web protocol client-side error status indicating that the browser could communicate with the server, but the requested page does not exist.'
 ) ON CONFLICT (question_id) DO UPDATE SET
     correct_option_id = EXCLUDED.correct_option_id,
     explanation = EXCLUDED.explanation;
@@ -862,8 +1225,8 @@ VALUES (
 INSERT INTO public.quiz_answer_keys (question_id, correct_option_id, explanation)
 VALUES (
     18,
-    'opt_2',
-    'The 60-30-10 rule creates visual balance: 60% neutral/dominant backdrop, 30% structure/secondary, and 10% punchy accent for CTAs.'
+    'opt_1',
+    'National Payments Corporation of India (NPCI) launched UPI in 2016, enabling instant mobile payments across competing banks.'
 ) ON CONFLICT (question_id) DO UPDATE SET
     correct_option_id = EXCLUDED.correct_option_id,
     explanation = EXCLUDED.explanation;
@@ -871,8 +1234,8 @@ VALUES (
 INSERT INTO public.quiz_answer_keys (question_id, correct_option_id, explanation)
 VALUES (
     19,
-    'opt_2',
-    '403 Forbidden indicates the server understood the request but refuses to authorize access.'
+    'opt_1',
+    'The Chandrayaan-3 lander was named Vikram (after Dr. Vikram Sarabhai), while the robotic surface rover was named Pragyan (''Wisdom'').'
 ) ON CONFLICT (question_id) DO UPDATE SET
     correct_option_id = EXCLUDED.correct_option_id,
     explanation = EXCLUDED.explanation;
@@ -880,8 +1243,8 @@ VALUES (
 INSERT INTO public.quiz_answer_keys (question_id, correct_option_id, explanation)
 VALUES (
     20,
-    'opt_2',
-    'Stacks operate on LIFO, matching function calls pushing frames and returning.'
+    'opt_1',
+    'Over 99% of global internet traffic travels through underwater fiber-optic submarine cables laid across ocean floors using pulses of laser light.'
 ) ON CONFLICT (question_id) DO UPDATE SET
     correct_option_id = EXCLUDED.correct_option_id,
     explanation = EXCLUDED.explanation;
@@ -890,7 +1253,7 @@ INSERT INTO public.quiz_answer_keys (question_id, correct_option_id, explanation
 VALUES (
     21,
     'opt_1',
-    'PWM varies the duty cycle (percentage of time high vs low) to emulate variable output levels for LED brightness or motor speed.'
+    'USB Type-C (reversible connector, high-speed data, and USB Power Delivery) has been adopted as the common standard to eliminate e-waste.'
 ) ON CONFLICT (question_id) DO UPDATE SET
     correct_option_id = EXCLUDED.correct_option_id,
     explanation = EXCLUDED.explanation;
@@ -898,8 +1261,8 @@ VALUES (
 INSERT INTO public.quiz_answer_keys (question_id, correct_option_id, explanation)
 VALUES (
     22,
-    'opt_2',
-    'ACID stands for Atomicity, Consistency, Isolation, and Durability.'
+    'opt_1',
+    'Linus Torvalds released the Linux kernel as free open-source software in 1991. It now powers the Android OS, cloud web servers, and supercomputers.'
 ) ON CONFLICT (question_id) DO UPDATE SET
     correct_option_id = EXCLUDED.correct_option_id,
     explanation = EXCLUDED.explanation;
@@ -907,8 +1270,8 @@ VALUES (
 INSERT INTO public.quiz_answer_keys (question_id, correct_option_id, explanation)
 VALUES (
     23,
-    'opt_2',
-    'SVGs are vector-based XML paths that scale infinitely without pixel degradation.'
+    'opt_1',
+    'SSDs have no mechanical spinning parts or latency-heavy read heads, delivering read speeds exceeding 5,000 MB/s compared to ~120 MB/s for mechanical HDDs.'
 ) ON CONFLICT (question_id) DO UPDATE SET
     correct_option_id = EXCLUDED.correct_option_id,
     explanation = EXCLUDED.explanation;
@@ -916,8 +1279,8 @@ VALUES (
 INSERT INTO public.quiz_answer_keys (question_id, correct_option_id, explanation)
 VALUES (
     24,
-    'opt_2',
-    'git commit records staged changes into the local repository history.'
+    'opt_1',
+    'A computer keyboard features character keys, the Space bar, the Enter key, and the Escape key!'
 ) ON CONFLICT (question_id) DO UPDATE SET
     correct_option_id = EXCLUDED.correct_option_id,
     explanation = EXCLUDED.explanation;
@@ -926,7 +1289,7 @@ INSERT INTO public.quiz_answer_keys (question_id, correct_option_id, explanation
 VALUES (
     25,
     'opt_1',
-    'ROS (Robot Operating System) is the global open-source robotics middleware standard.'
+    'Open-source software provides access to human-readable source code, allowing developers worldwide to audit security, fix bugs, and create modifications.'
 ) ON CONFLICT (question_id) DO UPDATE SET
     correct_option_id = EXCLUDED.correct_option_id,
     explanation = EXCLUDED.explanation;
@@ -935,7 +1298,7 @@ INSERT INTO public.quiz_answer_keys (question_id, correct_option_id, explanation
 VALUES (
     26,
     'opt_1',
-    'Proactive communication, systematic troubleshooting, and collaborative resilience are core to Zairza culture.'
+    'Team empathy, active collaboration, and supportive problem-solving define great club culture.'
 ) ON CONFLICT (question_id) DO UPDATE SET
     correct_option_id = EXCLUDED.correct_option_id,
     explanation = EXCLUDED.explanation;
@@ -943,8 +1306,8 @@ VALUES (
 INSERT INTO public.quiz_answer_keys (question_id, correct_option_id, explanation)
 VALUES (
     27,
-    'opt_2',
-    'A growth mindset and receptiveness to peer critique enable continuous technical leveling-up.'
+    'opt_1',
+    'Engineering integrity means transparency, quick mitigation, and staying composed under pressure.'
 ) ON CONFLICT (question_id) DO UPDATE SET
     correct_option_id = EXCLUDED.correct_option_id,
     explanation = EXCLUDED.explanation;
@@ -953,7 +1316,7 @@ INSERT INTO public.quiz_answer_keys (question_id, correct_option_id, explanation
 VALUES (
     28,
     'opt_1',
-    'Genuine passion to learn, innovate, and contribute to the collective club ecosystem.'
+    'Constructive feedback from experienced peers is the fastest catalyst for technical growth.'
 ) ON CONFLICT (question_id) DO UPDATE SET
     correct_option_id = EXCLUDED.correct_option_id,
     explanation = EXCLUDED.explanation;
@@ -961,8 +1324,8 @@ VALUES (
 INSERT INTO public.quiz_answer_keys (question_id, correct_option_id, explanation)
 VALUES (
     29,
-    'opt_2',
-    'Self-driven curiosity coupled with disciplined inquiry is what separates true engineers.'
+    'opt_1',
+    'Wonder, Think, Create represents the journey from curiosity to deep logic to real hardware/software creation.'
 ) ON CONFLICT (question_id) DO UPDATE SET
     correct_option_id = EXCLUDED.correct_option_id,
     explanation = EXCLUDED.explanation;
@@ -971,8 +1334,277 @@ INSERT INTO public.quiz_answer_keys (question_id, correct_option_id, explanation
 VALUES (
     30,
     'opt_1',
-    'Balanced dedication and personal organization ensure academic excellence and impactful club contributions.'
+    'Time-blocking, self-discipline, and early planning allow engineering students to excel at both academics and innovation.'
 ) ON CONFLICT (question_id) DO UPDATE SET
     correct_option_id = EXCLUDED.correct_option_id,
     explanation = EXCLUDED.explanation;
 
+INSERT INTO public.quiz_answer_keys (question_id, correct_option_id, explanation)
+VALUES (
+    31,
+    'opt_2',
+    'Total students = Left position + Right position - 1 = 22 + 17 - 1 = 38.'
+) ON CONFLICT (question_id) DO UPDATE SET
+    correct_option_id = EXCLUDED.correct_option_id,
+    explanation = EXCLUDED.explanation;
+
+INSERT INTO public.quiz_answer_keys (question_id, correct_option_id, explanation)
+VALUES (
+    32,
+    'opt_2',
+    'R is the father of S, and P is the brother of R (since P is brother of Q, Q is sister of R). Hence, P is the paternal uncle of S.'
+) ON CONFLICT (question_id) DO UPDATE SET
+    correct_option_id = EXCLUDED.correct_option_id,
+    explanation = EXCLUDED.explanation;
+
+INSERT INTO public.quiz_answer_keys (question_id, correct_option_id, explanation)
+VALUES (
+    33,
+    'opt_2',
+    'Angle = |30*H - 5.5*M| = |30(3) - 5.5(40)| = |90 - 220| = 130°.'
+) ON CONFLICT (question_id) DO UPDATE SET
+    correct_option_id = EXCLUDED.correct_option_id,
+    explanation = EXCLUDED.explanation;
+
+INSERT INTO public.quiz_answer_keys (question_id, correct_option_id, explanation)
+VALUES (
+    34,
+    'opt_1',
+    'Pattern is n^3 - 1: 2^3-1=7, 3^3-1=26, 4^3-1=63, 5^3-1=124, 6^3-1=215, 7^3-1=342.'
+) ON CONFLICT (question_id) DO UPDATE SET
+    correct_option_id = EXCLUDED.correct_option_id,
+    explanation = EXCLUDED.explanation;
+
+INSERT INTO public.quiz_answer_keys (question_id, correct_option_id, explanation)
+VALUES (
+    35,
+    'opt_1',
+    'In circular arrangement facing center, A is between E and C, so to immediate left of C is A.'
+) ON CONFLICT (question_id) DO UPDATE SET
+    correct_option_id = EXCLUDED.correct_option_id,
+    explanation = EXCLUDED.explanation;
+
+INSERT INTO public.quiz_answer_keys (question_id, correct_option_id, explanation)
+VALUES (
+    36,
+    'opt_1',
+    'Pattern shifts letters: R(+2)->T, O(+2)->Q, B(+2)->D, O(+0), T(+0) -> similarly D(+2)->F, R(+2)->T, O(+2)->Q, N(+2)->P, E(+2)->G => FTQPG.'
+) ON CONFLICT (question_id) DO UPDATE SET
+    correct_option_id = EXCLUDED.correct_option_id,
+    explanation = EXCLUDED.explanation;
+
+INSERT INTO public.quiz_answer_keys (question_id, correct_option_id, explanation)
+VALUES (
+    37,
+    'opt_4',
+    'Since all algorithms are logic and no logic is emotional, no algorithm is emotional (I). Also, if all algorithms are logic, some logic must be algorithms (II).'
+) ON CONFLICT (question_id) DO UPDATE SET
+    correct_option_id = EXCLUDED.correct_option_id,
+    explanation = EXCLUDED.explanation;
+
+INSERT INTO public.quiz_answer_keys (question_id, correct_option_id, explanation)
+VALUES (
+    38,
+    'opt_2',
+    'Only daughter of Ananya''s mother is Ananya herself. Hence Ananya is his mother.'
+) ON CONFLICT (question_id) DO UPDATE SET
+    correct_option_id = EXCLUDED.correct_option_id,
+    explanation = EXCLUDED.explanation;
+
+INSERT INTO public.quiz_answer_keys (question_id, correct_option_id, explanation)
+VALUES (
+    39,
+    'opt_1',
+    'CPUs handle complex branching logic with low latency; GPUs compute thousands of repetitive mathematical vector calculations concurrently.'
+) ON CONFLICT (question_id) DO UPDATE SET
+    correct_option_id = EXCLUDED.correct_option_id,
+    explanation = EXCLUDED.explanation;
+
+INSERT INTO public.quiz_answer_keys (question_id, correct_option_id, explanation)
+VALUES (
+    40,
+    'opt_1',
+    'Journalist Don Hoefler coined ''Silicon Valley'' in 1971 because silicon is the base element for semiconductors made by Fairchild, Intel, and AMD.'
+) ON CONFLICT (question_id) DO UPDATE SET
+    correct_option_id = EXCLUDED.correct_option_id,
+    explanation = EXCLUDED.explanation;
+
+INSERT INTO public.quiz_answer_keys (question_id, correct_option_id, explanation)
+VALUES (
+    41,
+    'opt_1',
+    'LLMs like Claude, GPT-4, and Gemini use deep transformer neural networks to calculate statistical token probabilities without sentience.'
+) ON CONFLICT (question_id) DO UPDATE SET
+    correct_option_id = EXCLUDED.correct_option_id,
+    explanation = EXCLUDED.explanation;
+
+INSERT INTO public.quiz_answer_keys (question_id, correct_option_id, explanation)
+VALUES (
+    42,
+    'opt_1',
+    'Incognito only clears local browser cache, cookies, and history when closed; it does not cloak traffic from your school Wi-Fi or website servers.'
+) ON CONFLICT (question_id) DO UPDATE SET
+    correct_option_id = EXCLUDED.correct_option_id,
+    explanation = EXCLUDED.explanation;
+
+INSERT INTO public.quiz_answer_keys (question_id, correct_option_id, explanation)
+VALUES (
+    43,
+    'opt_1',
+    'IBM Deep Blue defeated World Champion Garry Kasparov 3.5–2.5 in May 1997, calculating up to 200 million positions per second.'
+) ON CONFLICT (question_id) DO UPDATE SET
+    correct_option_id = EXCLUDED.correct_option_id,
+    explanation = EXCLUDED.explanation;
+
+INSERT INTO public.quiz_answer_keys (question_id, correct_option_id, explanation)
+VALUES (
+    44,
+    'opt_1',
+    'SpaceX''s autonomous rocket recovery has flown individual Falcon 9 first stages over 20+ times each, dramatically lowering the cost of spaceflight.'
+) ON CONFLICT (question_id) DO UPDATE SET
+    correct_option_id = EXCLUDED.correct_option_id,
+    explanation = EXCLUDED.explanation;
+
+INSERT INTO public.quiz_answer_keys (question_id, correct_option_id, explanation)
+VALUES (
+    45,
+    'opt_1',
+    'BackRub was Google''s original 1996 name because the PageRank algorithm estimated website importance by tracking backlinks.'
+) ON CONFLICT (question_id) DO UPDATE SET
+    correct_option_id = EXCLUDED.correct_option_id,
+    explanation = EXCLUDED.explanation;
+
+INSERT INTO public.quiz_answer_keys (question_id, correct_option_id, explanation)
+VALUES (
+    46,
+    'opt_1',
+    '8 bits = 1 byte. (4 bits is called a ''nibble''). A byte can represent 256 unique numbers (from 0 to 255), enough for one ASCII character.'
+) ON CONFLICT (question_id) DO UPDATE SET
+    correct_option_id = EXCLUDED.correct_option_id,
+    explanation = EXCLUDED.explanation;
+
+INSERT INTO public.quiz_answer_keys (question_id, correct_option_id, explanation)
+VALUES (
+    47,
+    'opt_1',
+    '2FA combines something you know (password) with something you physically have (phone, authenticator app, or YubiKey), blocking 99% of automated credential stuffing.'
+) ON CONFLICT (question_id) DO UPDATE SET
+    correct_option_id = EXCLUDED.correct_option_id,
+    explanation = EXCLUDED.explanation;
+
+INSERT INTO public.quiz_answer_keys (question_id, correct_option_id, explanation)
+VALUES (
+    48,
+    'opt_1',
+    'Spot is Boston Dynamics'' commercial quadruped robot used worldwide for autonomous plant inspections and disaster search-and-rescue.'
+) ON CONFLICT (question_id) DO UPDATE SET
+    correct_option_id = EXCLUDED.correct_option_id,
+    explanation = EXCLUDED.explanation;
+
+INSERT INTO public.quiz_answer_keys (question_id, correct_option_id, explanation)
+VALUES (
+    49,
+    'opt_1',
+    'ARPANET (Advanced Research Projects Agency Network) launched packet-switching communications between UCLA and Stanford in October 1969.'
+) ON CONFLICT (question_id) DO UPDATE SET
+    correct_option_id = EXCLUDED.correct_option_id,
+    explanation = EXCLUDED.explanation;
+
+INSERT INTO public.quiz_answer_keys (question_id, correct_option_id, explanation)
+VALUES (
+    50,
+    'opt_1',
+    'David Bradley designed Ctrl+Alt+Del for the original IBM PC as a quick hardware interrupt reset without cycling the power switch.'
+) ON CONFLICT (question_id) DO UPDATE SET
+    correct_option_id = EXCLUDED.correct_option_id,
+    explanation = EXCLUDED.explanation;
+
+INSERT INTO public.quiz_answer_keys (question_id, correct_option_id, explanation)
+VALUES (
+    51,
+    'opt_1',
+    'Cloud services are physical hyperscale data centers with miles of server racks and redundant power backups that you rent remotely over fiber cables.'
+) ON CONFLICT (question_id) DO UPDATE SET
+    correct_option_id = EXCLUDED.correct_option_id,
+    explanation = EXCLUDED.explanation;
+
+INSERT INTO public.quiz_answer_keys (question_id, correct_option_id, explanation)
+VALUES (
+    52,
+    'opt_1',
+    'Guido van Rossum was a fan of the BBC comedy show ''Monty Python''s Flying Circus'' and named the language to make programming feel fun and lighthearted.'
+) ON CONFLICT (question_id) DO UPDATE SET
+    correct_option_id = EXCLUDED.correct_option_id,
+    explanation = EXCLUDED.explanation;
+
+INSERT INTO public.quiz_answer_keys (question_id, correct_option_id, explanation)
+VALUES (
+    53,
+    'opt_1',
+    'Team empathy, active collaboration, and supportive problem-solving define great club culture.'
+) ON CONFLICT (question_id) DO UPDATE SET
+    correct_option_id = EXCLUDED.correct_option_id,
+    explanation = EXCLUDED.explanation;
+
+INSERT INTO public.quiz_answer_keys (question_id, correct_option_id, explanation)
+VALUES (
+    54,
+    'opt_1',
+    'Engineering integrity means transparency, quick mitigation, and staying composed under pressure.'
+) ON CONFLICT (question_id) DO UPDATE SET
+    correct_option_id = EXCLUDED.correct_option_id,
+    explanation = EXCLUDED.explanation;
+
+INSERT INTO public.quiz_answer_keys (question_id, correct_option_id, explanation)
+VALUES (
+    55,
+    'opt_1',
+    'Constructive feedback from experienced peers is the fastest catalyst for technical growth.'
+) ON CONFLICT (question_id) DO UPDATE SET
+    correct_option_id = EXCLUDED.correct_option_id,
+    explanation = EXCLUDED.explanation;
+
+INSERT INTO public.quiz_answer_keys (question_id, correct_option_id, explanation)
+VALUES (
+    56,
+    'opt_1',
+    'Wonder, Think, Create represents the journey from curiosity to deep logic to real hardware/software creation.'
+) ON CONFLICT (question_id) DO UPDATE SET
+    correct_option_id = EXCLUDED.correct_option_id,
+    explanation = EXCLUDED.explanation;
+
+INSERT INTO public.quiz_answer_keys (question_id, correct_option_id, explanation)
+VALUES (
+    57,
+    'opt_1',
+    'Time-blocking, self-discipline, and early planning allow engineering students to excel at both academics and innovation.'
+) ON CONFLICT (question_id) DO UPDATE SET
+    correct_option_id = EXCLUDED.correct_option_id,
+    explanation = EXCLUDED.explanation;
+
+INSERT INTO public.quiz_answer_keys (question_id, correct_option_id, explanation)
+VALUES (
+    58,
+    'opt_1',
+    'Peer mentorship and open knowledge-sharing are the foundational pillars of Zairza.'
+) ON CONFLICT (question_id) DO UPDATE SET
+    correct_option_id = EXCLUDED.correct_option_id,
+    explanation = EXCLUDED.explanation;
+
+INSERT INTO public.quiz_answer_keys (question_id, correct_option_id, explanation)
+VALUES (
+    59,
+    'opt_1',
+    'Real-world engineering triumphs occur at the intersection of mechanical, electrical, software, and design disciplines.'
+) ON CONFLICT (question_id) DO UPDATE SET
+    correct_option_id = EXCLUDED.correct_option_id,
+    explanation = EXCLUDED.explanation;
+
+INSERT INTO public.quiz_answer_keys (question_id, correct_option_id, explanation)
+VALUES (
+    60,
+    'opt_1',
+    'Disagree and commit: professional teams debate ideas openly, but execute the collective decision with 100% solidarity.'
+) ON CONFLICT (question_id) DO UPDATE SET
+    correct_option_id = EXCLUDED.correct_option_id,
+    explanation = EXCLUDED.explanation;
