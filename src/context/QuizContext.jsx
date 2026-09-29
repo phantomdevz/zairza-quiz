@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { QUIZ_CONFIG, INITIAL_QUESTIONS, INITIAL_CANDIDATES, INITIAL_AUDIT_LOGS } from "../data/mockQuizData";
+import { supabase, isSupabaseConfigured } from "../lib/supabaseClient";
 
 const QuizContext = createContext(null);
 
@@ -116,6 +117,17 @@ export const QuizProvider = ({ children }) => {
     setViolationCount(newCount);
     setViolations((prev) => [newViolation, ...prev]);
 
+    // Stream violation to Supabase Realtime
+    if (isSupabaseConfigured && supabase) {
+      supabase.from("proctoring_violations").insert([{
+        roll_number: newViolation.rollNumber,
+        violation_type: newViolation.type,
+        details: newViolation.details
+      }]).then(({ error }) => {
+        if (error) console.warn("Supabase violation sync note:", error.message);
+      });
+    }
+
     let message = "";
     if (violationType === "TAB_SWITCH") {
       message = "Tab switch or browser minimization detected! Please keep your focus on the assessment viewport.";
@@ -166,6 +178,25 @@ export const QuizProvider = ({ children }) => {
 
     setCandidates((prev) => [newCandidate, ...prev]);
     setActiveCandidate(newCandidate);
+
+    // Sync to Supabase Postgres if configured
+    if (isSupabaseConfigured && supabase) {
+      supabase.from("candidates").insert([{
+        roll_number: newCandidate.rollNumber,
+        full_name: newCandidate.fullName,
+        email: newCandidate.email,
+        mobile: newCandidate.mobile,
+        year: newCandidate.year,
+        branch: newCandidate.branch,
+        gender: newCandidate.gender,
+        residential_type: newCandidate.residentialType,
+        preferred_wing: newCandidate.preferredWing,
+        technical_interests: newCandidate.technicalInterests,
+        portfolio_url: newCandidate.portfolioUrl
+      }]).then(({ error }) => {
+        if (error) console.warn("Supabase candidate sync note:", error.message);
+      });
+    }
 
     // Log to audit trail
     setAuditLogs((prev) => [
@@ -297,6 +328,26 @@ export const QuizProvider = ({ children }) => {
           c.rollNumber === activeCandidate.rollNumber ? updatedCandidate : c
         )
       );
+
+      // Record final attempt to Supabase Postgres
+      if (isSupabaseConfigured && supabase) {
+        supabase.from("quiz_attempts").insert([{
+          roll_number: activeCandidate.rollNumber,
+          status: "COMPLETED",
+          score: finalScore,
+          logical_score: sectionBreakdown.logical,
+          tech_score: sectionBreakdown.tech,
+          hr_score: sectionBreakdown.hr,
+          correct_count: correctCount,
+          incorrect_count: incorrectCount,
+          unanswered_count: unansweredCount,
+          violations_count: violationCount,
+          time_taken_seconds: timeTaken,
+          submission_reason: submissionReason
+        }]).then(({ error }) => {
+          if (error) console.warn("Supabase attempt sync note:", error.message);
+        });
+      }
     }
 
     setCurrentView("page8_success");

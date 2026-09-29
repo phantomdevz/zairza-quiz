@@ -109,35 +109,36 @@ export const Navbar = () => {
           <span style={{ color: "var(--mut)", marginLeft: "14px" }}>STATE: READY TO LAUNCH</span>
         </div>
 
-        {/* Right Menu & Page Switcher */}
+        {/* Right Menu */}
         <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-          {/* Quick Page Explorer (20 Pages) */}
-          <div style={{ position: "relative" }}>
-            <button
-              onClick={() => setNavDropdownOpen(!navDropdownOpen)}
-              className="btn btn-secondary"
-              style={{ padding: "8px 14px", fontSize: "0.82rem", minHeight: "38px" }}
-            >
-              <span>Explore Platform (20 Pages)</span>
-              <ChevronDown size={14} />
-            </button>
-
-            {navDropdownOpen && (
-              <div
-                className="card"
-                style={{
-                  position: "absolute",
-                  right: 0,
-                  top: "46px",
-                  width: "320px",
-                  maxHeight: "440px",
-                  overflowY: "auto",
-                  padding: "12px",
-                  zIndex: 2000,
-                  border: "2px solid #f4f4f6",
-                  boxShadow: "6px 6px 0 var(--red)"
-                }}
+          {/* Admin Navigation Menu (Visible ONLY when logged in as Admin) */}
+          {isAdminLoggedIn && (
+            <div style={{ position: "relative" }}>
+              <button
+                onClick={() => setNavDropdownOpen(!navDropdownOpen)}
+                className="btn btn-secondary"
+                style={{ padding: "8px 14px", fontSize: "0.82rem", minHeight: "38px" }}
               >
+                <span>Admin Suite (20 Pages)</span>
+                <ChevronDown size={14} />
+              </button>
+
+              {navDropdownOpen && (
+                <div
+                  className="card"
+                  style={{
+                    position: "absolute",
+                    right: 0,
+                    top: "46px",
+                    width: "320px",
+                    maxHeight: "440px",
+                    overflowY: "auto",
+                    padding: "12px",
+                    zIndex: 2000,
+                    border: "2px solid #f4f4f6",
+                    boxShadow: "6px 6px 0 var(--red)"
+                  }}
+                >
                 <div style={{ fontSize: "0.72rem", fontWeight: "700", color: "var(--coral)", marginBottom: "8px", fontFamily: "var(--mono)" }}>
                   CANDIDATE PORTAL (PAGES 1–10)
                 </div>
@@ -216,6 +217,7 @@ export const Navbar = () => {
               </div>
             )}
           </div>
+          )}
 
           {/* Active Candidate Badge or Register CTA */}
           {activeCandidate ? (

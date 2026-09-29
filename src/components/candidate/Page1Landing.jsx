@@ -33,16 +33,7 @@ export const Page1Landing = () => {
   ];
 
   return (
-    <div className="wrap" style={{ paddingTop: "20px", paddingBottom: "80px" }}>
-      {/* Floating Chips */}
-      <div className="chips" aria-hidden="true">
-        <span className="chip">how to start DSA from zero</span>
-        <span className="chip b">best clubs to join 1st year</span>
-        <span className="chip r">Attendance: 68% ▲ Warning</span>
-        <span className="chip">bro which club r u joining</span>
-        <span className="chip">resume??</span>
-      </div>
-
+    <div className="wrap" style={{ paddingTop: "40px", paddingBottom: "80px" }}>
       {/* Retro Cyber Window (Hero) */}
       <div className="win">
         <div className="bar">
