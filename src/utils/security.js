@@ -143,24 +143,33 @@ export function evaluateCandidateQuiz({
   };
 }
 
-// 3. Admin Authentication Security (Zero plaintext credentials in source)
-const ADMIN_CRED_HASH = "793bbc4aa12ef130ca68ea0554ef24ff33fa4c128bb4433ea03050c0c7d78156";
-const ADMIN_TOTP_HASH = "18c52c615a979caa644cd337f9976c823263c503817cc99f07e427ed667e9291";
+import bcrypt from "bcryptjs";
 
-export function verifyAdminCredentials(email, password) {
+// 3. Admin Authentication Security using Industry-Standard Bcrypt Hashing
+const ADMIN_AUTHORIZED_EMAIL = "admin@zairza.in";
+const ADMIN_BCRYPT_PASSWORD_HASH = "$2b$10$40Md8KbekRaFvuPfPs8c8uya4ip0MMkRL3uxwcL8unj1MIT3MdlKq";
+const ADMIN_BCRYPT_2FA_HASH = "$2b$10$a3SFeQKncp.M4AVAUwGF9u6znPAuFLEiWU5RAbTK6NgSdwwB05DQi";
+
+export async function verifyAdminCredentials(email, password) {
   if (!email || !password) return false;
   const normalizedEmail = email.trim().toLowerCase();
-  const token = `${normalizedEmail}:${password.trim()}:zairza_adm_2026`;
-  const computed = sha256Sync(token);
-  return computed === ADMIN_CRED_HASH;
+  if (normalizedEmail !== ADMIN_AUTHORIZED_EMAIL) return false;
+
+  try {
+    return await bcrypt.compare(password.trim(), ADMIN_BCRYPT_PASSWORD_HASH);
+  } catch (err) {
+    return false;
+  }
 }
 
-export function verifyAdmin2FACode(code) {
+export async function verifyAdmin2FACode(code) {
   if (!code) return false;
   const cleanCode = code.trim();
-  const token = `${cleanCode}:zairza_adm_2026`;
-  const computed = sha256Sync(token);
-  return computed === ADMIN_TOTP_HASH;
+  try {
+    return await bcrypt.compare(cleanCode, ADMIN_BCRYPT_2FA_HASH);
+  } catch (err) {
+    return false;
+  }
 }
 
 // Generate ephemeral session token for admin

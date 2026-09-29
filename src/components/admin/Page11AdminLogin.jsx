@@ -36,7 +36,8 @@ export const Page11AdminLogin = () => {
       return;
     }
 
-    if (verifyAdmin2FACode(twoFactorCode)) {
+    const is2FAValid = await verifyAdmin2FACode(twoFactorCode);
+    if (is2FAValid) {
       const ok = await loginAdmin(email, password);
       if (ok) {
         setCurrentView("page12_admin_dashboard");

@@ -565,8 +565,9 @@ export const QuizProvider = ({ children }) => {
       }
     }
 
-    // 2. Cryptographic Salted SHA-256 (Zero plaintext credentials in source)
-    if (verifyAdminCredentials(username, password)) {
+    // 2. Cryptographic Bcrypt Verification (Zero plaintext credentials in source)
+    const isBcryptMatch = await verifyAdminCredentials(username, password);
+    if (isBcryptMatch) {
       setIsAdminLoggedIn(true);
       const session = generateAdminSession();
       sessionStorage.setItem("zairza_admin_token", session.token);
