@@ -20,31 +20,29 @@ export const QUIZ_CONFIG = {
       "id": "logical",
       "name": "Part 1: Logical Reasoning",
       "icon": "🧩",
-      "startQ": 1,
-      "endQ": 10,
-      "total": 10
+      "poolSize": 18,
+      "drawCount": 10
     },
     {
       "id": "tech",
       "name": "Part 2: Tech Knowledge",
       "icon": "⚡",
-      "startQ": 11,
-      "endQ": 25,
-      "total": 15
+      "poolSize": 29,
+      "drawCount": 15
     },
     {
       "id": "hr",
       "name": "Part 3: HR & Cultural Fit",
       "icon": "🤝",
-      "startQ": 26,
-      "endQ": 30,
-      "total": 5
+      "poolSize": 13,
+      "drawCount": 5
     }
   ]
 };
 
 // ==============================================================================
-// PUBLIC QUESTION BANK (Sanitized: NO correctOptionId or explanation)
+// PUBLIC QUESTION POOL (Sanitized: NO correctOptionId or explanation)
+// Random questions drawn from each section for each candidate
 // ==============================================================================
 export const INITIAL_QUESTIONS = [
   {
@@ -766,6 +764,726 @@ export const INITIAL_QUESTIONS = [
         "text": "Complain that engineering doesn't leave room for extracurricular development."
       }
     ]
+  },
+  {
+    "id": 31,
+    "section": "logical",
+    "sectionTitle": "Part 1: Logical Reasoning",
+    "prompt": "In a row of students, Rakesh is 12th from the left and Suman is 17th from the right. If they interchange their positions, Rakesh becomes 22nd from the left. How many students are there in the row?",
+    "options": [
+      {
+        "id": "opt_1",
+        "text": "37"
+      },
+      {
+        "id": "opt_2",
+        "text": "38"
+      },
+      {
+        "id": "opt_3",
+        "text": "39"
+      },
+      {
+        "id": "opt_4",
+        "text": "40"
+      }
+    ]
+  },
+  {
+    "id": 32,
+    "section": "logical",
+    "sectionTitle": "Part 1: Logical Reasoning",
+    "prompt": "If P is the brother of Q, Q is the sister of R, and R is the father of S, how is P related to S?",
+    "options": [
+      {
+        "id": "opt_1",
+        "text": "Father"
+      },
+      {
+        "id": "opt_2",
+        "text": "Paternal Uncle"
+      },
+      {
+        "id": "opt_3",
+        "text": "Brother"
+      },
+      {
+        "id": "opt_4",
+        "text": "Grandfather"
+      }
+    ]
+  },
+  {
+    "id": 33,
+    "section": "logical",
+    "sectionTitle": "Part 1: Logical Reasoning",
+    "prompt": "What is the angle between the hour hand and minute hand of an analog clock at 3:40?",
+    "options": [
+      {
+        "id": "opt_1",
+        "text": "120°"
+      },
+      {
+        "id": "opt_2",
+        "text": "130°"
+      },
+      {
+        "id": "opt_3",
+        "text": "140°"
+      },
+      {
+        "id": "opt_4",
+        "text": "125°"
+      }
+    ]
+  },
+  {
+    "id": 34,
+    "section": "logical",
+    "sectionTitle": "Part 1: Logical Reasoning",
+    "prompt": "Find the missing term in the sequence: 7, 26, 63, 124, 215, ?",
+    "options": [
+      {
+        "id": "opt_1",
+        "text": "342"
+      },
+      {
+        "id": "opt_2",
+        "text": "343"
+      },
+      {
+        "id": "opt_3",
+        "text": "328"
+      },
+      {
+        "id": "opt_4",
+        "text": "511"
+      }
+    ]
+  },
+  {
+    "id": 35,
+    "section": "logical",
+    "sectionTitle": "Part 1: Logical Reasoning",
+    "prompt": "Five club members (A, B, C, D, E) sit in a circle facing the center. A is between E and C. B is to the immediate right of E. Who is to the immediate left of C?",
+    "options": [
+      {
+        "id": "opt_1",
+        "text": "A"
+      },
+      {
+        "id": "opt_2",
+        "text": "D"
+      },
+      {
+        "id": "opt_3",
+        "text": "B"
+      },
+      {
+        "id": "opt_4",
+        "text": "E"
+      }
+    ]
+  },
+  {
+    "id": 36,
+    "section": "logical",
+    "sectionTitle": "Part 1: Logical Reasoning",
+    "prompt": "If 'ROBOT' is encoded as 'TQDOT' in a specific cipher, how is 'DRONE' encoded using the same rule?",
+    "options": [
+      {
+        "id": "opt_1",
+        "text": "FTQPG"
+      },
+      {
+        "id": "opt_2",
+        "text": "ESPOF"
+      },
+      {
+        "id": "opt_3",
+        "text": "FTPOG"
+      },
+      {
+        "id": "opt_4",
+        "text": "FTQOG"
+      }
+    ]
+  },
+  {
+    "id": 37,
+    "section": "logical",
+    "sectionTitle": "Part 1: Logical Reasoning",
+    "prompt": "Statement: All algorithms are logic. No logic is emotional. Conclusion I: No algorithm is emotional. Conclusion II: Some logic is an algorithm.",
+    "options": [
+      {
+        "id": "opt_1",
+        "text": "Only Conclusion I follows"
+      },
+      {
+        "id": "opt_2",
+        "text": "Only Conclusion II follows"
+      },
+      {
+        "id": "opt_3",
+        "text": "Neither follows"
+      },
+      {
+        "id": "opt_4",
+        "text": "Both Conclusion I and II follow"
+      }
+    ]
+  },
+  {
+    "id": 38,
+    "section": "logical",
+    "sectionTitle": "Part 1: Logical Reasoning",
+    "prompt": "Pointing to a photograph of a drone designer, Ananya says: 'His mother is the only daughter of my mother.' How is Ananya related to the designer?",
+    "options": [
+      {
+        "id": "opt_1",
+        "text": "Sister"
+      },
+      {
+        "id": "opt_2",
+        "text": "Mother"
+      },
+      {
+        "id": "opt_3",
+        "text": "Aunt"
+      },
+      {
+        "id": "opt_4",
+        "text": "Grandmother"
+      }
+    ]
+  },
+  {
+    "id": 39,
+    "section": "tech",
+    "sectionTitle": "Part 2: Tech Knowledge (Software Engineering)",
+    "prompt": "Which Git command allows you to select a specific individual commit from another branch and apply it to your current working branch?",
+    "options": [
+      {
+        "id": "opt_1",
+        "text": "git rebase --onto"
+      },
+      {
+        "id": "opt_2",
+        "text": "git cherry-pick <commit-hash>"
+      },
+      {
+        "id": "opt_3",
+        "text": "git merge --squash"
+      },
+      {
+        "id": "opt_4",
+        "text": "git stash apply"
+      }
+    ]
+  },
+  {
+    "id": 40,
+    "section": "tech",
+    "sectionTitle": "Part 2: Tech Knowledge (Electronics & IoT)",
+    "prompt": "In digital electronics and microcontrollers, what is the primary role of a pull-up or pull-down resistor on an input pin connected to a momentary button?",
+    "options": [
+      {
+        "id": "opt_1",
+        "text": "To prevent a floating high-impedance state and ensure a deterministic digital voltage level (HIGH or LOW)"
+      },
+      {
+        "id": "opt_2",
+        "text": "To amplify small wireless radio signals"
+      },
+      {
+        "id": "opt_3",
+        "text": "To speed up serial clock transmission"
+      },
+      {
+        "id": "opt_4",
+        "text": "To regulate USB power from 5V to 3.3V"
+      }
+    ]
+  },
+  {
+    "id": 41,
+    "section": "tech",
+    "sectionTitle": "Part 2: Tech Knowledge (Database & Systems)",
+    "prompt": "What does the 'ACID' acronym stand for in relational database transactional processing?",
+    "options": [
+      {
+        "id": "opt_1",
+        "text": "Atomicity, Consistency, Isolation, Durability"
+      },
+      {
+        "id": "opt_2",
+        "text": "Access, Control, Indexing, Delivery"
+      },
+      {
+        "id": "opt_3",
+        "text": "Authentication, Cryptography, Integrity, Decryption"
+      },
+      {
+        "id": "opt_4",
+        "text": "Asynchronous, Cached, Idempotent, Distributed"
+      }
+    ]
+  },
+  {
+    "id": 42,
+    "section": "tech",
+    "sectionTitle": "Part 2: Tech Knowledge (Robotics)",
+    "prompt": "Which sensor module integrates a 3-axis accelerometer and a 3-axis gyroscope to track angular velocity, roll, pitch, and yaw for rovers and drones?",
+    "options": [
+      {
+        "id": "opt_1",
+        "text": "IMU (Inertial Measurement Unit e.g. MPU6050)"
+      },
+      {
+        "id": "opt_2",
+        "text": "Ultrasonic HC-SR04"
+      },
+      {
+        "id": "opt_3",
+        "text": "DHT11 Humidity Sensor"
+      },
+      {
+        "id": "opt_4",
+        "text": "PIR Passive Infrared Detector"
+      }
+    ]
+  },
+  {
+    "id": 43,
+    "section": "tech",
+    "sectionTitle": "Part 2: Tech Knowledge (Algorithms)",
+    "prompt": "What is the worst-case time complexity of searching for an item in a balanced self-sorting Binary Search Tree (like an AVL or Red-Black Tree)?",
+    "options": [
+      {
+        "id": "opt_1",
+        "text": "O(1)"
+      },
+      {
+        "id": "opt_2",
+        "text": "O(log n)"
+      },
+      {
+        "id": "opt_3",
+        "text": "O(n)"
+      },
+      {
+        "id": "opt_4",
+        "text": "O(n log n)"
+      }
+    ]
+  },
+  {
+    "id": 44,
+    "section": "tech",
+    "sectionTitle": "Part 2: Tech Knowledge (Web Development)",
+    "prompt": "In modern React.js, which Hook is used to execute side effects such as data synchronization, subscriptions, or manual DOM adjustments?",
+    "options": [
+      {
+        "id": "opt_1",
+        "text": "useState"
+      },
+      {
+        "id": "opt_2",
+        "text": "useEffect"
+      },
+      {
+        "id": "opt_3",
+        "text": "useContext"
+      },
+      {
+        "id": "opt_4",
+        "text": "useMemo"
+      }
+    ]
+  },
+  {
+    "id": 45,
+    "section": "tech",
+    "sectionTitle": "Part 2: Tech Knowledge (Hardware Design)",
+    "prompt": "Why are decoupling ceramic capacitors (typically 0.1 µF) placed as close as physically possible to the power pins of integrated circuits (ICs) on PCBs?",
+    "options": [
+      {
+        "id": "opt_1",
+        "text": "To bypass high-frequency voltage noise to ground and supply instantaneous local charge during clock switching"
+      },
+      {
+        "id": "opt_2",
+        "text": "To boost battery life by converting heat back to electricity"
+      },
+      {
+        "id": "opt_3",
+        "text": "To act as digital memory cells"
+      },
+      {
+        "id": "opt_4",
+        "text": "To radiate RF radio signals for telemetry"
+      }
+    ]
+  },
+  {
+    "id": 46,
+    "section": "tech",
+    "sectionTitle": "Part 2: Tech Knowledge (UI/UX & CSS)",
+    "prompt": "In modern responsive CSS, what does setting 'justify-content: space-between' on a flex container achieve?",
+    "options": [
+      {
+        "id": "opt_1",
+        "text": "Items are aligned flush against the top and bottom edges"
+      },
+      {
+        "id": "opt_2",
+        "text": "First item is on the start line, last on the end line, with equal space distributed between adjacent items"
+      },
+      {
+        "id": "opt_3",
+        "text": "All items are packed tightly in the exact center"
+      },
+      {
+        "id": "opt_4",
+        "text": "Items wrap automatically onto a new line"
+      }
+    ]
+  },
+  {
+    "id": 47,
+    "section": "tech",
+    "sectionTitle": "Part 2: Tech Knowledge (Computer Networks)",
+    "prompt": "Which layer in the 7-layer OSI networking reference model provides end-to-end data transmission reliability, segment flow control, and port multiplexing?",
+    "options": [
+      {
+        "id": "opt_1",
+        "text": "Network Layer"
+      },
+      {
+        "id": "opt_2",
+        "text": "Transport Layer"
+      },
+      {
+        "id": "opt_3",
+        "text": "Data Link Layer"
+      },
+      {
+        "id": "opt_4",
+        "text": "Session Layer"
+      }
+    ]
+  },
+  {
+    "id": 48,
+    "section": "tech",
+    "sectionTitle": "Part 2: Tech Knowledge (Computer Vision & AI)",
+    "prompt": "In convolutional neural networks (CNNs) and OpenCV edge detection, what mathematical operation slides a small matrix (kernel) across pixels to compute feature maps?",
+    "options": [
+      {
+        "id": "opt_1",
+        "text": "Matrix Convolution"
+      },
+      {
+        "id": "opt_2",
+        "text": "Euclidean Distance"
+      },
+      {
+        "id": "opt_3",
+        "text": "Fast Fourier Transform"
+      },
+      {
+        "id": "opt_4",
+        "text": "Singular Value Decomposition"
+      }
+    ]
+  },
+  {
+    "id": 49,
+    "section": "tech",
+    "sectionTitle": "Part 2: Tech Knowledge (Aeronautics & Drones)",
+    "prompt": "Why do standard X-configuration quadcopters use two Clockwise (CW) and two Counter-Clockwise (CCW) rotating propellers rather than all four spinning in the same direction?",
+    "options": [
+      {
+        "id": "opt_1",
+        "text": "To cancel out aerodynamic reaction torque (yaw momentum) so the drone does not spin continuously in place"
+      },
+      {
+        "id": "opt_2",
+        "text": "Because CW motors use half as much electrical current as CCW motors"
+      },
+      {
+        "id": "opt_3",
+        "text": "To maintain forward momentum without using battery power"
+      },
+      {
+        "id": "opt_4",
+        "text": "To enable underwater navigation mode"
+      }
+    ]
+  },
+  {
+    "id": 50,
+    "section": "tech",
+    "sectionTitle": "Part 2: Tech Knowledge (Linux & DevOps)",
+    "prompt": "Which Linux terminal utility provides an interactive, real-time visual monitor of system processes, CPU thread load, memory usage, and swap space?",
+    "options": [
+      {
+        "id": "opt_1",
+        "text": "ls -la"
+      },
+      {
+        "id": "opt_2",
+        "text": "htop / top"
+      },
+      {
+        "id": "opt_3",
+        "text": "grep -r"
+      },
+      {
+        "id": "opt_4",
+        "text": "chmod 777"
+      }
+    ]
+  },
+  {
+    "id": 51,
+    "section": "tech",
+    "sectionTitle": "Part 2: Tech Knowledge (Object-Oriented Programming)",
+    "prompt": "Which core OOP pillar allows a child subclass to provide a specific, customized implementation of a method that is already declared in its parent class?",
+    "options": [
+      {
+        "id": "opt_1",
+        "text": "Polymorphism (Method Overriding)"
+      },
+      {
+        "id": "opt_2",
+        "text": "Encapsulation"
+      },
+      {
+        "id": "opt_3",
+        "text": "Data Hiding"
+      },
+      {
+        "id": "opt_4",
+        "text": "Static Compilation"
+      }
+    ]
+  },
+  {
+    "id": 52,
+    "section": "tech",
+    "sectionTitle": "Part 2: Tech Knowledge (Embedded Protocols)",
+    "prompt": "Comparing I2C and SPI serial communication buses on microcontrollers, which statement is physically correct?",
+    "options": [
+      {
+        "id": "opt_1",
+        "text": "I2C uses 2 lines (SDA/SCL) with addressing, while SPI uses 4 lines (MOSI/MISO/SCK/CS) and achieves significantly higher clock throughput"
+      },
+      {
+        "id": "opt_2",
+        "text": "SPI only works over optical fiber cables"
+      },
+      {
+        "id": "opt_3",
+        "text": "I2C requires 8 wires for parallel communication"
+      },
+      {
+        "id": "opt_4",
+        "text": "SPI does not use a master clock signal"
+      }
+    ]
+  },
+  {
+    "id": 53,
+    "section": "hr",
+    "sectionTitle": "Part 3: HR & Cultural Alignment",
+    "prompt": "During a 24-hour hackathon or lab build, your teammate is feeling overwhelmed and struggling to finish their module. What is your reaction?",
+    "options": [
+      {
+        "id": "opt_1",
+        "text": "Sit together, break down the remaining blocker into smaller tasks, pair-program to solve it, and encourage them"
+      },
+      {
+        "id": "opt_2",
+        "text": "Publicly complain to mentors that they are slowing down your team"
+      },
+      {
+        "id": "opt_3",
+        "text": "Abandon the project and leave the room"
+      },
+      {
+        "id": "opt_4",
+        "text": "Pretend nothing is wrong and wait until the deadline passes"
+      }
+    ]
+  },
+  {
+    "id": 54,
+    "section": "hr",
+    "sectionTitle": "Part 3: HR & Cultural Alignment",
+    "prompt": "Ten minutes before a live demonstration in front of faculty and guests, you discover a bug that occasionally crashes the platform. What do you do?",
+    "options": [
+      {
+        "id": "opt_1",
+        "text": "Calmly inform your team leads, identify the root crash trigger, implement a defensive fallback/safe mode, and be transparent during the demo"
+      },
+      {
+        "id": "opt_2",
+        "text": "Blame a teammate who isn't present"
+      },
+      {
+        "id": "opt_3",
+        "text": "Turn off the equipment and pretend power failed"
+      },
+      {
+        "id": "opt_4",
+        "text": "Silently delete the error logs so nobody knows"
+      }
+    ]
+  },
+  {
+    "id": 55,
+    "section": "hr",
+    "sectionTitle": "Part 3: HR & Cultural Alignment",
+    "prompt": "A senior mentor provides direct, constructive criticism highlighting major flaws in your circuit schematic or code architecture. How do you respond?",
+    "options": [
+      {
+        "id": "opt_1",
+        "text": "Welcome the technical critique, ask targeted questions to understand the best engineering practice, and iterate on the design"
+      },
+      {
+        "id": "opt_2",
+        "text": "Take it as a personal insult and stop attending club sessions"
+      },
+      {
+        "id": "opt_3",
+        "text": "Argue aggressively without looking at the technical data"
+      },
+      {
+        "id": "opt_4",
+        "text": "Agree verbally but never make the changes"
+      }
+    ]
+  },
+  {
+    "id": 56,
+    "section": "hr",
+    "sectionTitle": "Part 3: HR & Cultural Alignment",
+    "prompt": "What does the Zairza motto 'Wonder • Think • Create' mean to you as an engineer at OUTR?",
+    "options": [
+      {
+        "id": "opt_1",
+        "text": "Cultivating curiosity, applying deep first-principles thinking, and turning bold ideas into impactful, functioning reality"
+      },
+      {
+        "id": "opt_2",
+        "text": "Memorizing textbook definitions for exam marks"
+      },
+      {
+        "id": "opt_3",
+        "text": "Waiting for instructions without initiating anything yourself"
+      },
+      {
+        "id": "opt_4",
+        "text": "Just a catchy social media slogan"
+      }
+    ]
+  },
+  {
+    "id": 57,
+    "section": "hr",
+    "sectionTitle": "Part 3: HR & Cultural Alignment",
+    "prompt": "How do you balance high-tempo club projects with mid-term examinations and regular university academic coursework?",
+    "options": [
+      {
+        "id": "opt_1",
+        "text": "Plan ahead with structured weekly calendars, stay on top of coursework daily, and dedicate focused lab hours without last-minute panic"
+      },
+      {
+        "id": "opt_2",
+        "text": "Bunk all semester lectures"
+      },
+      {
+        "id": "opt_3",
+        "text": "Drop out of all extracurricular activities permanently"
+      },
+      {
+        "id": "opt_4",
+        "text": "Leave both studies and club tasks until the night before"
+      }
+    ]
+  },
+  {
+    "id": 58,
+    "section": "hr",
+    "sectionTitle": "Part 3: HR & Cultural Alignment",
+    "prompt": "A fresher or classmate asks you for help understanding a programming or circuit concept that you are already proficient in. How do you handle it?",
+    "options": [
+      {
+        "id": "opt_1",
+        "text": "Patiently explain the intuition, guide them to write or build it themselves, and point them to good documentation"
+      },
+      {
+        "id": "opt_2",
+        "text": "Refuse to share knowledge to protect your competitive edge"
+      },
+      {
+        "id": "opt_3",
+        "text": "Do their entire work for them so they learn nothing"
+      },
+      {
+        "id": "opt_4",
+        "text": "Make fun of them for not knowing the concept"
+      }
+    ]
+  },
+  {
+    "id": 59,
+    "section": "hr",
+    "sectionTitle": "Part 3: HR & Cultural Alignment",
+    "prompt": "Why is multi-disciplinary collaboration (Software + Hardware + Design + Robotics) critical for modern innovation at Zairza?",
+    "options": [
+      {
+        "id": "opt_1",
+        "text": "Because groundbreaking tech products require hardware sensors, intelligent algorithms, robust cloud backends, and intuitive human interfaces working harmoniously"
+      },
+      {
+        "id": "opt_2",
+        "text": "It isn't; every wing should remain in total isolation"
+      },
+      {
+        "id": "opt_3",
+        "text": "Only software matters in modern engineering"
+      },
+      {
+        "id": "opt_4",
+        "text": "Just to increase club headcount"
+      }
+    ]
+  },
+  {
+    "id": 60,
+    "section": "hr",
+    "sectionTitle": "Part 3: HR & Cultural Alignment",
+    "prompt": "The team votes on two competing architectural designs for an induction project, and your favorite proposal is not chosen. What is your attitude?",
+    "options": [
+      {
+        "id": "opt_1",
+        "text": "Disagree and commit: fully back the team's chosen decision and contribute 100% of your energy to execute it successfully"
+      },
+      {
+        "id": "opt_2",
+        "text": "Actively sabotage the chosen design so your idea looks better"
+      },
+      {
+        "id": "opt_3",
+        "text": "Stop contributing to the team"
+      },
+      {
+        "id": "opt_4",
+        "text": "Complain repeatedly during team meetings"
+      }
+    ]
   }
 ];
 
@@ -892,6 +1610,126 @@ export const QUIZ_ANSWER_KEYS = {
   "30": {
     "correctOptionId": "opt_1",
     "explanation": "Balanced dedication and personal organization ensure academic excellence and impactful club contributions."
+  },
+  "31": {
+    "correctOptionId": "opt_2",
+    "explanation": "Total students = Left position + Right position - 1 = 22 + 17 - 1 = 38."
+  },
+  "32": {
+    "correctOptionId": "opt_2",
+    "explanation": "R is the father of S, and P is the brother of R (since P is brother of Q, Q is sister of R). Hence, P is the paternal uncle of S."
+  },
+  "33": {
+    "correctOptionId": "opt_2",
+    "explanation": "Angle = |30*H - 5.5*M| = |30(3) - 5.5(40)| = |90 - 220| = 130°."
+  },
+  "34": {
+    "correctOptionId": "opt_1",
+    "explanation": "Pattern is n^3 - 1: 2^3-1=7, 3^3-1=26, 4^3-1=63, 5^3-1=124, 6^3-1=215, 7^3-1=342."
+  },
+  "35": {
+    "correctOptionId": "opt_1",
+    "explanation": "In circular arrangement facing center, A is between E and C, so to immediate left of C is A."
+  },
+  "36": {
+    "correctOptionId": "opt_1",
+    "explanation": "Pattern shifts letters: R(+2)->T, O(+2)->Q, B(+2)->D, O(+0), T(+0) -> similarly D(+2)->F, R(+2)->T, O(+2)->Q, N(+2)->P, E(+2)->G => FTQPG."
+  },
+  "37": {
+    "correctOptionId": "opt_4",
+    "explanation": "Since all algorithms are logic and no logic is emotional, no algorithm is emotional (I). Also, if all algorithms are logic, some logic must be algorithms (II)."
+  },
+  "38": {
+    "correctOptionId": "opt_2",
+    "explanation": "Only daughter of Ananya's mother is Ananya herself. Hence Ananya is his mother."
+  },
+  "39": {
+    "correctOptionId": "opt_2",
+    "explanation": "git cherry-pick applies the diff of a specific commit onto the current branch."
+  },
+  "40": {
+    "correctOptionId": "opt_1",
+    "explanation": "Pull-up/down resistors eliminate high-impedance floating inputs, giving steady Vcc or GND."
+  },
+  "41": {
+    "correctOptionId": "opt_1",
+    "explanation": "ACID guarantees Atomicity, Consistency, Isolation, and Durability."
+  },
+  "42": {
+    "correctOptionId": "opt_1",
+    "explanation": "An IMU combining accelerometer and gyro delivers attitude/orientation telemetry."
+  },
+  "43": {
+    "correctOptionId": "opt_2",
+    "explanation": "Balanced BSTs (AVL, Red-Black) maintain height O(log n), providing O(log n) search."
+  },
+  "44": {
+    "correctOptionId": "opt_2",
+    "explanation": "useEffect manages lifecycle side effects in React functional components."
+  },
+  "45": {
+    "correctOptionId": "opt_1",
+    "explanation": "Decoupling caps act as local charge reservoirs filtering high-frequency noise spikes."
+  },
+  "46": {
+    "correctOptionId": "opt_2",
+    "explanation": "space-between pushes first item to start, last to end, and spaces out the middle."
+  },
+  "47": {
+    "correctOptionId": "opt_2",
+    "explanation": "OSI Layer 4 (Transport, TCP/UDP) handles port multiplexing and end-to-end reliability."
+  },
+  "48": {
+    "correctOptionId": "opt_1",
+    "explanation": "2D Convolution slides the kernel matrix over pixels to detect visual features."
+  },
+  "49": {
+    "correctOptionId": "opt_1",
+    "explanation": "Equal pairs of CW and CCW props cancel out reactive rotational torque on the yaw axis."
+  },
+  "50": {
+    "correctOptionId": "opt_2",
+    "explanation": "htop/top is the standard interactive process and resource monitor on Linux."
+  },
+  "51": {
+    "correctOptionId": "opt_1",
+    "explanation": "Polymorphism through method overriding enables child classes to specialize parent behavior."
+  },
+  "52": {
+    "correctOptionId": "opt_1",
+    "explanation": "I2C uses 2 wires (SDA/SCL), while SPI uses 4 wires with higher data rates and dedicated CS lines."
+  },
+  "53": {
+    "correctOptionId": "opt_1",
+    "explanation": "Team empathy, active collaboration, and supportive problem-solving define great club culture."
+  },
+  "54": {
+    "correctOptionId": "opt_1",
+    "explanation": "Engineering integrity means transparency, quick mitigation, and staying composed under pressure."
+  },
+  "55": {
+    "correctOptionId": "opt_1",
+    "explanation": "Constructive feedback from experienced peers is the fastest catalyst for technical growth."
+  },
+  "56": {
+    "correctOptionId": "opt_1",
+    "explanation": "Wonder, Think, Create represents the journey from curiosity to deep logic to real hardware/software creation."
+  },
+  "57": {
+    "correctOptionId": "opt_1",
+    "explanation": "Time-blocking, self-discipline, and early planning allow engineering students to excel at both academics and innovation."
+  },
+  "58": {
+    "correctOptionId": "opt_1",
+    "explanation": "Peer mentorship and open knowledge-sharing are the foundational pillars of Zairza."
+  },
+  "59": {
+    "correctOptionId": "opt_1",
+    "explanation": "Real-world engineering triumphs occur at the intersection of mechanical, electrical, software, and design disciplines."
+  },
+  "60": {
+    "correctOptionId": "opt_1",
+    "explanation": "Disagree and commit: professional teams debate ideas openly, but execute the collective decision with 100% solidarity."
   }
 };
 
@@ -899,100 +1737,76 @@ export const INITIAL_CANDIDATES = [
   {
     "rollNumber": "2401106042",
     "fullName": "Aarav Mohapatra",
-    "email": "aarav.24cse042@outr.ac.in",
-    "mobile": "9876543210",
+    "email": "aarav.mohapatra@outr.ac.in",
+    "mobile": "+91 98765 43210",
     "year": "1st Year",
-    "branch": "Computer Science & Engineering",
+    "branch": "Computer Science and Engineering",
     "gender": "Male",
     "residentialType": "Hosteller",
     "preferredWing": "Software",
-    "technicalInterests": [
-      "Web Development",
-      "AI/ML",
-      "Cloud Systems"
-    ],
-    "portfolioUrl": "https://github.com/aarav-outr",
-    "registeredAt": "2026-09-29T10:15:00+05:30",
-    "quizStatus": "COMPLETED",
-    "score": 26,
-    "timeTakenSeconds": 1420,
+    "technicalInterests": ["React.js", "Python / ML", "Cybersecurity"],
+    "portfolioUrl": "https://github.com/aarav-m",
+    "quizStatus": "NOT_STARTED",
+    "score": null,
     "violationsCount": 0,
-    "sectionScores": {
-      "logical": 9,
-      "tech": 13,
-      "hr": 4
-    }
+    "timeTakenSeconds": 0,
+    "submissionReason": null,
+    "registeredAt": "2026-09-29 18:30"
   },
   {
-    "rollNumber": "2401106109",
+    "rollNumber": "2401106118",
     "fullName": "Priyanka Dash",
-    "email": "priyanka.24ee109@outr.ac.in",
-    "mobile": "9812345678",
+    "email": "priyanka.dash@outr.ac.in",
+    "mobile": "+91 98765 43211",
     "year": "1st Year",
-    "branch": "Electrical Engineering",
+    "branch": "Electronics and Communication Engineering (ECE)",
     "gender": "Female",
     "residentialType": "Day Scholar",
     "preferredWing": "Robotics & IoT",
-    "technicalInterests": [
-      "Embedded Systems",
-      "Robotics",
-      "Circuit Design"
-    ],
+    "technicalInterests": ["Embedded C", "Drone Aerodynamics", "ROS2"],
     "portfolioUrl": "https://linkedin.com/in/priyanka-dash",
-    "registeredAt": "2026-09-29T11:45:00+05:30",
     "quizStatus": "IN_PROGRESS",
     "score": null,
-    "timeTakenSeconds": 840,
-    "violationsCount": 2,
-    "currentQuestion": 18,
-    "sectionScores": null
+    "violationsCount": 1,
+    "timeTakenSeconds": 780,
+    "submissionReason": null,
+    "registeredAt": "2026-09-29 19:15"
   },
   {
-    "rollNumber": "2301106015",
-    "fullName": "Rohan Kumar Swain",
-    "email": "rohan.23me015@outr.ac.in",
-    "mobile": "9778899001",
-    "year": "2nd Year",
-    "branch": "Mechanical Engineering",
+    "rollNumber": "2401106205",
+    "fullName": "Rohan Behera",
+    "email": "rohan.behera@outr.ac.in",
+    "mobile": "+91 98765 43212",
+    "year": "1st Year",
+    "branch": "Information Technology",
     "gender": "Male",
     "residentialType": "Hosteller",
     "preferredWing": "Design",
-    "technicalInterests": [
-      "3D Modelling",
-      "UI/UX",
-      "Brand Design"
-    ],
-    "portfolioUrl": "https://behance.net/rohan-swain",
-    "registeredAt": "2026-09-29T12:30:00+05:30",
-    "quizStatus": "NOT_STARTED",
-    "score": null,
-    "timeTakenSeconds": 0,
+    "technicalInterests": ["Figma Design Systems", "3D Blender", "Next.js"],
+    "portfolioUrl": "https://behance.net/rohanbehera",
+    "quizStatus": "COMPLETED",
+    "score": 24.5,
     "violationsCount": 0,
-    "currentQuestion": 1,
-    "sectionScores": null
+    "timeTakenSeconds": 1420,
+    "submissionReason": "MANUAL_SUBMIT",
+    "registeredAt": "2026-09-29 17:45",
+    "submittedAt": "2026-09-29 22:45"
   }
 ];
 
 export const INITIAL_AUDIT_LOGS = [
   {
-    "id": "log_1",
-    "action": "SYSTEM_INITIALIZED",
-    "admin": "SuperAdmin (zairza_core)",
-    "details": "Platform initialized for Induction 2026 Quiz Window",
-    "timestamp": "2026-09-29T12:00:00+05:30"
+    "id": "log_001",
+    "action": "CONFIG_UPDATE",
+    "admin": "Super Admin (admin@zairza.in)",
+    "details": "Induction window set: 29th Sept 10:00 PM to 30th Sept 10:00 PM.",
+    "timestamp": "2026-09-29 16:30"
   },
   {
-    "id": "log_2",
-    "action": "QUIZ_CONFIG_SAVED",
-    "admin": "QuizManager (leads_team)",
-    "details": "Configured 30 questions across 3 parts (30 mins duration)",
-    "timestamp": "2026-09-29T12:15:00+05:30"
-  },
-  {
-    "id": "log_3",
-    "action": "CANDIDATE_SUBMIT",
-    "admin": "System Auto-Verifier",
-    "details": "Candidate 2401106042 successfully submitted response",
-    "timestamp": "2026-09-29T13:00:00+05:30"
+    "id": "log_002",
+    "action": "QUESTION_POOL_EXPANDED",
+    "admin": "Super Admin",
+    "details": "Expanded question pool to 60 questions with random section sampling (10 Logical, 15 Tech, 5 HR).",
+    "timestamp": "2026-09-29 17:00"
   }
 ];

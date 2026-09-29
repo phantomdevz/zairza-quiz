@@ -15,7 +15,8 @@ import {
 
 export const Page5ProctoredQuiz = () => {
   const {
-    questions,
+    questions: poolQuestions,
+    activeQuestions,
     quizConfig,
     activeCandidate,
     currentQuestionIndex,
@@ -34,6 +35,7 @@ export const Page5ProctoredQuiz = () => {
     setMobilePaletteOpen
   } = useQuiz();
 
+  const questions = activeQuestions || poolQuestions;
   const currentQ = questions[currentQuestionIndex] || questions[0];
   const roll = activeCandidate?.rollNumber || "2401106042";
 

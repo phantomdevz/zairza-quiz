@@ -130,7 +130,7 @@ export const Page16QuestionBank = () => {
         border: "1px solid rgba(16, 185, 129, 0.25)",
         borderRadius: "12px",
         padding: "16px 20px",
-        marginBottom: "24px",
+        marginBottom: "20px",
         display: "flex",
         alignItems: "flex-start",
         gap: "14px"
@@ -140,11 +140,37 @@ export const Page16QuestionBank = () => {
         </div>
         <div style={{ fontSize: "0.88rem", lineHeight: "1.6" }}>
           <div style={{ fontWeight: "700", color: "var(--accent-emerald)", marginBottom: "2px" }}>
-            Isolated Solution Keys Architecture Active
+            Dynamic Pool Sampling &amp; Isolated Answer Keys Active
           </div>
           <div style={{ color: "var(--text-secondary)" }}>
-            Correct answers and explanations are stored separately in the secure <code className="mono">quiz_answer_keys</code> table and never bundled with questions sent to student browsers.
-            <strong> Click any option card below to directly mark or reassign it as the official answer key.</strong>
+            Questions are not fixed! The Question Bank functions as a larger pool from which <strong>random questions are allotted to each candidate</strong> (10 Logical, 15 Tech, 5 HR). Answer keys are stored separately in <code className="mono">quiz_answer_keys</code>. Click any option below to set the official answer key.
+          </div>
+        </div>
+      </div>
+
+      {/* Dynamic Section Pool & Allotment Matrix */}
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "14px", marginBottom: "24px" }}>
+        <div className="glass-panel" style={{ padding: "16px 20px", borderLeft: "3px solid var(--accent-cyan)" }}>
+          <div style={{ fontSize: "0.75rem", color: "var(--text-muted)", textTransform: "uppercase", fontWeight: "700" }}>Part 1: Logical Reasoning</div>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginTop: "6px" }}>
+            <span style={{ fontSize: "1.3rem", fontWeight: "800" }}>{questions.filter(q => q.section === "logical").length} in Pool</span>
+            <span className="badge badge-cyan" style={{ fontSize: "0.72rem" }}>10 Allotted / Attempt</span>
+          </div>
+        </div>
+
+        <div className="glass-panel" style={{ padding: "16px 20px", borderLeft: "3px solid var(--accent-purple)" }}>
+          <div style={{ fontSize: "0.75rem", color: "var(--text-muted)", textTransform: "uppercase", fontWeight: "700" }}>Part 2: Tech Knowledge</div>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginTop: "6px" }}>
+            <span style={{ fontSize: "1.3rem", fontWeight: "800" }}>{questions.filter(q => q.section === "tech").length} in Pool</span>
+            <span className="badge badge-purple" style={{ fontSize: "0.72rem" }}>15 Allotted / Attempt</span>
+          </div>
+        </div>
+
+        <div className="glass-panel" style={{ padding: "16px 20px", borderLeft: "3px solid var(--accent-emerald)" }}>
+          <div style={{ fontSize: "0.75rem", color: "var(--text-muted)", textTransform: "uppercase", fontWeight: "700" }}>Part 3: HR &amp; Alignment</div>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginTop: "6px" }}>
+            <span style={{ fontSize: "1.3rem", fontWeight: "800" }}>{questions.filter(q => q.section === "hr").length} in Pool</span>
+            <span className="badge badge-emerald" style={{ fontSize: "0.72rem" }}>5 Allotted / Attempt</span>
           </div>
         </div>
       </div>
@@ -156,7 +182,7 @@ export const Page16QuestionBank = () => {
             <input
               type="text"
               className="form-input"
-              placeholder="Search questions by keyword..."
+              placeholder="Search questions in pool..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
@@ -168,10 +194,10 @@ export const Page16QuestionBank = () => {
               value={selectedSection}
               onChange={(e) => setSelectedSection(e.target.value)}
             >
-              <option value="ALL">All Sections (Logical, Tech, HR)</option>
-              <option value="logical">Part 1: Logical Reasoning ({questions.filter((q) => q.section === "logical").length})</option>
-              <option value="tech">Part 2: Tech Knowledge ({questions.filter((q) => q.section === "tech").length})</option>
-              <option value="hr">Part 3: HR &amp; Culture ({questions.filter((q) => q.section === "hr").length})</option>
+              <option value="ALL">All Sections ({questions.length} Questions Pool)</option>
+              <option value="logical">Part 1: Logical Reasoning ({questions.filter((q) => q.section === "logical").length} pool • 10 allotted)</option>
+              <option value="tech">Part 2: Tech Knowledge ({questions.filter((q) => q.section === "tech").length} pool • 15 allotted)</option>
+              <option value="hr">Part 3: HR &amp; Culture ({questions.filter((q) => q.section === "hr").length} pool • 5 allotted)</option>
             </select>
           </div>
         </div>

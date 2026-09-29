@@ -62,6 +62,53 @@ export const QuizProvider = ({ children }) => {
     });
   };
 
+  // Dynamic Candidate Allocated Questions (Randomly drawn from pool per section)
+  const [allocatedQuestions, setAllocatedQuestions] = useState(() => {
+    const saved = localStorage.getItem("zairza_allocated_questions");
+    return saved ? JSON.parse(saved) : null;
+  });
+
+  useEffect(() => {
+    if (allocatedQuestions) {
+      localStorage.setItem("zairza_allocated_questions", JSON.stringify(allocatedQuestions));
+    } else {
+      localStorage.removeItem("zairza_allocated_questions");
+    }
+  }, [allocatedQuestions]);
+
+  const generateRandomizedQuestions = (questionPool = questions) => {
+    // 10 Logical, 15 Tech, 5 HR (Total: 30)
+    const quotas = {
+      logical: 10,
+      tech: 15,
+      hr: 5
+    };
+
+    const shuffle = (array) => {
+      const copy = [...array];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    };
+
+    const logicalPool = questionPool.filter((q) => q.section === "logical");
+    const techPool = questionPool.filter((q) => q.section === "tech");
+    const hrPool = questionPool.filter((q) => q.section === "hr");
+
+    const sampledLogical = shuffle(logicalPool).slice(0, Math.min(quotas.logical, logicalPool.length));
+    const sampledTech = shuffle(techPool).slice(0, Math.min(quotas.tech, techPool.length));
+    const sampledHr = shuffle(hrPool).slice(0, Math.min(quotas.hr, hrPool.length));
+
+    return [...sampledLogical, ...sampledTech, ...sampledHr].map((q, idx) => ({
+      ...q,
+      displayNumber: idx + 1
+    }));
+  };
+
+  const activeQuestions = (allocatedQuestions && allocatedQuestions.length > 0) ? allocatedQuestions : questions.slice(0, 30);
+
   // Active Candidate Session (Identified by Registration Number)
   const [activeCandidate, setActiveCandidate] = useState(() => {
     const saved = localStorage.getItem("zairza_candidate_session");
@@ -296,6 +343,13 @@ export const QuizProvider = ({ children }) => {
     setCurrentSectionId("logical");
     setCurrentView("page5_quiz");
 
+    // Allot randomized questions per section for this candidate if not already allotted
+    let currentAllocated = allocatedQuestions;
+    if (!currentAllocated || currentAllocated.length === 0) {
+      currentAllocated = generateRandomizedQuestions(questions);
+      setAllocatedQuestions(currentAllocated);
+    }
+
     if (activeCandidate) {
       setCandidates((prev) =>
         prev.map((c) =>
@@ -339,7 +393,7 @@ export const QuizProvider = ({ children }) => {
     setShowSubmitModal(false);
     setShowViolationModal(false);
 
-    // Compute scores using the isolated QUIZ_ANSWER_KEYS table (never exposed to question objects)
+    // Compute scores using the isolated QUIZ_ANSWER_KEYS table (evaluated against candidate's allocated questions)
     let totalScore = 0;
     const sectionBreakdown = {
       logical: 0,
@@ -350,7 +404,9 @@ export const QuizProvider = ({ children }) => {
     let incorrectCount = 0;
     let unansweredCount = 0;
 
-    questions.forEach((q) => {
+    const activeQuestionsList = (allocatedQuestions && allocatedQuestions.length > 0) ? allocatedQuestions : questions.slice(0, 30);
+
+    activeQuestionsList.forEach((q) => {
       const selected = answers[q.id];
       const solution = answerKeys[q.id] || answerKeys[String(q.id)] || QUIZ_ANSWER_KEYS[q.id];
       if (!selected) {
@@ -385,7 +441,8 @@ export const QuizProvider = ({ children }) => {
         submittedAt: new Date().toLocaleTimeString(),
         submittedAtEpoch,
         evaluatesAtEpoch,
-        candidateAnswers: answers
+        candidateAnswers: answers,
+        allocatedQuestionIds: activeQuestionsList.map((q) => q.id)
       };
 
       setActiveCandidate(updatedCandidate);
@@ -485,7 +542,11 @@ export const QuizProvider = ({ children }) => {
         getUnlockRemainingSeconds,
         answerKeys,
         setAnswerKeys,
-        updateAnswerKey
+        updateAnswerKey,
+        allocatedQuestions,
+        setAllocatedQuestions,
+        activeQuestions,
+        generateRandomizedQuestions
       }}
     >
       {children}
