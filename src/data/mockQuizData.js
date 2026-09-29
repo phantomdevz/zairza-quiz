@@ -4609,360 +4609,360 @@ export const INITIAL_QUESTIONS = [
   {
     "id": 191,
     "section": "tech",
-    "sectionTitle": "Part 2: Tech Knowledge (Space & Robotics)",
-    "prompt": "In August 2023, India’s Chandrayaan-3 achieved a historic soft landing near the lunar south pole. What were the names of the Lander and the Rover modules?",
+    "sectionTitle": "Part 2: Tech Knowledge (Basic Robotics & Sensors)",
+    "prompt": "How does an Ultrasonic Sensor (like the common HC-SR04 module used in student obstacle-avoidance robots) measure the distance to a wall or obstacle?",
     "options": [
       {
         "id": "opt_1",
-        "text": "Lander: Vikram, Rover: Pragyan"
+        "text": "By emitting a burst of high-frequency sound waves and calculating the time it takes for the echo to bounce back (like a bat)"
       },
       {
         "id": "opt_2",
-        "text": "Lander: Pushpak, Rover: Aditya"
+        "text": "By taking digital photographs of the obstacle"
       },
       {
         "id": "opt_3",
-        "text": "Lander: Mangal, Rover: Gaganyaan"
+        "text": "By measuring ambient room temperature"
       },
       {
         "id": "opt_4",
-        "text": "Lander: Aryabhata, Rover: Bhaskara"
+        "text": "By magnetic attraction to metal objects"
       }
     ]
   },
   {
     "id": 192,
     "section": "tech",
-    "sectionTitle": "Part 2: Tech Knowledge (Space & Robotics)",
-    "prompt": "What historic feat did ISRO’s Aditya-L1 spacecraft achieve in January 2024?",
+    "sectionTitle": "Part 2: Tech Knowledge (Basic Robotics & Sensors)",
+    "prompt": "In a classic student Line Follower Robot, how do Infrared (IR) sensor pairs detect and follow a black track drawn on a white floor?",
     "options": [
       {
         "id": "opt_1",
-        "text": "Successfully inserted into a halo orbit around the Sun-Earth Lagrange Point 1 (L1) to continuously study solar coronal emissions"
+        "text": "The white surface reflects emitted infrared light back to the photodiode receiver, while the black line absorbs the light"
       },
       {
         "id": "opt_2",
-        "text": "Landed on the surface of Mercury"
+        "text": "The black line emits heat that warms the robot wheels"
       },
       {
         "id": "opt_3",
-        "text": "Flew through the rings of Saturn"
+        "text": "The sensor magnetically latches onto the black ink"
       },
       {
         "id": "opt_4",
-        "text": "Drilled into the ice core of a comet"
+        "text": "The robot smells the ink on the floor"
       }
     ]
   },
   {
     "id": 193,
     "section": "tech",
-    "sectionTitle": "Part 2: Tech Knowledge (Space & Robotics)",
-    "prompt": "Which aerospace company revolutionized rocket launches by landing orbital Falcon 9 boosters upright on autonomous ocean drone ships so they can be reflown?",
+    "sectionTitle": "Part 2: Tech Knowledge (Basic Robotics & Motors)",
+    "prompt": "Why do robotic arms and steering mechanisms use Servo Motors instead of regular DC Motors?",
     "options": [
       {
         "id": "opt_1",
-        "text": "SpaceX"
+        "text": "Servo motors have built-in feedback control that allows precise angular positioning (e.g., exactly 0° to 180°), whereas standard DC motors spin continuously"
       },
       {
         "id": "opt_2",
-        "text": "Blue Origin"
+        "text": "Servo motors do not require any electricity"
       },
       {
         "id": "opt_3",
-        "text": "Boeing Starliner"
+        "text": "DC motors only work under water"
       },
       {
         "id": "opt_4",
-        "text": "Virgin Galactic"
+        "text": "Servo motors are made of rubber"
       }
     ]
   },
   {
     "id": 194,
     "section": "tech",
-    "sectionTitle": "Part 2: Tech Knowledge (Space & Robotics)",
-    "prompt": "What is the name of Boston Dynamics’ famous 4-legged yellow quadruped robot dog used worldwide for industrial inspection and mapping?",
+    "sectionTitle": "Part 2: Tech Knowledge (Basic Robotics & Hardware)",
+    "prompt": "What is the Arduino Uno board commonly used in first-year robotics and IoT projects?",
     "options": [
       {
         "id": "opt_1",
-        "text": "Spot"
+        "text": "An open-source microcontroller prototyping board (featuring the ATmega328P chip) with input/output pins to control sensors, motors, and LEDs"
       },
       {
         "id": "opt_2",
-        "text": "Atlas"
+        "text": "A high-end desktop gaming graphics card"
       },
       {
         "id": "opt_3",
-        "text": "BigDog"
+        "text": "A wireless cellular SIM card"
       },
       {
         "id": "opt_4",
-        "text": "Optimus"
+        "text": "A battery charger for smartphones"
       }
     ]
   },
   {
     "id": 195,
     "section": "tech",
-    "sectionTitle": "Part 2: Tech Knowledge (Space & Robotics)",
-    "prompt": "What is the name of NASA’s flagship space telescope that uses 18 gold-coated beryllium hexagonal mirror segments to capture deep infrared views of the early universe?",
+    "sectionTitle": "Part 2: Tech Knowledge (Basic Robotics & Hardware)",
+    "prompt": "In a college electronics and robotics lab, what is a \"Breadboard\" used for?",
     "options": [
       {
         "id": "opt_1",
-        "text": "James Webb Space Telescope (JWST)"
+        "text": "Temporarily prototyping circuits and plugging in sensors, LEDs, and jumper wires without needing to solder"
       },
       {
         "id": "opt_2",
-        "text": "Hubble Space Telescope"
+        "text": "Slicing bread and food during hackathons"
       },
       {
         "id": "opt_3",
-        "text": "Kepler Space Observatory"
+        "text": "Measuring high-voltage electrical currents"
       },
       {
         "id": "opt_4",
-        "text": "Spitzer Space Telescope"
+        "text": "Storing electronic files permanently"
       }
     ]
   },
   {
     "id": 196,
     "section": "tech",
-    "sectionTitle": "Part 2: Tech Knowledge (Space & Robotics)",
-    "prompt": "What is Gaganyaan, one of ISRO’s most ambitious upcoming missions?",
+    "sectionTitle": "Part 2: Tech Knowledge (Basic Robotics & Electronics)",
+    "prompt": "Why cannot you connect a high-power DC motor directly to an Arduino or Raspberry Pi output pin without a Motor Driver module (like the L298N)?",
     "options": [
       {
         "id": "opt_1",
-        "text": "India’s first indigenous human spaceflight mission designed to send Indian astronauts (Gaganyatris) to low Earth orbit"
+        "text": "Because microcontroller pins can only safely supply tiny currents (~20-40 mA), while DC motors draw high electrical currents that would permanently burn the microcontroller chip"
       },
       {
         "id": "opt_2",
-        "text": "An unmanned probe to explore the moons of Jupiter"
+        "text": "Because motors only spin backwards when connected to an Arduino"
       },
       {
         "id": "opt_3",
-        "text": "A satellite network providing free high-speed Wi-Fi"
+        "text": "Because Arduino code cannot speak English"
       },
       {
         "id": "opt_4",
-        "text": "An underwater nuclear submarine testing project"
+        "text": "Because DC motors require solar energy only"
       }
     ]
   },
   {
     "id": 197,
     "section": "tech",
-    "sectionTitle": "Part 2: Tech Knowledge (Space & Robotics)",
-    "prompt": "What is the robotic arm on the International Space Station (ISS) that maneuvers payloads, assists spacewalks, and captures visiting spacecraft called?",
+    "sectionTitle": "Part 2: Tech Knowledge (Basic Robotics & Sensors)",
+    "prompt": "What does an LDR (Light Dependent Resistor / Photoresistor) do in a solar-tracker or light-seeking robot?",
     "options": [
       {
         "id": "opt_1",
-        "text": "Canadarm2"
+        "text": "Its electrical resistance decreases as the intensity of light falling on it increases, allowing the robot to locate the brightest light source"
       },
       {
         "id": "opt_2",
-        "text": "RoboHand 3000"
+        "text": "It generates free electricity out of thin air"
       },
       {
         "id": "opt_3",
-        "text": "EuroArm"
+        "text": "It stores digital pictures of the sun"
       },
       {
         "id": "opt_4",
-        "text": "TitanGripper"
+        "text": "It measures wind speed"
       }
     ]
   },
   {
     "id": 198,
     "section": "tech",
-    "sectionTitle": "Part 2: Tech Knowledge (Space & Robotics)",
-    "prompt": "What small, autonomous robotic helicopter flew 72 successful missions in the thin atmosphere of Mars alongside NASA’s Perseverance rover?",
+    "sectionTitle": "Part 2: Tech Knowledge (Basic Robotics & Sensors)",
+    "prompt": "What type of sensor is commonly used in automatic intruder alarms and human-following robots to detect the presence of humans?",
     "options": [
       {
         "id": "opt_1",
-        "text": "Ingenuity"
+        "text": "PIR (Passive Infrared) Sensor, which detects changes in thermal infrared radiation emitted by warm human bodies"
       },
       {
         "id": "opt_2",
-        "text": "Opportunity"
+        "text": "Barometer, which detects atmospheric air pressure"
       },
       {
         "id": "opt_3",
-        "text": "Spirit"
+        "text": "Hygrometer, which measures humidity"
       },
       {
         "id": "opt_4",
-        "text": "Sojourner"
+        "text": "Ammeter, which counts lightning strikes"
       }
     ]
   },
   {
     "id": 199,
     "section": "tech",
-    "sectionTitle": "Part 2: Tech Knowledge (Space & Robotics)",
-    "prompt": "What is a \"Degree of Freedom\" (DoF) in robotics engineering?",
+    "sectionTitle": "Part 2: Tech Knowledge (Basic Robotics Mechanisms)",
+    "prompt": "In robotics, what is an \"End-Effector\"?",
     "options": [
       {
         "id": "opt_1",
-        "text": "The number of independent directions, axes, or joints along which a robotic arm or mechanism can move or rotate"
+        "text": "The device or tool at the very end of a robotic arm that interacts with the physical environment (such as a gripper, mechanical claw, welder, or suction cup)"
       },
       {
         "id": "opt_2",
-        "text": "How many degrees Celsius a robot can withstand"
+        "text": "The emergency power off switch on the wall"
       },
       {
         "id": "opt_3",
-        "text": "The battery life percentage of an autonomous vehicle"
+        "text": "The software license agreement of the robot"
       },
       {
         "id": "opt_4",
-        "text": "The warranty period of a commercial robot"
+        "text": "The robot’s battery charging cable"
       }
     ]
   },
   {
     "id": 200,
     "section": "tech",
-    "sectionTitle": "Part 2: Tech Knowledge (Space & Robotics)",
-    "prompt": "What is \"Inverse Kinematics\" (IK) in robotics software?",
+    "sectionTitle": "Part 2: Tech Knowledge (Basic Robotics & Drones)",
+    "prompt": "On a standard 4-rotor quadcopter drone, why do two diagonal propellers rotate Clockwise (CW) while the other two rotate Counter-Clockwise (CCW)?",
     "options": [
       {
         "id": "opt_1",
-        "text": "Calculating the joint angles required to position a robot’s end-effector or gripper at a desired coordinate in 3D space"
+        "text": "To cancel out rotational torque (yaw reaction force), preventing the drone body from spinning uncontrollably in circles"
       },
       {
         "id": "opt_2",
-        "text": "Running a robot’s motors backward to recharge the battery"
+        "text": "Because the manufacturer had a shortage of identical propellers"
       },
       {
         "id": "opt_3",
-        "text": "Flipping a robot upside down to clean sensors"
+        "text": "To create a musical sound while flying"
       },
       {
         "id": "opt_4",
-        "text": "Measuring the temperature of servo motors"
+        "text": "Because one side pushes air up and the other side pushes air down"
       }
     ]
   },
   {
     "id": 201,
     "section": "tech",
-    "sectionTitle": "Part 2: Tech Knowledge (Space & Robotics)",
-    "prompt": "Why do satellites and spacecraft use gold foil (multi-layer insulation or MLI blankets) on their exterior chassis?",
+    "sectionTitle": "Part 2: Tech Knowledge (Basic Robotics Locomotion)",
+    "prompt": "How does a 2-wheeled differential drive mobile robot turn around on the spot (a zero-radius turn)?",
     "options": [
       {
         "id": "opt_1",
-        "text": "To reflect intense solar radiation and thermally insulate sensitive instruments from extreme temperature fluctuations in space"
+        "text": "By rotating the left wheel forward and the right wheel backward at the same speed"
       },
       {
         "id": "opt_2",
-        "text": "To show the high financial wealth of the space agency"
+        "text": "By turning the front steering wheel like a passenger car"
       },
       {
         "id": "opt_3",
-        "text": "To improve Wi-Fi signal reception back to Earth"
+        "text": "By extending a mechanical leg from underneath"
       },
       {
         "id": "opt_4",
-        "text": "To prevent asteroids from sticking to the hull"
+        "text": "By blowing high-pressure air sideways"
       }
     ]
   },
   {
     "id": 202,
     "section": "tech",
-    "sectionTitle": "Part 2: Tech Knowledge (Space & Robotics)",
-    "prompt": "What is the purpose of an IMU (Inertial Measurement Unit) inside a drone or spacecraft flight controller?",
+    "sectionTitle": "Part 2: Tech Knowledge (Basic Robotics Ethics & Lore)",
+    "prompt": "In science fiction and AI ethics, what does Isaac Asimov’s famous \"First Law of Robotics\" state?",
     "options": [
       {
         "id": "opt_1",
-        "text": "Combines accelerometers and gyroscopes to measure linear acceleration and angular velocity for attitude stabilization"
+        "text": "A robot may not injure a human being or, through inaction, allow a human being to come to harm"
       },
       {
         "id": "opt_2",
-        "text": "Measures atmospheric oxygen levels"
+        "text": "A robot must always be painted silver or chrome"
       },
       {
         "id": "opt_3",
-        "text": "Transmits high-definition live video feeds"
+        "text": "A robot must win all chess games against humans"
       },
       {
         "id": "opt_4",
-        "text": "Charges the drone battery during descent"
+        "text": "A robot must never turn off its power"
       }
     ]
   },
   {
     "id": 203,
     "section": "tech",
-    "sectionTitle": "Part 2: Tech Knowledge (Space & Robotics)",
-    "prompt": "What is \"Geostationary Orbit\" (GEO) and why is it valuable for television broadcast and weather satellites?",
+    "sectionTitle": "Part 2: Tech Knowledge (Basic Robotics & Sensors)",
+    "prompt": "What does a LiDAR sensor on autonomous mobile robots (AMRs) and self-driving vehicles use to map surrounding rooms and obstacles in 3D?",
     "options": [
       {
         "id": "opt_1",
-        "text": "Satellites orbit at 35,786 km with an orbital period matching Earth’s 24-hr rotation, appearing stationary over the same point on Earth"
+        "text": "Rotating laser beams that fire thousands of light pulses per second to measure precise distance reflections (Time of Flight)"
       },
       {
         "id": "opt_2",
-        "text": "Satellites orbit 100 meters above building roofs"
+        "text": "Sonar ping signals that bounce off water"
       },
       {
         "id": "opt_3",
-        "text": "Satellites orbit over the North Pole only"
+        "text": "Chemical sniffers that detect floor paint"
       },
       {
         "id": "opt_4",
-        "text": "Satellites fly through the center of the Earth"
+        "text": "Magnetic compass needles"
       }
     ]
   },
   {
     "id": 204,
     "section": "tech",
-    "sectionTitle": "Part 2: Tech Knowledge (Space & Robotics)",
-    "prompt": "What is the purpose of an Electronic Speed Controller (ESC) on a multirotor quadcopter drone?",
+    "sectionTitle": "Part 2: Tech Knowledge (Basic Robotics Kinematics)",
+    "prompt": "A basic pick-and-place robotic arm is described as having \"3 Degrees of Freedom (3-DoF)\". What does \"Degree of Freedom\" refer to?",
     "options": [
       {
         "id": "opt_1",
-        "text": "Regulates the electrical current and RPM speed delivered to each individual brushless DC motor based on flight controller commands"
+        "text": "The number of independent axes or joints around which the arm can move or rotate"
       },
       {
         "id": "opt_2",
-        "text": "Measures how fast the drone travels across the ground"
+        "text": "How many hours the robot can operate without an internet connection"
       },
       {
         "id": "opt_3",
-        "text": "Controls the camera shutter speed"
+        "text": "The temperature range in Celsius the robot can tolerate"
       },
       {
         "id": "opt_4",
-        "text": "Acts as an emergency parachute deployer"
+        "text": "The price discount given to college students"
       }
     ]
   },
   {
     "id": 205,
     "section": "tech",
-    "sectionTitle": "Part 2: Tech Knowledge (Space & Robotics)",
-    "prompt": "What is the ISS (International Space Station) and approximately how fast does it orbit around the Earth?",
+    "sectionTitle": "Part 2: Tech Knowledge (Basic Robotics & Quadrupeds)",
+    "prompt": "Why do robotics engineers develop 4-legged quadruped robots (like Boston Dynamics’ Spot) instead of using traditional wheels for disaster response and industrial sites?",
     "options": [
       {
         "id": "opt_1",
-        "text": "A modular habitable research space station orbiting at approximately 28,000 km/h (~17,500 mph), completing one orbit every 90 minutes"
+        "text": "Legs allow the robot to step over rubble, navigate unstructured terrain, and climb stairs where wheels would get stuck"
       },
       {
         "id": "opt_2",
-        "text": "A moon base orbiting at 500 km/h"
+        "text": "Legged robots are cheaper to manufacture than plastic wheels"
       },
       {
         "id": "opt_3",
-        "text": "A stationary satellite floating over Paris"
+        "text": "Legged robots never require batteries"
       },
       {
         "id": "opt_4",
-        "text": "A solar panel factory on Mars"
+        "text": "Wheels are legally banned in disaster zones"
       }
     ]
   },
@@ -6288,10 +6288,6 @@ export const INITIAL_QUESTIONS = [
   }
 ];
 
-// ==============================================================================
-// SECURED ISOLATED ANSWER KEYS TABLE (Server-side / Post-15min Evaluation)
-// Segregated from public question bank to prevent DevTools / Network inspection
-// ==============================================================================
 export const QUIZ_ANSWER_KEYS = {
   "1": {
     "correctOptionId": "opt_3",
@@ -7055,63 +7051,63 @@ export const QUIZ_ANSWER_KEYS = {
   },
   "191": {
     "correctOptionId": "opt_1",
-    "explanation": "The lander was named Vikram (honoring Dr. Vikram Sarabhai) and the 6-wheeled robotic rover was named Pragyan (Sanskrit for \"Wisdom\")."
+    "explanation": "Ultrasonic sensors emit high-frequency (40 kHz) sound waves and measure the round-trip echo time to calculate distance = (Time × Speed of Sound) / 2."
   },
   "192": {
     "correctOptionId": "opt_1",
-    "explanation": "Aditya-L1 was placed in a halo orbit around L1 (1.5 million km from Earth) to observe the Sun continuously without eclipses."
+    "explanation": "Infrared light reflects off light/white surfaces and is absorbed by dark/black surfaces. When the receiver detects no reflection, the robot knows it is over the black line."
   },
   "193": {
     "correctOptionId": "opt_1",
-    "explanation": "SpaceX pioneered rocket stage reusability, landing and re-flying individual Falcon 9 first stages over 20 times each."
+    "explanation": "Standard DC motors rotate continuously at high speed; servo motors incorporate a potentiometer and control circuit to hold a precise commanded shaft angle."
   },
   "194": {
     "correctOptionId": "opt_1",
-    "explanation": "Spot is Boston Dynamics’ agile quadruped robot that traverses rough terrain, climbs stairs, and performs automated industrial site inspections."
+    "explanation": "The Arduino Uno is a beginner-friendly microcontroller board that executes uploaded C/C++ code to read physical sensors and actuate motors in real time."
   },
   "195": {
     "correctOptionId": "opt_1",
-    "explanation": "The James Webb Space Telescope orbits the Sun at Lagrange Point 2 (L2), observing faint infrared light from the earliest galaxies."
+    "explanation": "A solderless breadboard contains internal rows of metal spring clips, allowing students to quickly assemble and iterate circuits without permanent soldering."
   },
   "196": {
     "correctOptionId": "opt_1",
-    "explanation": "Gaganyaan aims to demonstrate human spaceflight capability by launching a crew of 3 to a 400 km orbit for a 3-day mission."
+    "explanation": "Microcontroller pins provide low-current logic signals. A dedicated motor driver acts as a high-current power switch (H-Bridge) powered by an external battery pack."
   },
   "197": {
     "correctOptionId": "opt_1",
-    "explanation": "Canadarm2 (the Mobile Servicing System) is Canada’s premier contribution to the ISS, serving as a 17-meter-long robotic manipulator."
+    "explanation": "LDRs are made of photo-conductive semiconductors whose resistance drops dramatically in bright light, enabling robots to detect light direction."
   },
   "198": {
     "correctOptionId": "opt_1",
-    "explanation": "Ingenuity achieved the first powered, controlled aerodynamic flight on another planet in April 2021."
+    "explanation": "PIR sensors measure variations in ambient infrared thermal signatures. When a warm body moves across the Fresnel lens, it triggers an active high signal."
   },
   "199": {
     "correctOptionId": "opt_1",
-    "explanation": "A 6-DoF robotic arm can position and orient its end-effector in three translational axes (X, Y, Z) and three rotational axes (Roll, Pitch, Yaw)."
+    "explanation": "The end-effector is the robot's \"hand\" or terminal mechanism engineered specifically for the target task (grasping, welding, painting, suctioning)."
   },
   "200": {
     "correctOptionId": "opt_1",
-    "explanation": "Forward kinematics calculates position from joint angles; Inverse Kinematics calculates the required joint angles to place a tool at a target point."
+    "explanation": "By Newton's Third Law, motor rotation generates opposite angular torque on the frame. Having 2 CW and 2 CCW motors balances total net torque to zero for stable flight."
   },
   "201": {
     "correctOptionId": "opt_1",
-    "explanation": "Multi-Layer Insulation (MLI) blankets made of aluminized Mylar and Kapton protect spacecraft from extreme radiative temperature swings."
+    "explanation": "Differential drive robots turn on their center of mass by spinning opposing drive wheels in opposite directions at equal velocity."
   },
   "202": {
     "correctOptionId": "opt_1",
-    "explanation": "The IMU provides high-rate angular velocity and acceleration data essential for flight stability and dead-reckoning navigation."
+    "explanation": "Asimov introduced the Three Laws of Robotics in 1942: 1. Do not harm humans, 2. Obey human orders (unless conflicting with Law 1), 3. Protect own existence (unless conflicting with 1 or 2)."
   },
   "203": {
     "correctOptionId": "opt_1",
-    "explanation": "In GEO, the satellite rotates at the exact rotational speed of the Earth, allowing ground dishes to point at a fixed location in the sky without tracking motors."
+    "explanation": "LiDAR measures the time taken for pulsed laser beams to reflect off surfaces, building a rich 360-degree point-cloud map of surrounding geometry."
   },
   "204": {
     "correctOptionId": "opt_1",
-    "explanation": "ESCs translate throttle signals from the flight controller into 3-phase AC power pulses that drive brushless drone motors."
+    "explanation": "In mechanics and robotics, each Degree of Freedom represents one independent coordinate parameter (joint translation or rotation) needed to specify position."
   },
   "205": {
     "correctOptionId": "opt_1",
-    "explanation": "The ISS orbits in Low Earth Orbit (~400 km altitude) at ~7.66 km/s, allowing crew members to witness 16 sunrises and sunsets every day."
+    "explanation": "Wheeled robots excel on smooth flat pavements, but legged locomotion mimics biological animals to traverse stairs, rocks, construction gravel, and debris."
   },
   "206": {
     "correctOptionId": "opt_1",
