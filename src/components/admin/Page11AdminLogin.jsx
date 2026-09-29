@@ -38,17 +38,21 @@ export const Page11AdminLogin = () => {
     <div className="container" style={{ padding: "60px 20px 80px", maxWidth: "480px" }}>
       <div className="glass-panel" style={{ padding: "40px" }}>
         <div style={{
-          width: "56px",
-          height: "56px",
-          borderRadius: "14px",
-          background: "rgba(139, 92, 246, 0.15)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
+          width: "60px",
+          height: "60px",
+          borderRadius: "50%",
+          background: "#fff",
+          border: "2px solid var(--red)",
+          display: "grid",
+          placeItems: "center",
           margin: "0 auto 16px",
-          color: "var(--accent-purple)"
+          overflow: "hidden"
         }}>
-          <Terminal size={30} />
+          <img
+            src="/zairza-logo.png"
+            alt="Zairza Logo"
+            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+          />
         </div>
 
         <div style={{ textAlign: "center", marginBottom: "24px" }}>

@@ -33,14 +33,16 @@ export const Navbar = () => {
               height: "42px",
               borderRadius: "50%",
               background: "#fff",
-              border: "3px solid var(--red)",
+              border: "2px solid var(--red)",
               display: "grid",
-              placeItems: "center"
+              placeItems: "center",
+              overflow: "hidden"
             }}>
-              <svg width="24" height="24" viewBox="0 0 30 30" aria-hidden="true">
-                <circle cx="9" cy="15" r="7" fill="#2f5bff"/>
-                <path d="M14 4l12 7-4 4 5 6-9 4-4-7z" fill="#f08a1c"/>
-              </svg>
+              <img
+                src="/zairza-logo.png"
+                alt="Zairza Logo"
+                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              />
             </div>
             <div>
               <b style={{ fontSize: "1.1rem" }}>Zairza</b>
@@ -88,12 +90,14 @@ export const Navbar = () => {
             background: "#fff",
             border: "3px solid var(--red)",
             display: "grid",
-            placeItems: "center"
+            placeItems: "center",
+            overflow: "hidden"
           }}>
-            <svg width="28" height="28" viewBox="0 0 30 30" aria-hidden="true">
-              <circle cx="9" cy="15" r="7" fill="#2f5bff"/>
-              <path d="M14 4l12 7-4 4 5 6-9 4-4-7z" fill="#f08a1c"/>
-            </svg>
+            <img
+              src="/zairza-logo.png"
+              alt="Zairza Logo"
+              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+            />
           </div>
           <div>
             <b style={{ fontSize: "1.25rem", letterSpacing: ".02em" }}>Zairza</b>
