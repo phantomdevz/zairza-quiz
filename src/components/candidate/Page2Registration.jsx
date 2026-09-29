@@ -51,22 +51,11 @@ export const Page2Registration = () => {
 
   const handleInterestsChange = (e) => {
     const val = e.target.value;
-    const lines = val.split("\n");
-    if (lines.length > 3) return;
     setFormData({
       ...formData,
       interestsText: val,
-      technicalInterests: lines.map((l) => l.trim()).filter(Boolean)
+      technicalInterests: val.split("\n").map((l) => l.trim()).filter(Boolean)
     });
-  };
-
-  const handleInterestsKeyDown = (e) => {
-    if (e.key === "Enter") {
-      const lines = (formData.interestsText || "").split("\n");
-      if (lines.length >= 3) {
-        e.preventDefault();
-      }
-    }
   };
 
   const validate = () => {
@@ -326,21 +315,18 @@ export const Page2Registration = () => {
           </div>
 
           <div className="form-group" style={{ marginTop: "16px" }}>
-            <label className="form-label" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-              <span>Write your interests in 3 lines</span>
-              <span className="mono" style={{ fontSize: "0.8rem", color: "var(--accent-cyan)" }}>
-                {((formData.interestsText || "").split("\n").filter(Boolean)).length}/3 lines
-              </span>
+            <label className="form-label">
+              Write your interests in 3 lines
             </label>
             <textarea
               className="form-input"
               rows={3}
               value={formData.interestsText || ""}
               onChange={handleInterestsChange}
-              onKeyDown={handleInterestsKeyDown}
-              placeholder={"1. Web Development, React, Node.js & APIs\n2. Robotics, Arduino & Sensor Integration\n3. UI/UX Design, Figma & 3D Prototyping"}
+              placeholder="Tell us about your interests, projects, or what you are excited to explore at Zairza in about 3 sentences..."
               style={{
-                resize: "none",
+                resize: "vertical",
+                minHeight: "84px",
                 lineHeight: "1.6",
                 padding: "12px 14px",
                 fontSize: "0.9rem",
